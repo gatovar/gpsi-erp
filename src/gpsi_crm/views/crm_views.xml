@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record model="ir.ui.view" id="view_project_task_bpm">
+        <field name="name">gpsi.crm.team.bpm.form</field>
+        <field name="model">crm.team</field>
+        <field name="priority">18</field>
+        <field name="inherit_id" ref="sales_team.crm_team_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='user_id']" position="after">
+                <field name="bpm_project_id"/>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

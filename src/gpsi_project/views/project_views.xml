@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record model="ir.ui.view" id="view_project_task_bpm">
+        <field name="name">gpsi.project.task.bpm.form</field>
+        <field name="model">project.task</field>
+        <field name="priority">10</field>
+        <field name="inherit_id" ref="project.view_task_form2"/>
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='description_page']" position="after">
+                <page string="BPM Resources" groups="base.group_no_one">
+                    <field name="res_attachment_ids" context="{'default_task_id': id}">
+                        <tree editable="bottom">
+                            <field name="res_model"/>
+                            <field name="res_id"/>
+                            <field name="res_name"/>
+                        </tree>
+                    </field>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

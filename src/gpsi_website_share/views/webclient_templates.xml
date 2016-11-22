@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="assets_backend" inherit_id="web.assets_backend">
+            <xpath expr="//link[last()]" position="after">
+                <link rel="stylesheet" type="text/less" href="/gpsi_website_share/static/src/less/webclient.less"/>
+            </xpath>
+            <xpath expr="//script[last()]" position="after">
+            </xpath>
+        </template>
+
+        <template id="index">
+            <t t-call="web.layout">
+                <t t-if="not title">
+                    <t t-if="not additional_title and main_object and 'name' in main_object">
+                        <t t-set="additional_title" t-value="main_object.name"/>
+                    </t>
+                    <t t-if="main_object and 'website_meta_title' in main_object and main_object.website_meta_title">
+                        <t t-set="title" t-value="main_object.website_meta_title"/>
+                    </t>
+                    <t t-else="">
+                        <t t-set="title"><t t-if="additional_title"><t t-raw="additional_title"/> | </t><t t-esc="(website or res_company).name"/></t>
+                    </t>
+                </t>
+                <t t-set="x_icon" t-value="'/web/image/website/%s/favicon/' % website.id"/>
+                <t t-set="head_web">
+                    <script type="text/javascript">
+                        odoo.session_info = <t t-raw="session_info"/>;
+                    </script>
+
+                    <t t-call-assets="web.assets_common" t-js="false"/>
+                    <t t-call-assets="web.assets_backend" t-js="false"/>
+                    <t t-call-assets="web.assets_common" t-css="false"/>
+                    <t t-call-assets="web.assets_backend" t-css="false"/>
+
+                    <![CDATA[
+                        <!--[if lt IE 10]>
+                            <body class="ie9">
+                        <![endif]-->
+                    ]]>
+
+                    <t t-call="web.webclient_script"/>
+                </t>
+                <t t-set="head" t-value="head_web + (head or '')"/>
+                <t t-set="body_classname" t-value="'o_web_client'"/>
+
+                <nav id="oe_main_menu_navbar" class="navbar navbar-inverse" groups="base.group_user,base.group_portal" style="display:none">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                    </div>
+                    <div class="navbar-collapse collapse">
+                        <t t-call="web.menu"/>
+                    </div>
+                </nav>
+                <div class="o_main">
+                    <div class="o_sub_menu" groups="base.group_user,base.group_portal" style="display:none">
+                        <t t-call="web.menu_secondary"/>
+                    </div>
+                    <div class="o_main_content gpsi_webite_share">
+                    </div>
+                </div>
+            </t>
+        </template>
+    </data>
+</odoo>
