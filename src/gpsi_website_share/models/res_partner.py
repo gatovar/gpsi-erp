@@ -6,6 +6,3 @@ from odoo.exceptions import UserError, ValidationError
 
 class Partner(models.Model):
     _inherit = 'res.partner'
-
-    
-        
