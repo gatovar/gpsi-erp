@@ -2,7 +2,7 @@ version: '2'
 services:
       gpsi_erp_db:
             image: postgres:9.4.7
-            container_name: gpsi-demo-erp-db
+            container_name: gpsi-erp-db
             ports:
                   - "5432"
             environment:
@@ -10,7 +10,7 @@ services:
                   - POSTGRES_PASSWORD=odoo
       gpsi_erp:
             image: odoo:10
-            container_name: gpsi-demo-erp
+            container_name: gpsi-erp
             volumes:
                   - ./src:/mnt/extra-addons
             ports:

@@ -8,6 +8,14 @@ class CrmLead(models.Model):
     _name = 'crm.lead'
     _inherit = ['crm.lead', 'gpsi.project.task.mixin']
 
+    gpsi_opportunity_type = fields.Selection(
+        selection=[
+            ('course', 'Course'),
+            ('certification_audit', 'Certification Audit'),
+            ('vendor_audit', 'Vendor Audit')],
+        string='Type', default='course')
+    gpsi_cert_app = fields.Many2one('gpsi.crm.application.certification', 'Certification Application')        
+
 
 class CrmLeadCertificationWorkflow(models.Model):
     _inherit = 'crm.lead'

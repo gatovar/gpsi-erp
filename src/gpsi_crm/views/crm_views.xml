@@ -13,4 +13,198 @@
         </field>
     </record>
 
+    <record model="ir.ui.view" id="view_crm_opportunity_inherit">
+        <field name="name">gpsi.crm.opportunity.form</field>
+        <field name="model">crm.lead</field>
+        <field name="priority">18</field>
+        <field name="inherit_id" ref="crm.crm_case_form_view_oppor"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='partner_id']" position="before">
+                <field name="gpsi_opportunity_type"/>
+            </xpath>
+            <xpath expr="//field[@name='team_id']" position="after">
+                <field name="gpsi_cert_app" string="Application" attrs="{'invisible': [('gpsi_opportunity_type','!=','certification_audit')]}"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="view_crm_opportunity_simplified_inherit">
+        <field name="name">gpsi.crm.opportunity.simplified.form</field>
+        <field name="model">crm.lead</field>
+        <field name="priority">10</field>
+        <field name="inherit_id" ref="crm.view_create_opportunity_simplified"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='name']" position="after">
+                <field name="gpsi_opportunity_type"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="view_application_certification_tree">
+            <field name="name">gpsi.crm.application.certification.tree</field>
+            <field name="model">gpsi.crm.application.certification</field>
+            <field name="priority">10</field>
+            <field name="arch" type="xml">
+                <tree string="Certification Applications">
+                    <field name="name" string="Lead"/>
+                    <field name="create_date" string="Creation Date"/>
+                    <field name="city"/>
+                    <field name="country_id"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="view_application_certification_form">
+            <field name="name">gpsi.crm.application.certification.form</field>
+            <field name="model">gpsi.crm.application.certification</field>
+            <field name="priority">10</field>
+            <field name="arch" type="xml">
+                <form string="Certification Application">
+                    <sheet>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="name" default_focus="1" placeholder="Company name..." required="1"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="standard_id" required="1"/>
+                                <label for="street" string="Address"/>
+                                <div class="o_address_format">
+                                    <field name="street" placeholder="Street..." class="o_address_street" required="1"/>
+                                    <field name="street2" placeholder="Street 2..." class="o_address_street" required="1"/>
+                                    <field name="city" placeholder="City" class="o_address_city" required="1"/>
+                                    <field name="state_id" class="o_address_state" placeholder="State" options="{&quot;no_open&quot;: True}" required="1"/>
+                                    <field name="zip" placeholder="ZIP" class="o_address_zip" required="1"/>
+                                    <field name="country_id" placeholder="Country" class="o_address_country" options="{&quot;no_open&quot;: True, &quot;no_create&quot;: True}" required="1"/>
+                                </div>
+                                <field name="website" widget="url" placeholder="e.g. www.globalstd.com"/>
+                            </group>
+                            <group>
+                                <field name="phone1" widget="phone" required="1"/>
+                                <field name="phone2" widget="phone"/>
+                                <field name="email" widget="email"/>
+                                <field name="language"/>
+                                <field name="co_profile"/>
+                            </group>
+                        </group>
+                        <group string="Contact Information">
+                            <group>
+                                <field name="contact_name" required="1"/>
+                                <field name="contact_position" required="1"/>
+                            </group>
+                            <group>
+                                <field name="contact_email1" required="1"/>
+                                <field name="contact_email2" />
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Company Profile">
+                                <field name="co_profile_desc" placeholder="Company profile description..."/>
+                            </page>
+                            <page string="Certification Information">
+                                <group>
+                                    <group>
+                                        <field name="audit_type"/>
+                                        <field name="apply_design"/>
+                                        <field name="certified"/>
+                                    </group>
+                                    <group>
+                                        <field name="preaudit_date"/>
+                                        <field name="audit_stage1_date"/>
+                                        <field name="audit_stage2_date"/>
+                                        <field name="audit_surveillance1_date"/>
+                                        <field name="audit_surveillance2_date"/>
+                                    </group>
+                                </group>
+                                <group string="Scope">
+                                    <field name="scope" nolabel="1"/>
+                                </group>
+                                <group string="Exclussions justifications details">
+                                    <field name="exclusions" nolabel="1"/>
+                                </group>
+                                <group string="Other standards details">
+                                    <field name="certified_desc" nolabel="1"/>
+                                </group>
+                            </page>
+                            <page string="Facilities">
+                                <field name="facility_ids">
+                                    <tree>
+                                        <field name="street"/>
+                                        <field name="city"/>
+                                        <field name="description"/>
+                                    </tree>
+                                </field>
+                            </page>
+                            <page string="Misc">
+                                <group>
+                                    <group string="Outsourcing">
+                                        <field name="has_external_proc"/>
+                                        <field name="external_proc" string="Process Name"/>
+                                        <field name="external_proc_outsource"/>
+                                    </group>
+                                    <group string="External Consultant">
+                                        <field name="has_consultant"/>
+                                        <field name="consultant_name"/>
+                                        <field name="consultant_phone"/>
+                                    </group>
+                                    <group string="Main Partners">
+                                        <field name="customers"/>
+                                        <field name="suppliers"/>
+                                    </group>
+                                    <group string="Good Practices">
+                                        <field name="good_practices"/>
+                                        <field name="technologies"/>
+                                        <field name="has_internal_audits"/>
+                                        <field name="has_management_reviews"/>
+                                        <field name="has_quality_manual"/>
+                                    </group>
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="view_application_certification_site_form">
+            <field name="name">gpsi.crm.application.certification.site.form</field>
+            <field name="model">gpsi.crm.application.certification.site</field>
+            <field name="priority">10</field>
+            <field name="arch" type="xml">
+                <form string="Facility">
+                    <sheet>
+                        <group>
+                            <group>
+                                <label for="street" string="Address"/>
+                                <div class="o_address_format">
+                                    <field name="street" placeholder="Street..." class="o_address_street" required="1"/>
+                                    <field name="street2" placeholder="Street 2..." class="o_address_street" required="1"/>
+                                    <field name="city" placeholder="City" class="o_address_city" required="1"/>
+                                    <field name="state_id" class="o_address_state" placeholder="State" options="{&quot;no_open&quot;: True}" required="1"/>
+                                    <field name="zip" placeholder="ZIP" class="o_address_zip" required="1"/>
+                                    <field name="country_id" placeholder="Country" class="o_address_country" options="{&quot;no_open&quot;: True, &quot;no_create&quot;: True}" required="1"/>
+                                </div>
+                            </group>
+                            <group>
+                                <field name="shift1"/>
+                                <field name="shift2"/>
+                                <field name="shift3"/>
+                                <field name="shift4"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Description">
+                                <field name="description"/>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
 </odoo>

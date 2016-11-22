@@ -8,7 +8,9 @@
     'description': '',
     'website': 'http://www.globalstd.com/',
     'depends': [],
-    'data': [],
+    'data': [
+        'views/sale_views.xml'
+    ],
     'test': [],
     'installable': True,
     'auto_install': False,
