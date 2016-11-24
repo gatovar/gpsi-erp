@@ -9,7 +9,8 @@
     'website': 'http://www.globalstd.com/',
     'depends': ['crm', 'gpsi_project'],
     'data': [
-        'views/crm_views.xml'
+        'views/crm_views.xml',
+        'data/crm_data.xml'
     ],
     'test': [],
     'installable': True,

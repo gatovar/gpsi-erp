@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="lead_tag_course" model="crm.lead.tag">
+            <field name="name">Course</field>
+            <field name="color">5</field>
+        </record>
+
+        <record id="lead_tag_certification" model="crm.lead.tag">
+            <field name="name">Certification</field>
+            <field name="color">5</field>
+        </record>
+
+        <record id="lead_tag_certification_1" model="crm.lead.tag">
+            <field name="name">Certification/ISO 9001:2008</field>
+            <field name="color">5</field>
+        </record>
+
+        <record id="lead_tag_certification_2" model="crm.lead.tag">
+            <field name="name">Certification/ISO 9001:2015</field>
+            <field name="color">5</field>
+        </record>
+
+    </data>
+</odoo>

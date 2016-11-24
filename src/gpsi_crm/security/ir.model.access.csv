@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+gpsi_crm_application_certification_all,gpsi.crm.application.certification all,model.gpsi_crm_application_certification,,1,1,1,1
+gpsi_crm_application_certification_site_all,gpsi.crm.application.certification.site all,model.gpsi_crm_application_certification_site,,1,1,1,1
