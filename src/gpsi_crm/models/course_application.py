@@ -75,11 +75,3 @@ class CourseApplication(models.Model):
     applies_v = fields.Boolean('Applies')
     website_published = fields.Boolean('Website Published')
     zip_code = fields.Char('Zip Code')
-
-
-
-
-
-
-
-

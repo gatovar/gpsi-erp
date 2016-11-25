@@ -27,3 +27,4 @@ class CertificationContract(models.Model):
 	sqf_adress = fields.Text('Adress')#
 	sqf_phone = fields.Char('Phone')#
 	sqf_date = fields.Date('Date Audit')
+	
