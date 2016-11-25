@@ -7,7 +7,7 @@
     'summary': 'Sales Extension',
     'description': '',
     'website': 'http://www.globalstd.com/',
-    'depends': [],
+    'depends': ['mail'],
     'data': [
         'views/sale_views.xml'
     ],
