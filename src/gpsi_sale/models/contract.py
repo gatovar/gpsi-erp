@@ -8,7 +8,7 @@ class CertificationContract(models.Model):
 	Model para la aplicación de certificado.
 	'''
 
-	_name = 'gpsi.sale.contract'
+	_name = 'sale.contract'
 	_description = 'Contract Certification'
 	_inherit = 'mail.thread'
 
