@@ -334,6 +334,12 @@
                                 </group>
                             </page>
                         </notebook>
+                        <group>
+                            <div class="oe_chatter">
+                                <field name="message_follower_ids" widget="mail_followers"/>
+                                <field name="message_ids" widget="mail_thread"/>
+                            </div>
+                        </group>
                     </sheet>
                 </form>
             </field>
@@ -349,7 +355,15 @@
          name="Course"
          parent="sales_team.menu_base_partner"
          groups="base.group_no_one"
-         sequence="20">
+         sequence="9">
       </menuitem>
-      
+
+      <menuitem id="submenu_gpsi_course"
+         name="Registration Course"
+         parent="menu_gpsi_course"
+         action="action_gpsi_crm_course"
+         groups="base.group_no_one"
+         sequence="1" >
+      </menuitem>
+
 </odoo>
