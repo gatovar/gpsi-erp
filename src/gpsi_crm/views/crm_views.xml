@@ -339,5 +339,17 @@
             </field>
         </record>
 
+      <act_window id="action_gpsi_crm_course"
+         name="Course"
+         res_model="gpsi.crm.application.course"
+         view_mode="tree,form">
+      </act_window>
 
+      <menuitem id="menu_gpsi_course"
+         name="Course"
+         parent="sales_team.menu_base_partner"
+         groups="base.group_no_one"
+         sequence="20">
+      </menuitem>
+      
 </odoo>
