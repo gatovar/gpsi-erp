@@ -1,14 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 
-    <record model="ir.ui.view" id="view_project_task_bpm">
-        <field name="name">gpsi.crm.team.bpm.form</field>
-        <field name="model">crm.team</field>
-        <field name="priority">18</field>
-        <field name="inherit_id" ref="sales_team.crm_team_view_form"/>
+    <record model="ir.ui.view" id="view_project_cert_sales_opps">
+        <field name="name">gpsi.project.cert.sales.opps.form</field>
+        <field name="model">project.project</field>
+        <field name="priority">10</field>
+        <field name="inherit_id" ref="project.edit_project"/>
         <field name="arch" type="xml">
-            <xpath expr="//field[@name='user_id']" position="after">
-                <field name="bpm_project_id"/>
+            <xpath expr="//sheet" position="inside">
+                <field name="gpsi_is_cert_project" invisible="1"/>
+            </xpath>
+            <xpath expr="//field[@name='partner_id']" position="after">
+                <field name="gpsi_sales_team_id" attrs="{'invisible': [('gpsi_is_cert_project','=',False)]}"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="view_task_cert_sales_opps">
+        <field name="name">gpsi.task.cert.sales.opps.form</field>
+        <field name="model">project.task</field>
+        <field name="priority">10</field>
+        <field name="inherit_id" ref="project.view_task_form2"/>
+        <field name="arch" type="xml">
+            <xpath expr="//sheet" position="inside">
+                <field name="gpsi_is_cert_task" invisible="1"/>
+            </xpath>
+            <xpath expr="//group" position="after">
+                <group string="Documents" attrs="{'invisible': [('gpsi_is_cert_task','=',False)]}">
+                    <group>
+                        <field name="gpsi_opportunity_id"/>
+                    </group>
+                    <group>
+                    </group>
+                </group>
             </xpath>
         </field>
     </record>

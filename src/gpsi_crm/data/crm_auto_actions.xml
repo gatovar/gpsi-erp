@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="create_cert_sales_task_action" model="ir.actions.server">
+            <field name="name">Create Certification Sales Task</field>
+            <field name="model_id" ref="model_crm_lead"/>
+            <field name="state">code</field>
+            <field name="code">
+                if record.gpsi_opportunity_type == 'certification_audit':
+                    env['project.task'].create({
+                        'name': record.name,
+                        'project_id': env.ref('gpsi_crm.project_certification_sales_opportunities', False).id,
+                        'user_id': False,
+                        'gpsi_opportunity_id': record.id
+                    })
+            </field>
+        </record>
+
+        <record id="create_cert_sales_task_action_rule" model="base.action.rule">
+            <field name="name">Create Certification Sales Task</field>
+            <field name="model_id" ref="model_crm_lead"/>
+            <field name="kind">on_create</field>
+            <field name="server_action_ids" eval="[(6, 0, [ref('gpsi_crm.create_cert_sales_task_action')])]"/>
+        </record>
+
+    </data>
+</odoo>

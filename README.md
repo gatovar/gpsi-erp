@@ -1,1 +1,1 @@
-[README]
+Los usuarios solo podrán ver sus tareas asignadas.

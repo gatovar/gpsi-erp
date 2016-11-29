@@ -2,10 +2,114 @@
 <odoo>
     <data>
 
-        <record id="test_workflow_a" model="workflow">
-            <field name="name">test.workflow.a</field>
-            <field name="osv">test.workflow.model.a</field>
-            <field name="on_create">True</field>
+        <record id="cert_sales_opportunities_workflow" model="workflow">
+            <field name="name">Certification Sales Opportunities</field>
+            <field name="osv">project.task</field>
+            <field name="on_create">False</field>
+        </record>
+
+        <record id="cso_unassigned_activity" model="workflow.activity">
+            <field name="wkf_id" ref="cert_sales_opportunities_workflow"/>
+            <field name="flow_start">True</field>
+            <field name="name">Unassigned</field>
+            <field name="kind">function</field>
+            <field name="action">changed()</field>
+        </record>
+
+        <record id="cso_qualify_activity" model="workflow.activity">
+            <field name="wkf_id" ref="cert_sales_opportunities_workflow"/>
+            <field name="name">Qualify</field>
+            <field name="kind">function</field>
+            <field name="action">changed()</field>
+        </record>
+
+        <record id="cso_proposition_activity" model="workflow.activity">
+            <field name="wkf_id" ref="cert_sales_opportunities_workflow"/>
+            <field name="name">Proposition</field>
+            <field name="kind">function</field>
+            <field name="action">changed()</field>
+        </record>
+
+        <record id="cso_client_approval_activity" model="workflow.activity">
+            <field name="wkf_id" ref="cert_sales_opportunities_workflow"/>
+            <field name="name">Client Approval</field>
+            <field name="kind">function</field>
+            <field name="action">changed()</field>
+        </record>
+
+        <record id="cso_adjust_activity" model="workflow.activity">
+            <field name="wkf_id" ref="cert_sales_opportunities_workflow"/>
+            <field name="name">Adjust</field>
+            <field name="kind">function</field>
+            <field name="action">changed()</field>
+        </record>
+
+        <record id="cso_approval_activity" model="workflow.activity">
+            <field name="wkf_id" ref="cert_sales_opportunities_workflow"/>
+            <field name="name">Approval</field>
+            <field name="kind">function</field>
+            <field name="action">changed()</field>
+        </record>
+
+        <record id="cso_won_activity" model="workflow.activity">
+            <field name="wkf_id" ref="cert_sales_opportunities_workflow"/>
+            <field name="flow_stop">True</field>
+            <field name="name">Won</field>
+            <field name="kind">function</field>
+            <field name="action">changed()</field>
+        </record>
+
+        <record id="cso_lost_activity" model="workflow.activity">
+            <field name="wkf_id" ref="cert_sales_opportunities_workflow"/>
+            <field name="flow_stop">True</field>
+            <field name="name">Lost</field>
+            <field name="kind">function</field>
+            <field name="action">changed()</field>
+        </record>
+
+        <record id="cos_unassigned__qualify_trans" model="workflow.transition">
+            <field name="act_from" ref="cso_unassigned_activity"/>
+            <field name="act_to" ref="cso_qualify_activity"/>
+        </record>
+
+        <record id="cos_qualify__proposition_trans" model="workflow.transition">
+            <field name="act_from" ref="cso_qualify_activity"/>
+            <field name="act_to" ref="cso_proposition_activity"/>
+        </record>
+
+        <record id="cos_proposition__client_approval_trans" model="workflow.transition">
+            <field name="act_from" ref="cso_proposition_activity"/>
+            <field name="act_to" ref="cso_client_approval_activity"/>
+        </record>
+
+        <record id="cos_client_approval__adjust_trans" model="workflow.transition">
+            <field name="act_from" ref="cso_client_approval_activity"/>
+            <field name="act_to" ref="cso_adjust_activity"/>
+        </record>
+
+        <record id="cos_adjust__client_approval_trans" model="workflow.transition">
+            <field name="act_from" ref="cso_adjust_activity"/>
+            <field name="act_to" ref="cso_client_approval_activity"/>
+        </record>
+
+        <record id="cos_adjust__approval_trans" model="workflow.transition">
+            <field name="act_from" ref="cso_adjust_activity"/>
+            <field name="act_to" ref="cso_approval_activity"/>
+        </record>
+
+        <record id="cos_approval__adjust_trans" model="workflow.transition">
+            <field name="act_from" ref="cso_approval_activity"/>
+            <field name="act_to" ref="cso_adjust_activity"/>
+        </record>
+
+        <record id="cos_approval__won_trans" model="workflow.transition">
+            <field name="act_from" ref="cso_approval_activity"/>
+            <field name="act_to" ref="cso_won_activity"/>
+        </record>
+
+        <record id="cos_approval__lost_trans" model="workflow.transition">
+            <field name="act_from" ref="cso_approval_activity"/>
+            <field name="act_to" ref="cso_lost_activity"/>
         </record>
         
     </data>

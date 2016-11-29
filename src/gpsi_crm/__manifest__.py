@@ -10,7 +10,9 @@
     'depends': ['crm', 'mail', 'gpsi_project'],
     'data': [
         'views/crm_views.xml',
-        'data/crm_data.xml'
+        'data/crm_data.xml',
+        'data/crm_workflow.xml',
+        'data/crm_auto_actions.xml'
     ],
     'test': [],
     'installable': True,
