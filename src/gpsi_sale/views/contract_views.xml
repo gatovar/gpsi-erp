@@ -15,19 +15,19 @@
         <t t-call="report.html_container">
             <t t-foreach="docs" t-as="o">
                 <div class="page">
-                    <div class="container" style="">
+                    <div class="container" style="font-size: 11px;">
 
                     <div class="row">
                         <div class="row" style="float: left;">
-                            <div class="col-md-12"><img src="http://gms.globalstd.com/rutas_online/logo_actual.jpg" width="300px" class="img-responsive" alt="Imagen responsive" /></div>
+                            <div class="col-md-12"><img src="http://gms.globalstd.com/rutas_online/logo_actual.jpg" width="200px" class="img-responsive" alt="Imagen responsive"/></div>
                         </div>
                         <div class="row" style="float: right;">
-                            <div class="col-md-12"><div style="width: 400px; height: 70px; background-color: #a31d21; text-align: right; padding-top: 10px; padding-right: 20px; color: white; font-size: 22px;">Contrato de Servicios de Auditoría</div></div>
+                            <div class="col-md-12"><div style="width: 400px; height: 50px; background-color: #a31d21; text-align: right; padding-top: 5px; padding-right: 10px; color: white; font-size: 18px;">Contrato de Servicios de Auditoría</div></div>
                         </div>
                     </div>
-
+                    
                     <div class="row">
-                        <div class="" style="font-size: 14px; margin-top: 50px; margin-bottom: 50px; text-align: justify;"><label for="titulo">CONTRATO PARA LA PRESTACIÓN DE SERVICIOS DE AUDITORÍA PARA EL SISTEMA DE GESTIÓN ______________________QUE CELEBRAN GLOBAL STANDARDS S. C. (EN LOS SUCESIVO “GLOBALSTD”) REPRESENTADA EN ESTE ACTO POR:________________________________ Y POR OTRA PARTE: _____________________________________________________ (EN LOS SUCESIVO EL “CLIENTE”) REPRESENTADA EN ESTE ACTO POR: ______________________________________________, MISMOS QUE ESTAN DE ACUERDO EN CUMPLIR LOS SIGUIENTES TÉRMINOS Y CONDICIONES:</label></div>
+                        <div class="" style="font-size: 12px; margin-top: 50px; margin-bottom: 30px; text-align: justify;"><label for="titulo">CONTRATO PARA LA PRESTACIÓN DE SERVICIOS DE AUDITORÍA PARA EL SISTEMA DE GESTIÓN ______________________QUE CELEBRAN GLOBAL STANDARDS S. C. (EN LOS SUCESIVO “GLOBALSTD”) REPRESENTADA EN ESTE ACTO POR:________________________________ Y POR OTRA PARTE: _____________________________________________________ (EN LOS SUCESIVO EL “CLIENTE”) REPRESENTADA EN ESTE ACTO POR: ______________________________________________, MISMOS QUE ESTAN DE ACUERDO EN CUMPLIR LOS SIGUIENTES TÉRMINOS Y CONDICIONES:</label></div>
                     </div>
 
                     <div class="row">
@@ -83,6 +83,15 @@
                             <li style="text-align: justify;">GLOBALSTD emitirá el certificado al CLIENTE, una vez que haya aprobado satisfactoriamente los eventos de auditoría y que la evidencia obtenida a través de las auditorias demuestre que el sistema de gestión del CLIENTE cumple con los requerimientos de la norma, los regulatorios, y cualquier otro relacionado con el sistema; asimismo que haya cerrado cualquier asunto relacionado con “No Conformidades” detectadas durante el proceso de auditoría, en caso de que aplique.</li>
                             <li style="text-align: justify;">El certificado será emitido siempre y cuando el CLIENTE haya pagado los honorarios y viáticos correspondientes a los eventos de auditoría. El CLIENTE será conscienteque no podrá recibir su certificado si no ha liquidado sus eventos de auditoría.</li>
                         </ul>
+                    </div>
+                    
+                    <div class="row" style="page-break-before: always; margin-bottom: 30px;">
+                        <div class="row" style="float: left;">
+                            <div class="col-md-12"><img src="http://gms.globalstd.com/rutas_online/logo_actual.jpg" width="200px" class="img-responsive" alt="Imagen responsive"/></div>
+                        </div>
+                        <div class="row" style="float: right;">
+                            <div class="col-md-12"><div style="width: 400px; height: 50px; background-color: #a31d21; text-align: right; padding-top: 5px; padding-right: 10px; color: white; font-size: 18px;">Contrato de Servicios de Auditoría</div></div>
+                        </div>
                     </div>
 
                     <div class="row">
@@ -147,6 +156,15 @@
                             <li style="text-align: justify;">El CLIENTE se compromete a realizar el pago de honorarios y viáticos de eventos de auditoría y cierre de “No Conformidades” aún y cuando el resultado no sea favorable. Dichos pagos deberán realizarse en un plazo máximo de 15 días naturales después de haber finalizado los eventos de auditoría.</li>
                             <li style="text-align: justify;">El CLIENTE estará de acuerdo que en caso de no liquidar los eventos de auditoría, GLOBALSTD se reservará el derecho de no emitir, suspender o cancelar el certificado.</li>
                         </ul>
+                    </div>
+                    
+                    <div class="row" style="page-break-before: always; margin-bottom: 30px;">
+                        <div class="row" style="float: left;">
+                            <div class="col-md-12"><img src="http://gms.globalstd.com/rutas_online/logo_actual.jpg" width="200px" class="img-responsive" alt="Imagen responsive"/></div>
+                        </div>
+                        <div class="row" style="float: right;">
+                            <div class="col-md-12"><div style="width: 400px; height: 50px; background-color: #a31d21; text-align: right; padding-top: 5px; padding-right: 10px; color: white; font-size: 18px;">Contrato de Servicios de Auditoría</div></div>
+                        </div>
                     </div>
 
                     <div class="row">
@@ -237,6 +255,15 @@
                             <li style="text-align: justify;">Asimismo queda expresamente establecido que entre GLOBALSTD y los trabajadores del CLIENTE no habrá vínculo contractual de ninguna especie y, por lo tanto el CLIENTE asume cualquier responsabilidad derivada de lo anterior sin involucrar en ningún caso a GLOBALSTD y a sacarla en paz y a salvo bajo su costa de cualquier acción o contingencia que se entable o amenace entablar en su contra.</li>
                         </ul>
                     </div>
+                    
+                    <div class="row" style="page-break-before: always; margin-bottom: 30px;">
+                        <div class="row" style="float: left;">
+                            <div class="col-md-12"><img src="http://gms.globalstd.com/rutas_online/logo_actual.jpg" width="200px" class="img-responsive" alt="Imagen responsive"/></div>
+                        </div>
+                        <div class="row" style="float: right;">
+                            <div class="col-md-12"><div style="width: 400px; height: 50px; background-color: #a31d21; text-align: right; padding-top: 5px; padding-right: 10px; color: white; font-size: 18px;">Contrato de Servicios de Auditoría</div></div>
+                        </div>
+                    </div>
 
                     <div class="row">
                         <p style="font-weight: bold;">6.3 Responsabilidad por las decisiones de certificación:</p>
@@ -274,9 +301,18 @@
                     <div class="row">
                         <p style="">Habiendo conocido el contenido íntegro del presente “contrato de servicios de auditoría” proporcionado por GLOBALSTD; y sabedores de los términos, condiciones, alcances y costos de los servicios de certificación indicados en este documento, las partes se manifiestan conformes y firman este contrato.</p>
                     </div>
+                    
+                    <div class="row" style="page-break-before: always; margin-bottom: 30px;">
+                        <div class="row" style="float: left;">
+                            <div class="col-md-12"><img src="http://gms.globalstd.com/rutas_online/logo_actual.jpg" width="200px" class="img-responsive" alt="Imagen responsive"/></div>
+                        </div>
+                        <div class="row" style="float: right;">
+                            <div class="col-md-12"><div style="width: 400px; height: 50px; background-color: #a31d21; text-align: right; padding-top: 5px; padding-right: 10px; color: white; font-size: 18px;">Contrato de Servicios de Auditoría</div></div>
+                        </div>
+                    </div>
 
                     <div class="row">
-                        <table class="table table-bordered">
+                        <table class="table table-bordered" style="font-size: 11px;">
                             <thead>
                                 <tr>
                                 <th class="text-center" style="width: 80%;" colspan="2">EVENTOS PARA PROCESO DE CERTIFICACIÓN</th>
@@ -310,7 +346,7 @@
                     </div>
 
                     <div class="row">
-                        <table class="table">
+                        <table class="table" style="font-size: 11px;">
                             <thead>
                                 <tr>
                                 <th style="width: 80%;" colspan="2">Notas</th>
@@ -319,14 +355,14 @@
                             <tbody>
                                 <tr>
                                 <td style="background-color: #F1F1F1; text-align: justify;">Nota 1: Cuando aplique, adicional a estos costos serán facturados al cliente los eventos de auditorías especiales y cierre de “No Conformidades en sitio” (instalaciones de cliente) conforme a los términos y condiciones pactados en este contrato.
-                                <br />Nota 2: Cuando aplique, adicional a estos costos serán facturados al cliente los viáticos relacionados con la ejecución de los eventos de auditoría.</td>
+                                <br/>Nota 2: Cuando aplique, adicional a estos costos serán facturados al cliente los viáticos relacionados con la ejecución de los eventos de auditoría.</td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
 
                     <div class="row">
-                        <table class="table">
+                        <table class="table" style="font-size: 11px;">
                             <thead>
                                 <tr>
                                 <th style="width: 80%;" colspan="2">Condiciones especiales:</th>
@@ -334,35 +370,35 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                <td style="background-color: #F1F1F1; text-align: justify;"></td>
+                                <td style="background-color: #F1F1F1; text-align: justify;"/>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
 
                     <div class="row">
-                        <table class="table" style="border-style: dashed;">
+                        <table class="table" style="border-style: dashed; font-size: 11px;">
                             <tbody>
                                 <tr>
                                 <td style="width: 10%; font-weight: bold;">Cliente:</td>
-                                <td style="width: 40%;"></td>
+                                <td style="width: 40%;"/>
                                 <td style="width: 50%; font-weight: bold;" class="text-center" colspan="2">GLOBAL STANDARDS S.C.</td>
                                 </tr>
                                 <tr>
                                 <td style="width: 10%; font-weight: bold; background-color: #F1F1F1;">Firma:</td>
-                                <td style="width: 40%; background-color: #F1F1F1;"><br /><br /><br /><br /></td>
+                                <td style="width: 40%; background-color: #F1F1F1;"><br/><br/><br/><br/></td>
                                 <td style="width: 10%; font-weight: bold; background-color: #F1F1F1;">Firma:</td>
-                                <td style="width: 40%; background-color: #F1F1F1;"><br /><br /><br /><br /></td>
+                                <td style="width: 40%; background-color: #F1F1F1;"><br/><br/><br/><br/></td>
                                 </tr>
                                 <tr>
                                 <td style="width: 10%; font-weight: bold;">Nombre:</td>
-                                <td style="width: 40%;"></td>
+                                <td style="width: 40%;"/>
                                 <td style="width: 10%; font-weight: bold;">Nombre:</td>
                                 <td style="width: 40%;">MIGUEL ANGEL ROMERO MENDOZA</td>
                                 </tr>
                                 <tr>
                                 <td style="width: 10%; font-weight: bold;">Puesto:</td>
-                                <td style="width: 40%;"></td>
+                                <td style="width: 40%;"/>
                                 <td style="width: 10%; font-weight: bold;">Puesto:</td>
                                 <td style="width: 40%;">Director</td>
                                 </tr>
@@ -371,13 +407,13 @@
                     </div>
 
                     <div class="row">
-                        <table class="table table-bordered">
+                        <table class="table table-bordered" style="font-size: 11px;">
                             <tbody>
                                 <tr>
                                 <td style="width: 25%; font-weight: bold; background-color: #F1F1F1;">Fecha del contrato:</td>
-                                <td style="width: 25%; background-color: #F1F1F1;"></td>
+                                <td style="width: 25%; background-color: #F1F1F1;"/>
                                 <td style="width: 25%; font-weight: bold; background-color: #F1F1F1;">Fecha de aceptación:</td>
-                                <td style="width: 25%; background-color: #F1F1F1;"></td>
+                                <td style="width: 25%; background-color: #F1F1F1;"/>
                                 </tr>
                             </tbody>
                         </table>
