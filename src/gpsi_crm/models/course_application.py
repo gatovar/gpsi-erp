@@ -24,6 +24,7 @@ class CourseApplication(models.Model):
     
     _name = 'gpsi.crm.application.course'
     _description = 'Application Course'
+    _inherit = 'mail.thread'
     
     apartment_number = fields.Integer('Apartment Number')
     attention_to = fields.Char('Attention To')
@@ -77,3 +78,4 @@ class CourseApplication(models.Model):
     translator_needed = fields.Boolean('Translator Needed')
     travel_expenses_applies = fields.Boolean('Travel Expenses Applies')
     website_published = fields.Boolean('Website Published')
+    

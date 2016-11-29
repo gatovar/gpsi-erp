@@ -7,7 +7,7 @@
     'summary': 'CRM Extension',
     'description': '',
     'website': 'http://www.globalstd.com/',
-    'depends': ['crm', 'gpsi_project'],
+    'depends': ['crm', 'mail', 'gpsi_project'],
     'data': [
         'views/crm_views.xml',
         'data/crm_data.xml'
