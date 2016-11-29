@@ -12,7 +12,7 @@
                         'name': record.name,
                         'project_id': env.ref('gpsi_crm.project_certification_sales_opportunities', False).id,
                         'user_id': False,
-                        'gpsi_opportunity_id': record.idd
+                        'gpsi_opportunity_id': record.id
                     })
             </field>
         </record>
