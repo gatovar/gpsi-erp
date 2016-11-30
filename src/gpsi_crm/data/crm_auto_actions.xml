@@ -7,13 +7,13 @@
             <field name="model_id" ref="model_crm_lead"/>
             <field name="state">code</field>
             <field name="code">
-                if record.gpsi_opportunity_type == 'certification_audit':
-                    env['project.task'].create({
+                if record.gs_is_cert:
+                    task = env['project.task'].create({
                         'name': record.name,
                         'project_id': env.ref('gpsi_crm.project_certification_sales_opportunities', False).id,
-                        'user_id': False,
-                        'gpsi_opportunity_id': record.id
+                        'user_id': False
                     })
+                    task.gs_add_res(record)
             </field>
         </record>
 

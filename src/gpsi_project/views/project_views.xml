@@ -1,6 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 
+    <record model="ir.actions.act_window" id="action_bpm_tasks">
+        <field name="name">Tasks</field>
+        <field name="res_model">project.task</field>
+        <field name="view_mode">tree,form</field>
+        <field name="search_view_id" ref="project.view_task_search_form"/>
+        <field name="context">{'search_default_my_tasks': 1}</field>
+        <field name="help" type="html">
+          <p>
+            From this report, you can have an overview on all depreciations. The
+            search bar can also be used to personalize your assets depreciation reporting.
+          </p>
+        </field>
+    </record>
+
+    <menuitem 
+        id="menu_bpm_tasks"
+        name="Tasks"
+        action="action_bpm_tasks"
+        sequence="5">
+    </menuitem>
+
+    <record model="ir.ui.view" id="view_bpm_resources">
+        <field name="name">gpsi.bpm.resources.form</field>
+        <field name="model">project.task</field>
+        <field name="priority">10</field>
+        <field name="inherit_id" ref="project.view_task_form2"/>
+        <field name="arch" type="xml">
+            <xpath expr="//notebook" position="inside">
+                <page string="Documents">
+                    <field name="res_attachment_ids" context="{'default_task_id': id}">
+                        <tree editable="bottom">
+                            <field name="res_model"/>
+                            <field name="res_id"/>
+                            <field name="view_id"/>
+                            <field name="res_name"/>
+                            <button name="action_open_resource" type="object" string="Open"/>
+                        </tree>
+                    </field>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
     <record model="ir.ui.view" id="view_project_type_bpm">
         <field name="name">gpsi.project.type.bpm.form</field>
         <field name="model">project.task.type</field>
@@ -10,21 +53,21 @@
             <xpath expr="//sheet" position="inside">
                 <group string="Activity Management">
                     <group>
-                        <field name="bpm_assignee_id"/>
+                        <field name="gs_assignee_id"/>
                     </group>
                     <group>
                     </group>
                 </group>
                 <notebook>
                     <page string="Candidate Users">
-                        <field name="bpm_canditate_ids">
+                        <field name="gs_canditate_ids">
                             <tree>
                                 <field name="name"/>
                             </tree>
                         </field>
                     </page>
                     <page string="Candidate Groups">
-                        <field name="bpm_canditate_group_ids">
+                        <field name="gs_canditate_group_ids">
                             <tree>
                                 <field name="name"/>
                             </tree>

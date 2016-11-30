@@ -4,17 +4,25 @@ from odoo import api, fields, models, _
 from odoo.exceptions import UserError, ValidationError
 
 
-class CertificationApplication(models.Model):
+class CrmLead(models.Model):
+    _name = 'crm.lead'
+    _inherit = ['crm.lead']
+
+    gs_is_cert = fields.Boolean('Certification')
+    gs_cert_card_id = fields.Many2one('gpsi.crm.cert.card', 'Certification Card')        
+
+
+class CertificationCard(models.Model):
     '''
     Model para la aplicación de certificado.
     '''
 
-    _name = 'gpsi.crm.application.certification'
-    _description = 'Application Certification'
+    _name = 'gpsi.crm.cert.card'
+    _description = 'Certification Card'
     _inherit = 'mail.thread'
 
     name = fields.Char('Name')
-    facility_ids = fields.One2many('gpsi.crm.application.certification.site', 'application_id', 'Facilities')
+    facility_ids = fields.One2many('gpsi.crm.cert.card.site', 'cert_card_id', 'Facilities')
     street = fields.Char('Street')
     street2 = fields.Char('Street2')
     zip = fields.Char('Zip', size=24, change_default=True)
@@ -72,15 +80,15 @@ class CertificationApplication(models.Model):
     audit_surveillance2_date = fields.Date('Surveillance 2')
 
 
-class CertificationApplicationSite(models.Model):
+class CertificationCardSite(models.Model):
     '''
     Sitio de certificación.
     '''
     
-    _name = 'gpsi.crm.application.certification.site'
+    _name = 'gpsi.crm.cert.card.site'
     _description = 'Site'
 
-    application_id = fields.Many2one('gpsi.crm.application.certification', 'Application', ondelete="cascade")
+    cert_card_id = fields.Many2one('gpsi.crm.cert.card', 'Certification Card', ondelete="cascade")
     street = fields.Char('Street')
     street2 = fields.Char('Street2')
     zip = fields.Char('Zip', size=24, change_default=True)
