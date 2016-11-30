@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 
-    <record model="ir.actions.act_window" id="action_bpm_tasks">
+    <record model="ir.actions.act_window" id="bpm_tasks_action">
         <field name="name">Tasks</field>
         <field name="res_model">project.task</field>
         <field name="view_mode">tree,form</field>
@@ -16,14 +16,14 @@
     </record>
 
     <menuitem 
-        id="menu_bpm_tasks"
+        id="bpm_tasks_menu"
         name="Tasks"
-        action="action_bpm_tasks"
+        action="bpm_tasks_action"
         sequence="5">
     </menuitem>
 
-    <record model="ir.ui.view" id="view_bpm_resources">
-        <field name="name">gpsi.bpm.resources.form</field>
+    <record model="ir.ui.view" id="bpm_task_resources_form_inherit">
+        <field name="name">gpsi.bpm.task.resources.form</field>
         <field name="model">project.task</field>
         <field name="priority">10</field>
         <field name="inherit_id" ref="project.view_task_form2"/>
@@ -44,8 +44,8 @@
         </field>
     </record>
 
-    <record model="ir.ui.view" id="view_project_type_bpm">
-        <field name="name">gpsi.project.type.bpm.form</field>
+    <record model="ir.ui.view" id="bpm_project_task_type_form_inherit">
+        <field name="name">gpsi.bpm.project.task.type.form</field>
         <field name="model">project.task.type</field>
         <field name="priority">10</field>
         <field name="inherit_id" ref="project.task_type_edit"/>
