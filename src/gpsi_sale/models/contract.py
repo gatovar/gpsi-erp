@@ -3,28 +3,30 @@
 from odoo import api, fields, models, _
 from odoo.exceptions import UserError, ValidationError
 
-class CertificationContract(models.Model):
-	'''
-	Model para la aplicación de certificado.
-	'''
 
-	_name = 'sale.contract'
-	_description = 'Contract Certification'
-	_inherit = 'mail.thread'
+class Standard(models.Model):
+    _name = 'gpsi.sale.contract.standard'
+    
+    name = fields.Char('Name')
+    
 
-	standard = fields.Char('Standard')#
-	client = fields.Char('Client')#
-	representative = fields.Char('Representative')#
-	representative_position = fields.Char('Representative Position')#
-	events = fields.Char('Events')##
-	notes = fields.Text('Notes')
-	conditions = fields.Text('Special Conditions')
-	date_contract = fields.Date('Date')
+class Contract(models.Model):
+    _inherit = 'sale.order'
 
-	sqf_scope = fields.Text('Scope')#
-	sqf_code = fields.Char('Code')#
-	sqf_level = fields.Char('Level')#
-	sqf_adress = fields.Text('Adress')#
-	sqf_phone = fields.Char('Phone')#
-	sqf_date = fields.Date('Date Audit')
-	
+    gs_is_contract = fields.Boolean('Is Contract', help='Indica que esta orden es un contrato GlobalSTD')
+    gs_cycle = fields.Integer('Cycle')
+    gs_standard_id = fields.Many2one('gpsi.sale.contract.standard', 'Standard')
+    gs_code = fields.Char('Code')
+    gs_apply_design = fields.Boolean('Apply Design')
+    gs_is_multisite = fields.Boolean('Multisite')
+    gs_is_multilocate = fields.Boolean('Multilocate')
+    gs_block_contract = fields.Boolean('Block Contract')
+    gs_need_bilingual_auditor = fields.Boolean('Bilingual Auditor')
+    gs_risk_level = fields.Char('Risk Level')
+    gs_certification_type = fields.Selection([('initial', 'Initial')], 'Certification Type')
+    gs_scheme = fields.Selection([('mixed', 'Mixed'), ('annual', 'Annual')], 'Scheme')
+    gs_duration = fields.Selection([('1year', '1 Year'), ('2year', '2 Year'), ('3year', '3 Year')], 'Duration')
+    gs_scope = fields.Text('Scope')
+    gs_expiration_date = fields.Date('Expiration Date')
+    gs_certificate_status = fields.Selection([('active', 'Active'), ('expired', 'Expired'), ('suspended', 'Suspended'), ('canceled', 'Canceled')], 
+        'Certificate Status')

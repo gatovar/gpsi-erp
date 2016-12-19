@@ -6,6 +6,9 @@
         <field name="priority">18</field>
         <field name="inherit_id" ref="crm.crm_case_form_view_oppor" />
         <field name="arch" type="xml">
+            <xpath expr="//sheet" position="inside">
+                <field name="gs_is_cert" invisible="1"/>
+            </xpath>
             <xpath expr="//field[@name='team_id']" position="after">
                 <field name="gs_cert_card_id" attrs="{'invisible': [('gs_is_cert','=',False)]}" />
             </xpath>
@@ -143,9 +146,9 @@
         </field>
     </record>
 
-    <record model="ir.ui.view" id="view_application_certification_site_form">
-        <field name="name">gpsi.crm.application.certification.site.form</field>
-        <field name="model">gpsi.crm.application.certification.site</field>
+    <record model="ir.ui.view" id="cert_card_site_form">
+        <field name="name">gpsi.crm.cert.card.site.form</field>
+        <field name="model">gpsi.crm.cert.card.site</field>
         <field name="priority">10</field>
         <field name="arch" type="xml">
             <form string="Facility">

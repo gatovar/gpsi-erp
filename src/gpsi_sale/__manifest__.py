@@ -9,8 +9,7 @@
     'website': 'http://www.globalstd.com/',
     'depends': ['mail'],
     'data': [
-        'views/sale_views.xml',
-        'views/contract_views.xml'
+        'views/sale_views.xml'
     ],
     'test': [],
     'installable': True,

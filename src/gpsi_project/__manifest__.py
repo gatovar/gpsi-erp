@@ -9,6 +9,7 @@
     'website': 'http://www.globalstd.com/',
     'depends': ['project'],
     'data': [
+        #'security/ir.model.access.csv',
         'security/project_security.xml',
         'views/project_views.xml'
     ],

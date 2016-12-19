@@ -3,9 +3,9 @@
     <data>
 
         <record id="bpm_candidate_rule" model="ir.rule">
-            <field name="name">Project/Task: employees need to be candidates</field>
+            <field name="name">Project/Task: Employees need to be candidates</field>
             <field name="model_id" ref="project.model_project_task"/>
-            <field name="domain_force">[('user_id','=',False), ('stage_id.gs_canditate_ids','!=',False), ('stage_id.gs_canditate_ids','in',[user.id])]</field>
+            <field name="domain_force">[('stage_id.gs_canditate_ids','!=',False), ('stage_id.gs_canditate_ids','in',[user.id])]</field>
             <field name="groups" eval="[(4, ref('base.group_user'))]"/>
         </record>
         
