@@ -1,17 +1,15 @@
 # -*- coding: utf-8 -*-
 {
-    'name': 'GPSI Project',
+    'name': 'GPSI Sales',
     'version': '1.0.0',
-    'category': 'GlobalSTD',
+    'category': 'globalstd',
     'sequence': 20,
-    'summary': 'Project Extension',
+    'summary': 'Sales Extension',
     'description': '',
     'website': 'http://www.globalstd.com/',
-    'depends': ['project'],
+    'depends': ['mail'],
     'data': [
-        #'security/ir.model.access.csv',
-        'security/project_security.xml',
-        'views/project_views.xml'
+        'views/sale_views.xml'
     ],
     'test': [],
     'installable': True,

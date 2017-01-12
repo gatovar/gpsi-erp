@@ -2,7 +2,7 @@
 {
     'name': 'GPSI Website Share',
     'version': '1.0.0',
-    'category': 'GPSI',
+    'category': 'GlobalSTD',
     'sequence': 20,
     'summary': 'Share Resources in Website',
     'description': '',

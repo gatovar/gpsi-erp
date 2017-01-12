@@ -9,7 +9,7 @@ class CrmLead(models.Model):
     _inherit = ['crm.lead']
 
     gs_is_cert = fields.Boolean('Certification')
-    gs_cert_card_id = fields.Many2one('gpsi.crm.cert.card', 'Certification Card')        
+    gs_cert_card_id = fields.Many2one('gpsi.crm.cert.card', 'Certification Card')
 
 
 class CertificationCard(models.Model):

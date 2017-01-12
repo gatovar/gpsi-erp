@@ -9,7 +9,7 @@ services:
                   - POSTGRES_USER=odoo
                   - POSTGRES_PASSWORD=odoo
       gpsi_erp:
-            image: odoo
+            image: odoo:9
             container_name: gpsi-erp
             volumes:
                   - ./src:/mnt/extra-addons
