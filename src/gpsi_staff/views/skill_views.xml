@@ -52,5 +52,16 @@
                 </xpath>
             </field>
         </record>
+        <record id="attachment_view_form_inherit_gpsi_staff_category" model="ir.ui.view">
+            <field name="name">gpsi.ir.attachment.category.form</field>
+            <field name="model">ir.attachment</field>
+            <field name="inherit_id" ref="base.view_attachment_form" />
+            <field name="priority">20</field>
+            <field name="arch" type="xml">
+                <field name="mimetype" position="after">
+                    <field name="tags_ids" widget="many2many_tags" placeholder="e.g. Type Document" groups="base.group_hr_user" />
+                </field>
+            </field>
+        </record>
     </data>
 </openerp>

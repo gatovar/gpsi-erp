@@ -17,6 +17,22 @@ class Employee(models.Model):
 
     gs_competence_ids = fields.One2many('gpsi.staff.competence', 'employee_id', 'Competences')
 
+class Attachments(models.Model):
+    _inherit = 'ir.attachment'
+
+    tags_ids = fields.Many2many('ir.attachment.category', string='Tags')
+
+class AttachmentCategory(models.Model):
+    _name = "ir.attachment.category"
+    _description = "Attachment Category"
+
+    name = fields.Char("Attachment Tag", required=True)
+    color = fields.Integer('Color Index')
+    tags_ids = fields.Many2many('ir.attachment', string='Tags')
+
+    _sql_constraints = [
+            ('name_uniq', 'unique (name)', "Tag name already exists !"),
+    ]
 
 class Competence(models.Model):
     _name = 'gpsi.staff.competence'
