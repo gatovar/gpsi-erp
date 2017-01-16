@@ -22,7 +22,7 @@ class Contract(models.Model):
     gs_is_multilocate = fields.Boolean('Multilocate')
     gs_block_contract = fields.Boolean('Block Contract')
     gs_need_bilingual_auditor = fields.Boolean('Bilingual Auditor')
-    gs_risk_level = fields.Char('Risk Level')
+    gs_risk_level = fields.Selection([('low','Low'), ('medium','Medium'), ('high','High'), ('lim','Lim')], 'Risk Level')
     gs_certification_type = fields.Selection([('initial', 'Initial')], 'Certification Type')
     gs_scheme = fields.Selection([('mixed', 'Mixed'), ('annual', 'Annual')], 'Scheme')
     gs_duration = fields.Selection([('1year', '1 Year'), ('2year', '2 Year'), ('3year', '3 Year')], 'Duration')
@@ -31,11 +31,9 @@ class Contract(models.Model):
     gs_certificate_status = fields.Selection([('active', 'Active'), ('expired', 'Expired'), ('suspended', 'Suspended'), ('canceled', 'Canceled')], 
         'Certificate Status')
     
-    gs_client = fields.Many2one('res.partner', 'Client')
-    gs_contact = fields.Many2one('res.partner', 'Responsible')
-    gs_sales_order = fields.Many2one('sale.order', 'Sales Order')
+    gs_responsable = fields.Many2one('res.partner', 'Responssble')
     gs_notes = fields.Text('Notes')
-    gs_special_conditions = fields.Char('Special Conditions')
+    gs_special_conditions = fields.Text('Special Conditions')
     gs_approves_date = fields.Date('Approves Date')
 
     gs_audit_date = fields.Date('Audit Date')
