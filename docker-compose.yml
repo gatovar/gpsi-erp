@@ -14,7 +14,7 @@ services:
             volumes:
                   - ./src:/mnt/extra-addons
             ports:
-                  - "8099:8069"
+                  - "8079:8069"
             environment:
                   - DB_PORT_5432_TCP_ADDR=gpsi_erp_db
                   - DB_PORT_5432_TCP_PORT=5432

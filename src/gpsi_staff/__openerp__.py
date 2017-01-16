@@ -7,8 +7,10 @@
     'summary': 'Staff Integration',
     'description': '',
     'website': '',
-    'depends': [],
-    'data': [],
+    'depends': ['hr'],
+    'data': [
+        'views/skill_views.xml'
+    ],
     'test': [],
     'installable': True,
     'auto_install': False,

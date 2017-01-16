@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <!--<record id="skill_view_tree" model="ir.ui.view">
+            <field name="name">gpsi.staff.skill.tree</field>
+            <field name="model">gpsi.staff.skill</field>
+            <field name="priority">20</field>
+            <field name="arch" type="xml">
+            </field>
+        </record>
+
+        <record id="skill_view_form" model="ir.ui.view">
+            <field name="name">gpsi.staff.skill.form</field>
+            <field name="model">gpsi.staff.skill</field>
+            <field name="priority">20</field>
+            <field name="arch" type="xml">
+                <form string="Skill">
+                    <sheet>
+                    </sheet>
+                </form>
+            </field>
+        </record>-->
+
+        <record id="employee_view_form_inherit_gpsi_staff_skill" model="ir.ui.view">
+            <field name="name">gpsi.staff.skill.form.inherit</field>
+            <field name="model">hr.employee</field>
+            <field name="inherit_id" ref="hr.view_employee_form"/>
+            <field name="priority">20</field>
+            <field name="arch" type="xml">
+                <xpath expr="//notebook" position="inside">
+                    <page string="Competences">
+                        <field name="competence_ids">
+                            <tree editable="bottom">
+                                <field name="skill_id" required="1"/>
+                                <field name="rating"/>
+                            </tree>
+                        </field>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</openerp>
