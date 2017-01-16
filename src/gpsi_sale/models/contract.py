@@ -30,3 +30,13 @@ class Contract(models.Model):
     gs_expiration_date = fields.Date('Expiration Date')
     gs_certificate_status = fields.Selection([('active', 'Active'), ('expired', 'Expired'), ('suspended', 'Suspended'), ('canceled', 'Canceled')], 
         'Certificate Status')
+    
+    gs_client = fields.Many2one('res.partner', 'Client')
+    gs_contact = fields.Many2one('res.partner', 'Responsible')
+    gs_sales_order = fields.Many2one('sale.order', 'Sales Order')
+    gs_notes = fields.Text('Notes')
+    gs_special_conditions = fields.Char('Special Conditions')
+    gs_approves_date = fields.Date('Approves Date')
+
+    gs_audit_date = fields.Date('Audit Date')
+
