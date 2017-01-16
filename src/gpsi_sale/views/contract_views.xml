@@ -44,7 +44,7 @@
                     </div>
                     
                     <div class="row">
-                        <div class="" style="font-size: 12px; margin-top: 50px; margin-bottom: 30px; text-align: justify;"><label for="titulo">CONTRATO PARA LA PRESTACIÓN DE SERVICIOS DE AUDITORÍA PARA EL SISTEMA DE GESTIÓN <ins><t t-esc="o.gs_standard_id.name"/></ins> QUE CELEBRAN GLOBAL STANDARDS S. C. (EN LOS SUCESIVO “GLOBALSTD”) REPRESENTADA EN ESTE ACTO POR: <ins>Miguel Angel Romero Mendoza</ins> Y POR OTRA PARTE: <ins><t t-esc="o.partner_id.name"/></ins> (EN LOS SUCESIVO EL “CLIENTE”) REPRESENTADA EN ESTE ACTO POR: <ins><t t-esc="o.gs_responsible.name"/></ins>, MISMOS QUE ESTAN DE ACUERDO EN CUMPLIR LOS SIGUIENTES TÉRMINOS Y CONDICIONES:</label></div>
+                        <div class="" style="font-size: 12px; margin-top: 50px; margin-bottom: 30px; text-align: justify;"><label for="titulo">CONTRATO PARA LA PRESTACIÓN DE SERVICIOS DE AUDITORÍA PARA EL SISTEMA DE GESTIÓN <ins><t t-esc="o.gs_standard_id.name"/></ins> QUE CELEBRAN GLOBAL STANDARDS S. C. (EN LOS SUCESIVO “GLOBALSTD”) REPRESENTADA EN ESTE ACTO POR: <ins>Miguel Angel Romero Mendoza</ins> Y POR OTRA PARTE: <ins><t t-esc="o.partner_id.name"/></ins> (EN LOS SUCESIVO EL “CLIENTE”) REPRESENTADA EN ESTE ACTO POR: <ins><t t-esc="o.gs_responsible_id.name"/></ins>, MISMOS QUE ESTAN DE ACUERDO EN CUMPLIR LOS SIGUIENTES TÉRMINOS Y CONDICIONES:</label></div>
                     </div>
 
                     <div class="row">
@@ -411,13 +411,13 @@
                                 </tr>
                                 <tr>
                                 <td style="width: 10%; font-weight: bold;">Nombre:</td>
-                                <td style="width: 40%;"><t t-esc="o.gs_responsible.name"/></td>
+                                <td style="width: 40%;"><t t-esc="o.gs_responsible_id.name"/></td>
                                 <td style="width: 10%; font-weight: bold;">Nombre:</td>
                                 <td style="width: 40%;">MIGUEL ANGEL ROMERO MENDOZA</td>
                                 </tr>
                                 <tr>
                                 <td style="width: 10%; font-weight: bold;">Puesto:</td>
-                                <td style="width: 40%;"><t t-esc="o.gs_responsible.function"/></td>
+                                <td style="width: 40%;"><t t-esc="o.gs_responsible_id.function"/></td>
                                 <td style="width: 10%; font-weight: bold;">Puesto:</td>
                                 <td style="width: 40%;">Director</td>
                                 </tr>
@@ -432,7 +432,7 @@
                                 <td style="width: 25%; font-weight: bold; background-color: #F1F1F1;">Fecha del contrato:</td>
                                 <td style="width: 25%; background-color: #F1F1F1;"><t t-esc="o.create_date"/></td>
                                 <td style="width: 25%; font-weight: bold; background-color: #F1F1F1;">Fecha de aceptación:</td>
-                                <td style="width: 25%; background-color: #F1F1F1;"><t t-esc="o.gs_approves_date"/></td>
+                                <td style="width: 25%; background-color: #F1F1F1;"><t t-esc="o.gs_approval_date"/></td>
                                 </tr>
                             </tbody>
                         </table>

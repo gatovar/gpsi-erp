@@ -27,7 +27,7 @@
                             </group>
                         </group>
                         <group>
-                            <field name="gs_responsible" />
+                            <field name="gs_responsible_id" />
                         </group>
                         <group string="Scope">
                             <field name="gs_scope" nolabel="1"/>
