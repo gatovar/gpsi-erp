@@ -15,7 +15,7 @@ SKILL_RATINGS = [
 class Employee(models.Model):
     _inherit = 'hr.employee'
 
-    competence_ids = fields.One2many('gpsi.staff.competence', 'employee_id', 'Competences')
+    gs_competence_ids = fields.One2many('gpsi.staff.competence', 'employee_id', 'Competences')
 
 
 class Competence(models.Model):
