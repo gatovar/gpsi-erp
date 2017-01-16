@@ -2,13 +2,30 @@
 
 <odoo>
 
+    <record id="paperformat_custom" model="report.paperformat">
+        <field name="name">European A4 custom</field>
+        <field name="default" eval="True"/>
+        <field name="format">custom</field>
+        <field name="page_height">297</field>
+        <field name="page_width">210</field>
+        <field name="orientation">Portrait</field>
+        <field name="margin_top">20</field>
+        <field name="margin_bottom">23</field>
+        <field name="margin_left">7</field>
+        <field name="margin_right">7</field>
+        <field name="header_line" eval="False"/>
+        <field name="header_spacing">35</field>
+        <field name="dpi">90</field>
+    </record>
+
     <report
         id="sale_contract_report"
-        model="sale.contract"
+        model="sale.order"
         string="Contrato"
         report_type="qweb-pdf"
         name="sale.contract_report"
         file="sale.contract_report"
+        paperformat="paperformat_custom"
     />
 
     <template id="sale.contract_report">
@@ -22,12 +39,12 @@
                             <div class="col-md-12"><img src="http://gms.globalstd.com/rutas_online/logo_actual.jpg" width="200px" class="img-responsive" alt="Imagen responsive"/></div>
                         </div>
                         <div class="row" style="float: right;">
-                            <div class="col-md-12"><div style="width: 400px; height: 50px; background-color: #a31d21; text-align: right; padding-top: 5px; padding-right: 10px; color: white; font-size: 18px;">Contrato de Servicios de Auditoría</div></div>
+                            <div class="col-md-12"><div style="width: 400px; height: 50px; background-color: #a31d21; text-align: right; padding-top: 5px; padding-right: 10px; color: white; font-size: 14px;">Contrato de Servicios de Auditoría <br/> <label style="font-size:12px;"><t t-esc="o.gs_standard_id.name"/></label></div></div>
                         </div>
                     </div>
                     
                     <div class="row">
-                        <div class="" style="font-size: 12px; margin-top: 50px; margin-bottom: 30px; text-align: justify;"><label for="titulo">CONTRATO PARA LA PRESTACIÓN DE SERVICIOS DE AUDITORÍA PARA EL SISTEMA DE GESTIÓN ______________________QUE CELEBRAN GLOBAL STANDARDS S. C. (EN LOS SUCESIVO “GLOBALSTD”) REPRESENTADA EN ESTE ACTO POR:________________________________ Y POR OTRA PARTE: _____________________________________________________ (EN LOS SUCESIVO EL “CLIENTE”) REPRESENTADA EN ESTE ACTO POR: ______________________________________________, MISMOS QUE ESTAN DE ACUERDO EN CUMPLIR LOS SIGUIENTES TÉRMINOS Y CONDICIONES:</label></div>
+                        <div class="" style="font-size: 12px; margin-top: 50px; margin-bottom: 30px; text-align: justify;"><label for="titulo">CONTRATO PARA LA PRESTACIÓN DE SERVICIOS DE AUDITORÍA PARA EL SISTEMA DE GESTIÓN <ins><t t-esc="o.gs_standard_id.name"/></ins> QUE CELEBRAN GLOBAL STANDARDS S. C. (EN LOS SUCESIVO “GLOBALSTD”) REPRESENTADA EN ESTE ACTO POR: <ins>Miguel Angel Romero Mendoza</ins> Y POR OTRA PARTE: <ins><t t-esc="o.partner_id.name"/></ins> (EN LOS SUCESIVO EL “CLIENTE”) REPRESENTADA EN ESTE ACTO POR: <ins><t t-esc="o.gs_responsible.name"/></ins>, MISMOS QUE ESTAN DE ACUERDO EN CUMPLIR LOS SIGUIENTES TÉRMINOS Y CONDICIONES:</label></div>
                     </div>
 
                     <div class="row">
@@ -90,7 +107,7 @@
                             <div class="col-md-12"><img src="http://gms.globalstd.com/rutas_online/logo_actual.jpg" width="200px" class="img-responsive" alt="Imagen responsive"/></div>
                         </div>
                         <div class="row" style="float: right;">
-                            <div class="col-md-12"><div style="width: 400px; height: 50px; background-color: #a31d21; text-align: right; padding-top: 5px; padding-right: 10px; color: white; font-size: 18px;">Contrato de Servicios de Auditoría</div></div>
+                            <div class="col-md-12"><div style="width: 400px; height: 50px; background-color: #a31d21; text-align: right; padding-top: 5px; padding-right: 10px; color: white; font-size: 14px;">Contrato de Servicios de Auditoría <br/> <label style="font-size:12px;"><t tesc="o.gs_standard_id.name"/></label></div></div>
                         </div>
                     </div>
 
@@ -163,7 +180,7 @@
                             <div class="col-md-12"><img src="http://gms.globalstd.com/rutas_online/logo_actual.jpg" width="200px" class="img-responsive" alt="Imagen responsive"/></div>
                         </div>
                         <div class="row" style="float: right;">
-                            <div class="col-md-12"><div style="width: 400px; height: 50px; background-color: #a31d21; text-align: right; padding-top: 5px; padding-right: 10px; color: white; font-size: 18px;">Contrato de Servicios de Auditoría</div></div>
+                            <div class="col-md-12"><div style="width: 400px; height: 50px; background-color: #a31d21; text-align: right; padding-top: 5px; padding-right: 10px; color: white; font-size: 14px;">Contrato de Servicios de Auditoría <br/> <label style="font-size:12px;"><t tesc="o.gs_standard_id.name"/></label></div></div>
                         </div>
                     </div>
 
@@ -261,7 +278,7 @@
                             <div class="col-md-12"><img src="http://gms.globalstd.com/rutas_online/logo_actual.jpg" width="200px" class="img-responsive" alt="Imagen responsive"/></div>
                         </div>
                         <div class="row" style="float: right;">
-                            <div class="col-md-12"><div style="width: 400px; height: 50px; background-color: #a31d21; text-align: right; padding-top: 5px; padding-right: 10px; color: white; font-size: 18px;">Contrato de Servicios de Auditoría</div></div>
+                            <div class="col-md-12"><div style="width: 400px; height: 50px; background-color: #a31d21; text-align: right; padding-top: 5px; padding-right: 10px; color: white; font-size: 14px;">Contrato de Servicios de Auditoría <br/> <label style="font-size:12px;"><t tesc="o.gs_standard_id.name"/></label></div></div>
                         </div>
                     </div>
 
@@ -307,7 +324,7 @@
                             <div class="col-md-12"><img src="http://gms.globalstd.com/rutas_online/logo_actual.jpg" width="200px" class="img-responsive" alt="Imagen responsive"/></div>
                         </div>
                         <div class="row" style="float: right;">
-                            <div class="col-md-12"><div style="width: 400px; height: 50px; background-color: #a31d21; text-align: right; padding-top: 5px; padding-right: 10px; color: white; font-size: 18px;">Contrato de Servicios de Auditoría</div></div>
+                            <div class="col-md-12"><div style="width: 400px; height: 50px; background-color: #a31d21; text-align: right; padding-top: 5px; padding-right: 10px; color: white; font-size: 14px;">Contrato de Servicios de Auditoría <br/> <label style="font-size:12px;"><t tesc="o.gs_standard_id.name"/></label></div></div>
                         </div>
                     </div>
 
@@ -355,7 +372,9 @@
                             <tbody>
                                 <tr>
                                 <td style="background-color: #F1F1F1; text-align: justify;">Nota 1: Cuando aplique, adicional a estos costos serán facturados al cliente los eventos de auditorías especiales y cierre de “No Conformidades en sitio” (instalaciones de cliente) conforme a los términos y condiciones pactados en este contrato.
-                                <br/>Nota 2: Cuando aplique, adicional a estos costos serán facturados al cliente los viáticos relacionados con la ejecución de los eventos de auditoría.</td>
+                                <br/>Nota 2: Cuando aplique, adicional a estos costos serán facturados al cliente los viáticos relacionados con la ejecución de los eventos de auditoría.
+                                <br/><t t-esc="o.gs_notes"/>
+                                </td>
                                 </tr>
                             </tbody>
                         </table>
@@ -370,7 +389,7 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                <td style="background-color: #F1F1F1; text-align: justify;"/>
+                                <td style="background-color: #F1F1F1; text-align: justify;"><t t-esc="o.gs_special_conditions"/></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -381,7 +400,7 @@
                             <tbody>
                                 <tr>
                                 <td style="width: 10%; font-weight: bold;">Cliente:</td>
-                                <td style="width: 40%;"/>
+                                <td style="width: 40%;"><t t-esc="o.partner_id.name"/></td>
                                 <td style="width: 50%; font-weight: bold;" class="text-center" colspan="2">GLOBAL STANDARDS S.C.</td>
                                 </tr>
                                 <tr>
@@ -392,13 +411,13 @@
                                 </tr>
                                 <tr>
                                 <td style="width: 10%; font-weight: bold;">Nombre:</td>
-                                <td style="width: 40%;"/>
+                                <td style="width: 40%;"><t t-esc="o.gs_responsible.name"/></td>
                                 <td style="width: 10%; font-weight: bold;">Nombre:</td>
                                 <td style="width: 40%;">MIGUEL ANGEL ROMERO MENDOZA</td>
                                 </tr>
                                 <tr>
                                 <td style="width: 10%; font-weight: bold;">Puesto:</td>
-                                <td style="width: 40%;"/>
+                                <td style="width: 40%;"><t t-esc="o.gs_responsible.function"/></td>
                                 <td style="width: 10%; font-weight: bold;">Puesto:</td>
                                 <td style="width: 40%;">Director</td>
                                 </tr>
@@ -411,9 +430,9 @@
                             <tbody>
                                 <tr>
                                 <td style="width: 25%; font-weight: bold; background-color: #F1F1F1;">Fecha del contrato:</td>
-                                <td style="width: 25%; background-color: #F1F1F1;"/>
+                                <td style="width: 25%; background-color: #F1F1F1;"><t t-esc="o.create_date"/></td>
                                 <td style="width: 25%; font-weight: bold; background-color: #F1F1F1;">Fecha de aceptación:</td>
-                                <td style="width: 25%; background-color: #F1F1F1;"/>
+                                <td style="width: 25%; background-color: #F1F1F1;"><t t-esc="o.gs_approves_date"/></td>
                                 </tr>
                             </tbody>
                         </table>
