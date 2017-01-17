@@ -107,7 +107,7 @@
                             <div class="col-md-12"><img src="http://gms.globalstd.com/rutas_online/logo_actual.jpg" width="200px" class="img-responsive" alt="Imagen responsive"/></div>
                         </div>
                         <div class="row" style="float: right;">
-                            <div class="col-md-12"><div style="width: 400px; height: 50px; background-color: #a31d21; text-align: right; padding-top: 5px; padding-right: 10px; color: white; font-size: 14px;">Contrato de Servicios de Auditoría <br/> <label style="font-size:12px;"><t tesc="o.gs_standard_id.name"/></label></div></div>
+                            <div class="col-md-12"><div style="width: 400px; height: 50px; background-color: #a31d21; text-align: right; padding-top: 5px; padding-right: 10px; color: white; font-size: 14px;">Contrato de Servicios de Auditoría <br/> <label style="font-size:12px;"><t t-esc="o.gs_standard_id.name"/></label></div></div>
                         </div>
                     </div>
 
@@ -180,7 +180,7 @@
                             <div class="col-md-12"><img src="http://gms.globalstd.com/rutas_online/logo_actual.jpg" width="200px" class="img-responsive" alt="Imagen responsive"/></div>
                         </div>
                         <div class="row" style="float: right;">
-                            <div class="col-md-12"><div style="width: 400px; height: 50px; background-color: #a31d21; text-align: right; padding-top: 5px; padding-right: 10px; color: white; font-size: 14px;">Contrato de Servicios de Auditoría <br/> <label style="font-size:12px;"><t tesc="o.gs_standard_id.name"/></label></div></div>
+                            <div class="col-md-12"><div style="width: 400px; height: 50px; background-color: #a31d21; text-align: right; padding-top: 5px; padding-right: 10px; color: white; font-size: 14px;">Contrato de Servicios de Auditoría <br/> <label style="font-size:12px;"><t t-esc="o.gs_standard_id.name"/></label></div></div>
                         </div>
                     </div>
 
@@ -278,7 +278,7 @@
                             <div class="col-md-12"><img src="http://gms.globalstd.com/rutas_online/logo_actual.jpg" width="200px" class="img-responsive" alt="Imagen responsive"/></div>
                         </div>
                         <div class="row" style="float: right;">
-                            <div class="col-md-12"><div style="width: 400px; height: 50px; background-color: #a31d21; text-align: right; padding-top: 5px; padding-right: 10px; color: white; font-size: 14px;">Contrato de Servicios de Auditoría <br/> <label style="font-size:12px;"><t tesc="o.gs_standard_id.name"/></label></div></div>
+                            <div class="col-md-12"><div style="width: 400px; height: 50px; background-color: #a31d21; text-align: right; padding-top: 5px; padding-right: 10px; color: white; font-size: 14px;">Contrato de Servicios de Auditoría <br/> <label style="font-size:12px;"><t t-esc="o.gs_standard_id.name"/></label></div></div>
                         </div>
                     </div>
 
@@ -324,9 +324,22 @@
                             <div class="col-md-12"><img src="http://gms.globalstd.com/rutas_online/logo_actual.jpg" width="200px" class="img-responsive" alt="Imagen responsive"/></div>
                         </div>
                         <div class="row" style="float: right;">
-                            <div class="col-md-12"><div style="width: 400px; height: 50px; background-color: #a31d21; text-align: right; padding-top: 5px; padding-right: 10px; color: white; font-size: 14px;">Contrato de Servicios de Auditoría <br/> <label style="font-size:12px;"><t tesc="o.gs_standard_id.name"/></label></div></div>
+                            <div class="col-md-12"><div style="width: 400px; height: 50px; background-color: #a31d21; text-align: right; padding-top: 5px; padding-right: 10px; color: white; font-size: 14px;">Contrato de Servicios de Auditoría <br/> <label style="font-size:12px;"><t t-esc="o.gs_standard_id.name"/></label></div></div>
                         </div>
                     </div>
+
+                    <t t-set="y1" t-value="0" />
+                    <t t-set="y2" t-value="0" />
+                    <t t-set="y3" t-value="0" />
+                    
+                    
+                    <t t-foreach="o.order_line" t-as="order">
+                        <t t-if="order.product_id.product_tmpl_id.categ_id.name == 'Annual 1'"><t t-set="y1" t-value="y1 + order.price_total" /></t>
+                        <t t-if="order.product_id.product_tmpl_id.categ_id.name == 'Annual 2'"><t t-set="y2" t-value="y2 + order.price_total" /></t>
+                        <t t-if="order.product_id.product_tmpl_id.categ_id.name == 'Annual 3'"><t t-set="y3" t-value="y3 + order.price_total" /></t>
+                    </t>
+                    
+                    
 
                     <div class="row">
                         <table class="table table-bordered" style="font-size: 11px;">
@@ -339,24 +352,43 @@
                             <tbody>
                                 <tr>
                                 <td class="text-center" style="width: 5%;">1</td>
-                                <td style="width: 75%;">PROCESO DE CERTIFICACIÓN (Etapa 1 Revisión de documentos del sistema de gestión, Etapa 2 Evaluación del nivel de implementación del sistema y Emisión de certificado)</td>
-                                <td class="text-right" style="width: 20%;">$0.00</td>
+                                <td style="width: 75%;">
+                                    PROCESO DE CERTIFICACIÓN
+                                    <ul style="margin-left:10px;">
+                                    <t t-foreach="o.order_line" t-as="order">
+                                        <t t-if="order.product_id.product_tmpl_id.categ_id.name == 'Annual 1'"><li><t t-esc="order.name"/></li></t>
+                                    </t>
+                                    </ul>
+                                </td>
+                                <td class="text-right" style="width: 20%;">$<t t-esc="y1"/></td>
                                 </tr>
                                 <tr>
                                 <td class="text-center" style="width: 5%;">2</td>
-                                <td style="width: 75%;">SEGUIMIENTO ANUAL 1 Y MANTENIMIENTO DE CERTIFICADO</td>
-                                <td class="text-right" style="width: 20%;">$0.00</td>
+                                <td style="width: 75%;">
+                                    <ul style="margin-left:10px;">
+                                    <t t-foreach="o.order_line" t-as="order">
+                                        <t t-if="order.product_id.product_tmpl_id.categ_id.name == 'Annual 2'"><li><t t-esc="order.name"/></li></t>
+                                    </t>
+                                    </ul>
+                                </td>
+                                <td class="text-right" style="width: 20%;">$<t t-esc="y2"/></td>
                                 </tr>
                                 <tr>
                                 <td class="text-center" style="width: 5%;">3</td>
-                                <td style="width: 75%;">SEGUIMIENTO ANUAL 2 Y MANTENIMIENTO DE CERTIFICADO</td>
-                                <td class="text-right" style="width: 20%;">$0.00</td>
+                                <td style="width: 75%;">
+                                    <ul style="margin-left:10px;">
+                                    <t t-foreach="o.order_line" t-as="order">
+                                        <t t-if="order.product_id.product_tmpl_id.categ_id.name == 'Annual 3'"><li><t t-esc="order.name"/></li></t>
+                                    </t>
+                                    </ul>
+                                </td>
+                                <td class="text-right" style="width: 20%;">$<t t-esc="y3"/></td>
                                 </tr>
                             </tbody>
                             <tfoot>
                                 <tr>
                                 <td class="text-right" style="width: 80%;" colspan="2">COSTO DE CERTIFICACIÓN POR 3 AÑOS</td>
-                                <td class="text-right" style="width: 20%; font-weight: bold;">$0.00</td>
+                                <td class="text-right" style="width: 20%; font-weight: bold;">$<t t-esc="y1 + y2 + y3"/></td>
                                 </tr>
                             </tfoot>
                         </table>

@@ -10,7 +10,8 @@
     'depends': ['mail','sale'],
     'data': [
         'views/sale_views.xml',
-        'views/contract_views.xml'
+        'views/contract_views.xml',
+        'data/sale_data.xml'
     ],
     'test': [],
     'installable': True,

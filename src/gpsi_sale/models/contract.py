@@ -32,7 +32,7 @@ class Contract(models.Model):
         'Certificate Status')
     
     gs_responsible_id = fields.Many2one('res.partner', 'Responsible')
-    gs_notes = fields.Text('Notes')
+    gs_notes = fields.Text(default='Nota 1: Cuando aplique, adicional a estos costos serán facturados al cliente los eventos de auditorías especiales y cierre de “No Conformidades en sitio” (instalaciones de cliente) conforme a los términos y condiciones pactados en este contrato. \n Nota 2: Cuando aplique, adicional a estos costos serán facturados al cliente los viáticos relacionados con la ejecución de los eventos de auditoría.', string='Notes')
     gs_special_conditions = fields.Text('Special Conditions')
     gs_approval_date = fields.Date('Approval Date')
 
