@@ -31,6 +31,98 @@
             <script type="text/javascript" src="/gpsi_website/static/src/unify/assets/js/plugins/parallax-slider.js"></script>
         </template>
 
+        <template id="gpsi_website.signin" name="Signin">&lt;!DOCTYPE html&gt;
+            <html>
+                <head>
+                    <title>Login - GlobalSTD</title>
+
+                    <meta charset="utf-8"/>
+                    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+                    <meta name="description" content=""/>
+                    <meta name="author" content=""/>
+
+                    <link rel="shortcut icon" href="favicon.ico"/>
+                    <link rel='stylesheet' type='text/css' href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600&amp;subset=cyrillic,latin'/>
+                    <link rel="stylesheet" href="/gpsi_website/static/src/unify/assets/plugins/bootstrap/css/bootstrap.min.css"/>
+                    <link rel="stylesheet" href="/gpsi_website/static/src/unify/assets/css/style.css"/>
+                    <link rel="stylesheet" href="/gpsi_website/static/src/unify/assets/plugins/animate.css"/>
+                    <link rel="stylesheet" href="/gpsi_website/static/src/unify/assets/plugins/line-icons/line-icons.css"/>
+                    <link rel="stylesheet" href="/gpsi_website/static/src/unify/assets/plugins/font-awesome/css/font-awesome.min.css"/>
+                    <link rel="stylesheet" href="/gpsi_website/static/src/unify/assets/css/pages/page_log_reg_v2.css"/>
+                    <link rel="stylesheet" href="/gpsi_website/static/src/unify/assets/css/theme-colors/default.css" id="style_color"/>
+                    <link rel="stylesheet" href="/gpsi_website/static/src/unify/assets/css/theme-skins/dark.css"/>
+                    <link rel="stylesheet" href="/gpsi_website/static/src/unify/assets/css/custom.css"/>
+                </head>
+                <body>
+                    <!--=== Content Part ===-->
+                    <div class="container">
+                        <!--Reg Block-->
+                        <form class="reg-block">
+                            <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                            <div class="reg-block-header">
+                                <h2>Sign In</h2>
+                                <ul class="social-icons text-center">
+                                    <li><a class="rounded-x social_facebook" data-original-title="Facebook" href="#"></a></li>
+                                    <li><a class="rounded-x social_twitter" data-original-title="Twitter" href="#"></a></li>
+                                    <li><a class="rounded-x social_googleplus" data-original-title="Google Plus" href="#"></a></li>
+                                    <li><a class="rounded-x social_linkedin" data-original-title="Linkedin" href="#"></a></li>
+                                </ul>
+                                <p>Don't Have Account? Click <a class="color-green" href="page_registration1.html">Sign Up</a> to registration.</p>
+                            </div>
+                            <div class="input-group margin-bottom-20">
+                                <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
+                                <input type="text" class="form-control" placeholder="Email"/>
+                            </div>
+                            <div class="input-group margin-bottom-20">
+                                <span class="input-group-addon"><i class="fa fa-lock"></i></span>
+                                <input type="text" class="form-control" placeholder="Password"/>
+                            </div>
+                            <hr/>
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox"/>
+                                    <p>Always stay signed in</p>
+                                </label>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-10 col-md-offset-1">
+                                    <button type="submit" class="btn-u btn-block">Log In</button>
+                                </div>
+                            </div>
+                        </form>
+                        <!--End Reg Block-->
+                    </div>
+                    <!--/container-->
+                    <!--=== End Content Part ===-->
+
+                    <script type="text/javascript" src="/gpsi_website/static/src/unify/assets/plugins/jquery/jquery.min.js"></script>
+                    <script type="text/javascript" src="/gpsi_website/static/src/unify/assets/plugins/jquery/jquery-migrate.min.js"></script>
+                    <script type="text/javascript" src="/gpsi_website/static/src/unify/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+                    <script type="text/javascript" src="/gpsi_website/static/src/unify/assets/plugins/back-to-top.js"></script>
+                    <script type="text/javascript" src="/gpsi_website/static/src/unify/assets/plugins/backstretch/jquery.backstretch.min.js"></script>
+                    <script type="text/javascript" src="/gpsi_website/static/src/unify/assets/js/custom.js"></script>
+                    <script type="text/javascript" src="/gpsi_website/static/src/unify/assets/js/app.js"></script>
+                    <script type="text/javascript">
+                        jQuery(document).ready(function() {
+                            App.init();
+                        });
+                    </script>
+                    <script type="text/javascript">
+                        $.backstretch([
+                            "/gpsi_website/static/src/unify/assets/img/bg/19.jpg",
+                            "/gpsi_website/static/src/unify/assets/img/bg/18.jpg",
+                            ], {
+                                fade: 1000,
+                                duration: 7000
+                            });
+                    </script>
+                </body>
+            </html>
+        </template>
+
+        <template id="gpsi_website.signup" name="Signup">&lt;!DOCTYPE html&gt;
+        </template>
+
         <template id="gpsi_website.layout" name="Web layout">&lt;!DOCTYPE html&gt;
             <html>
                 <head>
