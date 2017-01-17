@@ -42,7 +42,7 @@
             <field name="arch" type="xml">
                 <xpath expr="//notebook" position="inside">
                     <page string="Competences">
-                        <field name="competence_ids">
+                        <field name="gs_competence_ids">
                             <tree editable="bottom">
                                 <field name="skill_id" required="1" />
                                 <field name="rating" />
