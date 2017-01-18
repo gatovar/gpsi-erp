@@ -48,14 +48,14 @@
 
         <act_window
             id="hr_employee_action_staff_operations_employee"
-            name="Employee"
+            name="Employees"
             res_model="hr.employee"
             view_mode="tree,form">
         </act_window>
 
         <menuitem
             id="hr_employee_menu_staff_operations_employee"
-            name="Employee"
+            name="Employees"
             parent="menu_staff_operations"
             action="hr_employee_action_staff_operations_employee"
             sequence="1">

@@ -11,6 +11,7 @@
                 </tree>
             </field>
         </record>
+
         <record id="skill_view_form" model="ir.ui.view">
             <field name="name">gpsi.staff.skill.form</field>
             <field name="model">gpsi.staff.skill</field>
@@ -18,14 +19,20 @@
             <field name="arch" type="xml">
                 <form string="Skill">
                     <sheet>
+                        <field name="id" invisible="1"/>
                         <group>
-                            <field name="name" string="Name" />
+                            <group>
+                                <field name="name"/>
+                            </group>
+                            <group>
+                                <field name="parent_id"/>
+                            </group>
                         </group>
                         <notebook>
                             <page string="Children">
-                                <field name="child_ids">
+                                <field name="child_ids" context="{'default_parent_id': id}">
                                     <tree>
-                                        <field name="name" string="Name" />
+                                        <field name="name" string="Name"/>
                                     </tree>
                                 </field>
                             </page>
@@ -34,6 +41,7 @@
                 </form>
             </field>
         </record>
+
         <record id="employee_view_form_inherit_gpsi_staff_skill" model="ir.ui.view">
             <field name="name">gpsi.staff.skill.form.inherit</field>
             <field name="model">hr.employee</field>
@@ -57,6 +65,7 @@
                 </xpath>
             </field>
         </record>
+
         <record id="attachment_view_form_inherit_gpsi_staff_category" model="ir.ui.view">
             <field name="name">gpsi.ir.attachment.category.form</field>
             <field name="model">ir.attachment</field>
