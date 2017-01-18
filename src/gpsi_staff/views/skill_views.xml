@@ -40,6 +40,11 @@
             <field name="inherit_id" ref="hr.view_employee_form" />
             <field name="priority">20</field>
             <field name="arch" type="xml">
+                <div name="button_box" position="inside">
+                    <button class="oe_stat_button" name="attachment_tree_view" type="object" icon="fa-files-o">
+                        <field string="Documents" name="doc_count" widget="statinfo"/>
+                    </button>
+                </div>
                 <xpath expr="//notebook" position="inside">
                     <page string="Competences">
                         <field name="gs_competence_ids">
@@ -59,7 +64,7 @@
             <field name="priority">20</field>
             <field name="arch" type="xml">
                 <field name="mimetype" position="after">
-                    <field name="tags_ids" widget="many2many_tags" placeholder="e.g. Type Document" groups="base.group_hr_user" />
+                    <field name="gs_tags_ids" widget="many2many_tags" placeholder="e.g. Type Document" groups="base.group_hr_user" />
                 </field>
             </field>
         </record>
