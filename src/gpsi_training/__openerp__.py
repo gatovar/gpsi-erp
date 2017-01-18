@@ -7,7 +7,7 @@
     'summary': 'GPSI Training',
     'description': '',
     'website': 'http://www.globalstd.com/',
-    'depends': ['event'],
+    'depends': [],
     'data': [
         'views/general_views.xml'
     ],

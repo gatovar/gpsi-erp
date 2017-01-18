@@ -21,7 +21,7 @@
         <menuitem
             id="res_partner_menu_dashboard"
             name="Dashboard"
-            parent="res_partner_menu_home"
+            parent="menu_home"
             action="res_partner_action_dashboard"
             sequence="1">
         </menuitem>
@@ -31,7 +31,7 @@
         <menuitem
             id="res_partner_menu_operations"
             name="Operations"
-            parent="res_partner_menu_home"
+            parent="menu_home"
             sequence="2">
         </menuitem>
 
@@ -85,7 +85,7 @@
         <menuitem
             id="res_partner_menu_resports"
             name="Reports"
-            parent="res_partner_menu_home"
+            parent="menu_home"
             sequence="3">
         </menuitem>
 
@@ -109,7 +109,7 @@
         <menuitem
             id="res_partner_menu_settings"
             name="Settings"
-            parent="res_partner_menu_home"
+            parent="menu_home"
             sequence="4">
         </menuitem>
 
