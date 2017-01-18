@@ -6,7 +6,7 @@ from openerp.exceptions import UserError, ValidationError
 class Attachments(models.Model):
     _inherit = 'ir.attachment'
 
-    gs_tag_ids = fields.Many2many('ir.attachment.category', string='Attachment Category')
+    gs_tag_ids = fields.Many2many('ir.attachment.category', string='Tags')
 
 class AttachmentCategory(models.Model):
     _name = "ir.attachment.category"
