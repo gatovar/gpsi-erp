@@ -2,164 +2,164 @@
 <openerp>
     <data>
 
-        # Staff
+        <!--Staff-->
 
         <menuitem
-            id="gpsi_capa_home_menu"
+            id="menu_staff"
             name="Staff"
             sequence="1">
         </menuitem>
                 
-        # Dashboard
+        <!--Dashboard--> 
 
         <act_window
-            id="gpsi_capa_staff_dashboard_action"
+            id="action_staff_dashboard"
             name="Dashboard"
             res_model="hr.employee"
             view_mode="tree,form">
         </act_window>
 
         <menuitem
-            id="gpsi_capa_home_staff_dashboard_menu"
+            id="menu_staff_dashboard"
             name="Dashboard"
-            parent="gpsi_capa_home_menu"
-            action="gpsi_capa_staff_dashboard_action"
+            parent="menu_staff"
+            action="action_staff_dashboard"
             sequence="1">
         </menuitem>
 
-        # Operations
+        <!--Operations-->
 
         <act_window
-            id="gpsi_capa_staff_operations_action"
+            id="action_staff_operations"
             name="Operations"
             res_model="hr.employee"
             view_mode="tree,form">
         </act_window>
 
         <menuitem
-            id="gpsi_capa_home_staff_operations_menu"
+            id="menu_staff_operations"
             name="Operations"
-            parent="gpsi_capa_home_menu"
-            action="gpsi_capa_staff_operations_action"
+            parent="menu_staff"
+            action="action_staff_operations"
             sequence="2">
         </menuitem>
 
-        # Employee
+        <!--Employee-->
 
         <act_window
-            id="gpsi_capa_staff_operations_employee_action"
+            id="hr_employee_action_staff_operations_employee"
             name="Employee"
             res_model="hr.employee"
             view_mode="tree,form">
         </act_window>
 
         <menuitem
-            id="gpsi_capa_home_staff_operations_employee_menu"
+            id="hr_employee_menu_staff_operations_employee"
             name="Employee"
-            parent="gpsi_capa_home_staff_operations_menu"
-            action="gpsi_capa_staff_operations_employee_action"
+            parent="menu_staff_operations"
+            action="hr_employee_action_staff_operations_employee"
             sequence="1">
         </menuitem>
 
-        # Appraisals
+        <!--Appraisals-->
 
         <act_window
-            id="gpsi_capa_staff_operations_appraisals_action"
+            id="action_staff_operations_appraisals"
             name="Appraisals"
             res_model="hr.employee"
             view_mode="tree,form">
         </act_window>
 
         <menuitem
-            id="gpsi_capa_home_staff_operations_appraisals_menu"
+            id="menu_staff_operations_appraisals"
             name="Appraisals"
-            parent="gpsi_capa_home_staff_operations_menu"
-            action="gpsi_capa_staff_operations_appraisals_action"
+            parent="menu_staff_operations"
+            action="action_staff_operations_appraisals"
             sequence="2">
         </menuitem>
 
-        # Documents
+        <!--Documents-->
 
         <act_window
-            id="gpsi_capa_staff_operations_documents_action"
+            id="action_staff_operations_documents"
             name="Documents"
             res_model="hr.employee"
             view_mode="tree,form">
         </act_window>
 
         <menuitem
-            id="gpsi_capa_home_staff_operations_documents_menu"
+            id="menu_staff_operations_documents"
             name="Documents"
-            parent="gpsi_capa_home_staff_operations_menu"
-            action="gpsi_capa_staff_operations_documents_action"
+            parent="menu_staff_operations"
+            action="action_staff_operations_documents"
             sequence="3">
         </menuitem>
 
-        # Reports
+        <!--Reports-->
 
         <act_window
-            id="gpsi_capa_staff_reports_action"
+            id="action_staff_reports"
             name="Reports"
             res_model="hr.employee"
             view_mode="tree,form">
         </act_window>
 
         <menuitem
-            id="gpsi_capa_home_staff_reports_menu"
+            id="menu_staff_reports"
             name="Reports"
-            parent="gpsi_capa_home_menu"
-            action="gpsi_capa_staff_reports_action"
+            parent="menu_staff"
+            action="action_staff_reports"
             sequence="3">
         </menuitem>
 
-        # Appraisals
+        <!--Appraisals-->
 
         <act_window
-            id="gpsi_capa_staff_reports_appraisals_action"
+            id="action_staff_reports_appraisals"
             name="Appraisals"
             res_model="hr.employee"
             view_mode="tree,form">
         </act_window>
 
         <menuitem
-            id="gpsi_capa_home_staff_reports_appraisals_menu"
+            id="menu_staff_reports_appraisals"
             name="Appraisals"
-            parent="gpsi_capa_home_staff_reports_menu"
-            action="gpsi_capa_staff_reports_appraisals_action"
+            parent="menu_staff_reports"
+            action="action_staff_reports_appraisals"
             sequence="1">
         </menuitem>
 
-        # Settings
+        <!--Settings-->
 
         <act_window
-            id="gpsi_capa_staff_settings_action"
+            id="action_staff_settings"
             name="Settings"
             res_model="hr.employee"
             view_mode="tree,form">
         </act_window>
 
         <menuitem
-            id="gpsi_capa_home_staff_settings_menu"
+            id="menu_staff_settings"
             name="Settings"
-            parent="gpsi_capa_home_menu"
-            action="gpsi_capa_staff_settings_action"
+            parent="menu_staff"
+            action="action_staff_settings"
             sequence="4">
         </menuitem>
 
-        # Appraisal Plans
+        <!--Appraisal Plans-->
 
         <act_window
-            id="gpsi_capa_staff_settings_appraisal_plans_action"
+            id="action_staff_settings_appraisal_plans"
             name="Appraisal Plans"
             res_model="hr.employee"
             view_mode="tree,form">
         </act_window>
 
         <menuitem
-            id="gpsi_capa_home_staff_settings_appraisal_plans_menu"
+            id="menu_staff_settings_appraisal_plans"
             name="Appraisal Plans"
-            parent="gpsi_capa_home_staff_settings_menu"
-            action="gpsi_capa_staff_settings_appraisal_plans_action"
+            parent="menu_staff_settings"
+            action="action_staff_settings_appraisal_plans"
             sequence="1">
         </menuitem>
 
