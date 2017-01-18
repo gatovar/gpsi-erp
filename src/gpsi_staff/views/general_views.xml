@@ -175,9 +175,9 @@
         <menuitem
             id="gpsi_staff_skill_menu_staff_skills"
             name="Skills"
-            parent="menu_staff"
+            parent="menu_staff_settings"
             action="gpsi_staff_skill_action_staff_skills"
-            sequence="5">
+            sequence="2">
         </menuitem>
 
     </data>
