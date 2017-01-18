@@ -11,7 +11,8 @@
     'data': [
         'views/sale_views.xml',
         'views/contract_views.xml',
-        'data/sale_data.xml'
+        'data/sale_data.xml',
+        'views/quotation_views.xml'
     ],
     'test': [],
     'installable': True,
