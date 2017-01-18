@@ -4,7 +4,7 @@
 
         <!-- MENU PRINCIPAL TRAINING -->
         <menuitem
-            id="gpsi_training_home_menu"
+            id="gpsi_training_menu_home"
             name="Training"
             sequence="1">
         </menuitem>
@@ -12,119 +12,119 @@
 
         <!-- Dashboard -->
         <act_window
-            id="gpsi_training_dashboard_action"
+            id="gpsi_training_action_dashboard"
             name="Dashboard"
             res_model="res.partner"
             view_mode="tree,form">
         </act_window>
 
         <menuitem
-            id="gpsi_training_dashboard_menu"
+            id="gpsi_training_menu_dashboard"
             name="Dashboard"
-            parent="gpsi_training_home_menu"
-            action="gpsi_training_dashboard_action"
+            parent="gpsi_training_menu_home"
+            action="gpsi_training_action_dashboard"
             sequence="1">
         </menuitem>
         <!-- /Dashboard -->
 
         <!-- Operations -->
         <menuitem
-            id="gpsi_training_operations_menu"
+            id="gpsi_training_menu_operations"
             name="Operations"
-            parent="gpsi_training_home_menu"
+            parent="gpsi_training_menu_home"
             sequence="2">
         </menuitem>
 
             <!-- Operations/Employees -->
             <act_window
-                id="gpsi_training_operations_employees_action"
+                id="gpsi_training_action_operations_employees"
                 name="Employees"
                 res_model="res.partner"
                 view_mode="tree,form">
             </act_window>
             <menuitem
-                id="gpsi_training_operations_employees_menu"
+                id="gpsi_training_menu_operations_employees"
                 name="Employees"
-                parent="gpsi_training_operations_menu"
-                action="gpsi_training_operations_employees_action"
+                parent="gpsi_training_menu_operations"
+                action="gpsi_training_action_operations_employees"
                 sequence="1">
             </menuitem>
 
             <!-- Operations/Appraisals -->
             <act_window
-                id="gpsi_training_operations_appraisals_action"
+                id="gpsi_training_action_operations_appraisals"
                 name="Appraisals"
                 res_model="res.partner"
                 view_mode="tree,form">
             </act_window>
             <menuitem
-                id="gpsi_training_operations_appraisals_menu"
+                id="gpsi_training_menu_operations_appraisals"
                 name="Appraisals"
-                parent="gpsi_training_operations_menu"
-                action="gpsi_training_operations_appraisals_action"
+                parent="gpsi_training_menu_operations"
+                action="gpsi_training_action_operations_appraisals"
                 sequence="1">
             </menuitem>
 
             <!-- Operations/Documents -->
             <act_window
-                id="gpsi_training_operations_documents_action"
+                id="gpsi_training_action_operations_documents"
                 name="Documents"
                 res_model="res.partner"
                 view_mode="tree,form">
             </act_window>
             <menuitem
-                id="gpsi_training_operations_documents_menu"
+                id="gpsi_training_menu_operations_documents"
                 name="Documents"
-                parent="gpsi_training_operations_menu"
-                action="gpsi_training_operations_documents_action"
+                parent="gpsi_training_menu_operations"
+                action="gpsi_training_action_operations_documents"
                 sequence="1">
             </menuitem>
         <!-- /Operations -->
 
         <!-- Reports -->
         <menuitem
-            id="gpsi_training_resports_menu"
+            id="gpsi_training_menu_resports"
             name="Reports"
-            parent="gpsi_training_home_menu"
+            parent="gpsi_training_menu_home"
             sequence="3">
         </menuitem>
 
             <!-- Reports/Appraisals -->
             <act_window
-                id="gpsi_training_resports_appraisals_action"
+                id="gpsi_training_action_resports_appraisals"
                 name="Appraisals"
                 res_model="res.partner"
                 view_mode="tree,form">
             </act_window>
             <menuitem
-                id="gpsi_training_resports_appraisals_menu"
+                id="gpsi_training_menu_resports_appraisals"
                 name="Appraisals"
-                parent="gpsi_training_resports_menu"
-                action="gpsi_training_resports_appraisals_action"
+                parent="gpsi_training_menu_resports"
+                action="gpsi_training_action_resports_appraisals"
                 sequence="1">
             </menuitem>
         <!-- /Dashboard -->
 
         <!-- Settings -->
         <menuitem
-            id="gpsi_training_settings_menu"
+            id="gpsi_training_menu_settings"
             name="Settings"
-            parent="gpsi_training_home_menu"
+            parent="gpsi_training_menu_home"
             sequence="4">
         </menuitem>
 
             <!-- Reports/Appraisals -->
             <act_window
-                id="gpsi_training_settings_appraisals_action"
+                id="gpsi_training_action_settings_appraisals"
                 name="Appraisals Plans"
                 res_model="res.partner"
                 view_mode="tree,form">
             </act_window>
             <menuitem
-                id="gpsi_training_settings_appraisals_menu"
+                id="gpsi_training_menu_settings_appraisals"
                 name="Appraisals Plans"
-                parent="gpsi_training_settings_menu"
-                action="gpsi_training_settings_appraisals_action"
+                parent="gpsi_training_menu_settings"
+                action="gpsi_training_action_settings_appraisals"
                 sequence="1">
             </menuitem>
         <!-- /Settings -->
