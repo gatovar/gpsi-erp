@@ -7,8 +7,10 @@
     'summary': 'GPSI Training',
     'description': '',
     'website': 'http://www.globalstd.com/',
-    'depends': [],
-    'data': [],
+    'depends': ['event'],
+    'data': [
+        'views/general_views.xml'
+    ],
     'test': [],
     'installable': True,
     'auto_install': False,

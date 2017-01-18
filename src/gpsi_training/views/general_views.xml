@@ -2,5 +2,132 @@
 <openerp>
     <data>
 
+        <!-- MENU PRINCIPAL TRAINING -->
+        <menuitem
+            id="gpsi_training_home_menu"
+            name="Training"
+            sequence="1">
+        </menuitem>
+        <!-- /MENU PRINCIPAL TRAINING -->
+
+        <!-- Dashboard -->
+        <act_window
+            id="gpsi_training_dashboard_action"
+            name="Dashboard"
+            res_model="res.partner"
+            view_mode="tree,form">
+        </act_window>
+
+        <menuitem
+            id="gpsi_training_dashboard_menu"
+            name="Dashboard"
+            parent="gpsi_training_home_menu"
+            action="gpsi_training_dashboard_action"
+            sequence="1">
+        </menuitem>
+        <!-- /Dashboard -->
+
+        <!-- Operations -->
+        <menuitem
+            id="gpsi_training_operations_menu"
+            name="Operations"
+            parent="gpsi_training_home_menu"
+            sequence="2">
+        </menuitem>
+
+            <!-- Operations/Employees -->
+            <act_window
+                id="gpsi_training_operations_employees_action"
+                name="Employees"
+                res_model="res.partner"
+                view_mode="tree,form">
+            </act_window>
+            <menuitem
+                id="gpsi_training_operations_employees_menu"
+                name="Employees"
+                parent="gpsi_training_operations_menu"
+                action="gpsi_training_operations_employees_action"
+                sequence="1">
+            </menuitem>
+
+            <!-- Operations/Appraisals -->
+            <act_window
+                id="gpsi_training_operations_appraisals_action"
+                name="Appraisals"
+                res_model="res.partner"
+                view_mode="tree,form">
+            </act_window>
+            <menuitem
+                id="gpsi_training_operations_appraisals_menu"
+                name="Appraisals"
+                parent="gpsi_training_operations_menu"
+                action="gpsi_training_operations_appraisals_action"
+                sequence="1">
+            </menuitem>
+
+            <!-- Operations/Documents -->
+            <act_window
+                id="gpsi_training_operations_documents_action"
+                name="Documents"
+                res_model="res.partner"
+                view_mode="tree,form">
+            </act_window>
+            <menuitem
+                id="gpsi_training_operations_documents_menu"
+                name="Documents"
+                parent="gpsi_training_operations_menu"
+                action="gpsi_training_operations_documents_action"
+                sequence="1">
+            </menuitem>
+        <!-- /Operations -->
+
+        <!-- Reports -->
+        <menuitem
+            id="gpsi_training_resports_menu"
+            name="Reports"
+            parent="gpsi_training_home_menu"
+            sequence="3">
+        </menuitem>
+
+            <!-- Reports/Appraisals -->
+            <act_window
+                id="gpsi_training_resports_appraisals_action"
+                name="Appraisals"
+                res_model="res.partner"
+                view_mode="tree,form">
+            </act_window>
+            <menuitem
+                id="gpsi_training_resports_appraisals_menu"
+                name="Appraisals"
+                parent="gpsi_training_resports_menu"
+                action="gpsi_training_resports_appraisals_action"
+                sequence="1">
+            </menuitem>
+        <!-- /Dashboard -->
+
+        <!-- Settings -->
+        <menuitem
+            id="gpsi_training_settings_menu"
+            name="Settings"
+            parent="gpsi_training_home_menu"
+            sequence="4">
+        </menuitem>
+
+            <!-- Reports/Appraisals -->
+            <act_window
+                id="gpsi_training_settings_appraisals_action"
+                name="Appraisals Plans"
+                res_model="res.partner"
+                view_mode="tree,form">
+            </act_window>
+            <menuitem
+                id="gpsi_training_settings_appraisals_menu"
+                name="Appraisals Plans"
+                parent="gpsi_training_settings_menu"
+                action="gpsi_training_settings_appraisals_action"
+                sequence="1">
+            </menuitem>
+        <!-- /Settings -->
+
     </data>
 </openerp>
