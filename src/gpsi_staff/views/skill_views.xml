@@ -64,7 +64,7 @@
             <field name="priority">20</field>
             <field name="arch" type="xml">
                 <field name="mimetype" position="after">
-                    <field name="gs_tags_ids" widget="many2many_tags" placeholder="e.g. Type Document" groups="base.group_hr_user" />
+                    <field name="gs_tag_ids" widget="many2many_tags" placeholder="e.g. Type Document" groups="base.group_hr_user" />
                 </field>
             </field>
         </record>
