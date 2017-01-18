@@ -2,5 +2,166 @@
 <openerp>
     <data>
 
+        # Staff
+
+        <menuitem
+            id="gpsi_capa_home_menu"
+            name="Staff"
+            sequence="1">
+        </menuitem>
+                
+        # Dashboard
+
+        <act_window
+            id="gpsi_capa_staff_dashboard_action"
+            name="Dashboard"
+            res_model="hr.employee"
+            view_mode="tree,form">
+        </act_window>
+
+        <menuitem
+            id="gpsi_capa_home_staff_dashboard_menu"
+            name="Dashboard"
+            parent="gpsi_capa_home_menu"
+            action="gpsi_capa_staff_dashboard_action"
+            sequence="1">
+        </menuitem>
+
+        # Operations
+
+        <act_window
+            id="gpsi_capa_staff_operations_action"
+            name="Operations"
+            res_model="hr.employee"
+            view_mode="tree,form">
+        </act_window>
+
+        <menuitem
+            id="gpsi_capa_home_staff_operations_menu"
+            name="Operations"
+            parent="gpsi_capa_home_menu"
+            action="gpsi_capa_staff_operations_action"
+            sequence="2">
+        </menuitem>
+
+        # Employee
+
+        <act_window
+            id="gpsi_capa_staff_operations_employee_action"
+            name="Employee"
+            res_model="hr.employee"
+            view_mode="tree,form">
+        </act_window>
+
+        <menuitem
+            id="gpsi_capa_home_staff_operations_employee_menu"
+            name="Employee"
+            parent="gpsi_capa_home_staff_operations_menu"
+            action="gpsi_capa_staff_operations_employee_action"
+            sequence="1">
+        </menuitem>
+
+        # Appraisals
+
+        <act_window
+            id="gpsi_capa_staff_operations_appraisals_action"
+            name="Appraisals"
+            res_model="hr.employee"
+            view_mode="tree,form">
+        </act_window>
+
+        <menuitem
+            id="gpsi_capa_home_staff_operations_appraisals_menu"
+            name="Appraisals"
+            parent="gpsi_capa_home_staff_operations_menu"
+            action="gpsi_capa_staff_operations_appraisals_action"
+            sequence="2">
+        </menuitem>
+
+        # Documents
+
+        <act_window
+            id="gpsi_capa_staff_operations_documents_action"
+            name="Documents"
+            res_model="hr.employee"
+            view_mode="tree,form">
+        </act_window>
+
+        <menuitem
+            id="gpsi_capa_home_staff_operations_documents_menu"
+            name="Documents"
+            parent="gpsi_capa_home_staff_operations_menu"
+            action="gpsi_capa_staff_operations_documents_action"
+            sequence="3">
+        </menuitem>
+
+        # Reports
+
+        <act_window
+            id="gpsi_capa_staff_reports_action"
+            name="Reports"
+            res_model="hr.employee"
+            view_mode="tree,form">
+        </act_window>
+
+        <menuitem
+            id="gpsi_capa_home_staff_reports_menu"
+            name="Reports"
+            parent="gpsi_capa_home_menu"
+            action="gpsi_capa_staff_reports_action"
+            sequence="3">
+        </menuitem>
+
+        # Appraisals
+
+        <act_window
+            id="gpsi_capa_staff_reports_appraisals_action"
+            name="Appraisals"
+            res_model="hr.employee"
+            view_mode="tree,form">
+        </act_window>
+
+        <menuitem
+            id="gpsi_capa_home_staff_reports_appraisals_menu"
+            name="Appraisals"
+            parent="gpsi_capa_home_staff_reports_menu"
+            action="gpsi_capa_staff_reports_appraisals_action"
+            sequence="1">
+        </menuitem>
+
+        # Settings
+
+        <act_window
+            id="gpsi_capa_staff_settings_action"
+            name="Settings"
+            res_model="hr.employee"
+            view_mode="tree,form">
+        </act_window>
+
+        <menuitem
+            id="gpsi_capa_home_staff_settings_menu"
+            name="Settings"
+            parent="gpsi_capa_home_menu"
+            action="gpsi_capa_staff_settings_action"
+            sequence="4">
+        </menuitem>
+
+        # Appraisal Plans
+
+        <act_window
+            id="gpsi_capa_staff_settings_appraisal_plans_action"
+            name="Appraisal Plans"
+            res_model="hr.employee"
+            view_mode="tree,form">
+        </act_window>
+
+        <menuitem
+            id="gpsi_capa_home_staff_settings_appraisal_plans_menu"
+            name="Appraisal Plans"
+            parent="gpsi_capa_home_staff_settings_menu"
+            action="gpsi_capa_staff_settings_appraisal_plans_action"
+            sequence="1">
+        </menuitem>
+
     </data>
 </openerp>

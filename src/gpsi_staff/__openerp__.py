@@ -9,7 +9,8 @@
     'website': '',
     'depends': ['hr'],
     'data': [
-        'views/skill_views.xml'
+        'views/skill_views.xml',
+        'views/general_views.xml'
     ],
     'test': [],
     'installable': True,
