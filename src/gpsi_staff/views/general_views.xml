@@ -163,5 +163,22 @@
             sequence="1">
         </menuitem>
 
+        <!--Skill-->
+
+        <act_window
+            id="gpsi_staff_skill_action_staff_skills"
+            name="Skills"
+            res_model="gpsi.staff.skill"
+            view_mode="tree,form">
+        </act_window>
+
+        <menuitem
+            id="gpsi_staff_skill_menu_staff_skills"
+            name="Skills"
+            parent="menu_staff"
+            action="gpsi_staff_skill_action_staff_skills"
+            sequence="5">
+        </menuitem>
+
     </data>
 </openerp>
