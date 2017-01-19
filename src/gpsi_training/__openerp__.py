@@ -9,7 +9,8 @@
     'website': 'http://www.globalstd.com/',
     'depends': ['event'],
     'data': [
-        'views/general_views.xml'
+        'views/general_views.xml',
+        'views/event_instructor.xml'
     ],
     'test': [],
     'installable': True,
