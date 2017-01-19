@@ -129,55 +129,72 @@
             sequence="1">
         </menuitem>
 
-        <!--Settings-->
+        <!--Configuration-->
 
         <act_window
-            id="action_staff_settings"
-            name="Settings"
+            id="action_staff_configuration"
+            name="Configuration"
             res_model="hr.employee"
             view_mode="tree,form">
         </act_window>
 
         <menuitem
-            id="menu_staff_settings"
-            name="Settings"
+            id="menu_staff_configuration"
+            name="Configuration"
             parent="menu_staff"
-            action="action_staff_settings"
+            action="action_staff_configuration"
             sequence="4">
         </menuitem>
 
-        <!--Appraisal Plans-->
+        <!--Settings-->
 
         <act_window
-            id="action_staff_settings_appraisal_plans"
-            name="Appraisal Plans"
+            id="action_staff_configuration_settings"
+            name="Settings"
             res_model="hr.employee"
             view_mode="tree,form">
         </act_window>
 
         <menuitem
-            id="menu_staff_settings_appraisal_plans"
-            name="Appraisal Plans"
-            parent="menu_staff_settings"
-            action="action_staff_settings_appraisal_plans"
+            id="menu_staff_configuration_settings"
+            name="Settings"
+            parent="menu_staff_configuration"
+            action="action_staff_configuration_settings"
             sequence="1">
         </menuitem>
 
         <!--Skill-->
 
         <act_window
-            id="gpsi_staff_skill_action_staff_skills"
+            id="gpsi_staff_skill_action_staff_configuration_skills"
             name="Skills"
             res_model="gpsi.staff.skill"
             view_mode="tree,form">
         </act_window>
 
         <menuitem
-            id="gpsi_staff_skill_menu_staff_skills"
+            id="gpsi_staff_skill_menu_staff_configuration_skills"
             name="Skills"
-            parent="menu_staff_settings"
-            action="gpsi_staff_skill_action_staff_skills"
+            parent="menu_staff_configuration"
+            action="gpsi_staff_skill_action_staff_configuration_skills"
             sequence="2">
+        </menuitem>
+
+        <!--Attachments-->
+
+        <act_window
+            id="ir_attachment_category_action_staff_configuration_attachments"
+            name="Attachments"
+            res_model="ir.attachment.category"
+            view_mode="tree,form">
+        </act_window>
+
+        <menuitem
+            id="ir_attachment_category_menu_staff_configuration_attachments"
+            name="Attachments"
+            parent="menu_staff_configuration"
+            action="ir_attachment_category_action_staff_configuration_attachments"
+            sequence="3">
         </menuitem>
 
     </data>
