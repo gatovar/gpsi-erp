@@ -7,4 +7,5 @@ from openerp.exceptions import UserError, ValidationError
 class Attendee(models.Model):
     _inherit = 'event.registration'
 
-    gs_certificate_delivery_policy = fields.Selection([('me','Me'), ('company','Company'), ('both','Both')], default="me", string='Certificate Delivery Policy')
+    gs_certificate_delivery_policy = fields.Selection([('me','Me'), ('company','Company'), ('both','Both')], default="me", 
+        string='Cert. Delivery Policy', help='Certificate Delivery Policy')

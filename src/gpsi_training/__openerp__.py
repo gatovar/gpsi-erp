@@ -11,7 +11,7 @@
     'data': [
         'views/general_views.xml',
         'views/event_instructor.xml',
-        'views/event_registration_certificate_delivery.xml'
+        'views/event_cert_delivery.xml'
     ],
     'test': [],
     'installable': True,
