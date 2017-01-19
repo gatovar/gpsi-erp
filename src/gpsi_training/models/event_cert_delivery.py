@@ -3,6 +3,7 @@
 from openerp import api, fields, models, _
 from openerp.exceptions import UserError, ValidationError
 
+
 class Attendee(models.Model):
     _inherit = 'event.registration'
 

@@ -1,4 +1,4 @@
 # -*- coding: utf-8 -*-
 
-import course
-import attendee
+import event_instructor
+import event_cert_delivery
