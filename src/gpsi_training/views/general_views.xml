@@ -35,49 +35,50 @@
             sequence="2">
         </menuitem>
 
-            <!-- Operations/Employees -->
+            <!-- Operations/Attendees -->
             <act_window
-                id="res_partner_action_operations_employees"
-                name="Employees"
-                res_model="res.partner"
+                id="res_partner_action_operations_attendees"
+                name="Attendees"
+                res_model="event.registration"
                 view_mode="tree,form">
             </act_window>
             <menuitem
-                id="res_partner_menu_operations_employees"
-                name="Employees"
+                id="res_partner_menu_operations_attendees"
+                name="Attendees"
                 parent="res_partner_menu_operations"
-                action="res_partner_action_operations_employees"
+                action="res_partner_action_operations_attendees"
                 sequence="1">
             </menuitem>
 
-            <!-- Operations/Appraisals -->
+            <!-- Operations/Events -->
             <act_window
-                id="res_partner_action_operations_appraisals"
-                name="Appraisals"
-                res_model="res.partner"
-                view_mode="tree,form">
+                id="res_partner_action_operations_events"
+                name="Events"
+                res_model="event.event"
+                view_mode="kanban,calendar,tree,form"
+                context="{'search_default_upcoming':1}">
             </act_window>
             <menuitem
-                id="res_partner_menu_operations_appraisals"
-                name="Appraisals"
+                id="res_partner_menu_operations_events"
+                name="Events"
                 parent="res_partner_menu_operations"
-                action="res_partner_action_operations_appraisals"
-                sequence="1">
+                action="res_partner_action_operations_events"
+                sequence="2">
             </menuitem>
 
-            <!-- Operations/Documents -->
+            <!-- Operations/Documents Control -->
             <act_window
                 id="res_partner_action_operations_documents"
-                name="Documents"
+                name="Documents Control"
                 res_model="res.partner"
                 view_mode="tree,form">
             </act_window>
             <menuitem
                 id="res_partner_menu_operations_documents"
-                name="Documents"
+                name="Documents Control"
                 parent="res_partner_menu_operations"
                 action="res_partner_action_operations_documents"
-                sequence="1">
+                sequence="3">
             </menuitem>
         <!-- /Operations -->
 
@@ -89,45 +90,45 @@
             sequence="3">
         </menuitem>
 
-            <!-- Reports/Appraisals -->
+            <!-- Reports/Events -->
             <act_window
-                id="res_partner_action_resports_appraisals"
-                name="Appraisals"
+                id="res_partner_action_resports_events"
+                name="Events"
                 res_model="res.partner"
                 view_mode="tree,form">
             </act_window>
             <menuitem
-                id="res_partner_menu_resports_appraisals"
-                name="Appraisals"
+                id="res_partner_menu_resports_events"
+                name="Events"
                 parent="res_partner_menu_resports"
-                action="res_partner_action_resports_appraisals"
+                action="res_partner_action_resports_events"
                 sequence="1">
             </menuitem>
         <!-- /Dashboard -->
 
-        <!-- Settings -->
+        <!-- Configuration -->
         <menuitem
-            id="res_partner_menu_settings"
-            name="Settings"
+            id="res_partner_menu_configuration"
+            name="Configuration"
             parent="menu_home"
             sequence="4">
         </menuitem>
 
-            <!-- Reports/Appraisals -->
+            <!-- Configuration/Settings -->
             <act_window
-                id="res_partner_action_settings_appraisals"
-                name="Appraisals Plans"
+                id="res_partner_action_configuration_settings"
+                name="Settings"
                 res_model="res.partner"
                 view_mode="tree,form">
             </act_window>
             <menuitem
-                id="res_partner_menu_settings_appraisals"
-                name="Appraisals Plans"
-                parent="res_partner_menu_settings"
-                action="res_partner_action_settings_appraisals"
+                id="res_partner_menu_configuration_settings"
+                name="Settings"
+                parent="res_partner_menu_configuration"
+                action="res_partner_action_configuration_settings"
                 sequence="1">
             </menuitem>
-        <!-- /Settings -->
+        <!-- /Configuration -->
 
     </data>
 </openerp>
