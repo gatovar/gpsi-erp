@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="event_registration_view_form_inherit_gpsi_training" model="ir.ui.view">
+            <field name="name">GPSI Training – Event Registration extension</field>
+            <field name="model">event.registration</field>
+            <field name="inherit_id" ref="event.view_event_registration_form"/>
+            <field name="arch" type="xml">
+                <field name="partner_id" position="after">
+                    <field name="gs_certificate_delivery_policy" />
+                </field>
+            </field>
+        </record>
+    </data>
+</odoo>
