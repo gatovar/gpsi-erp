@@ -7,11 +7,11 @@ from openerp.exceptions import UserError, ValidationError
 class Attachment(models.Model):
     _inherit = 'ir.attachment'
 
-    gs_tag_ids = fields.Many2many('gpsi.project.tags', string='Tags')
+    gs_tag_ids = fields.Many2many('ir.attachment.tag', string='Tags')
 
 
 class Tag(models.Model):
-    _name = "gpsi.attachment.tag"
+    _name = "ir.attachment.tag"
     _description = "Attachment Category"
 
     name = fields.Char("Tag", required=True)
@@ -21,3 +21,4 @@ class Tag(models.Model):
     _sql_constraints = [
             ('name_uniq', 'unique (name)', "Tag name already exists !"),
     ]
+    

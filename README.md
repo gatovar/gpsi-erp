@@ -38,3 +38,5 @@ El documento para gestionar una tarea de evaluación.
     - Solicitud de Ausencia SA001 - Formato para ausentarse.
 
 Los documentos del área son controlados por 
+
+industrial de lonas
