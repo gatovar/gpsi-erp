@@ -183,18 +183,35 @@
         <!--Attachments-->
 
         <act_window
-            id="ir_attachment_category_action_staff_configuration_attachments"
+            id="ir_attachment_category_action_staff_configuration_attachment"
             name="Attachments"
             res_model="ir.attachment.category"
             view_mode="tree,form">
         </act_window>
 
         <menuitem
-            id="ir_attachment_category_menu_staff_configuration_attachments"
+            id="ir_attachment_category_menu_staff_configuration_attachment"
             name="Attachments"
             parent="menu_staff_configuration"
-            action="ir_attachment_category_action_staff_configuration_attachments"
+            action="ir_attachment_category_action_staff_configuration_attachment"
             sequence="3">
+        </menuitem>
+
+        <!--Tags-->
+
+        <act_window
+            id="ir_attachment_category_action_staff_configuration_attachment_tags"
+            name="Tags"
+            res_model="ir.attachment.category"
+            view_mode="tree,form">
+        </act_window>
+
+        <menuitem
+            id="ir_attachment_category_menu_staff_configuration_attachment_tags"
+            name="Tags"
+            parent="ir_attachment_category_menu_staff_configuration_attachment"
+            action="ir_attachment_category_action_staff_configuration_attachment_tags"
+            sequence="1">
         </menuitem>
 
     </data>
