@@ -28,7 +28,7 @@ class WorkExperience(models.Model):
     work_position = fields.Char('Professional Experience')
     start_date = fields.Date('Start Date')
     end_date = fields.Date('End Date')
-    experience_id = fields.Many2one('hr.employee.profile', 'Employee Profile', ondele="cascade")
+    experience_id = fields.Many2one('hr.employee.profile', 'Employee')
 
 class JobTraining(models.Model):
     '''
@@ -41,10 +41,9 @@ class JobTraining(models.Model):
     expertise_area = fields.Char('Area of Expertise')
     start_date = fields.Date('Start Date')
     end_date = fields.Date('End Date')
-    training_id = fields.Many2one('hr.employee.profile', 'Employee Profile', ondele="cascade")
+    training_id = fields.Many2one('hr.employee.profile', 'Employee', ondele="cascade")
 
-    
-
+class Education
 
 
 

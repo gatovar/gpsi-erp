@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <record id="hr_employee_profile_view_tree" model="ir.ui.view">
+            <field name="name">hr.employee.profile.tree</field>
+            <field name="model">hr.employee.profile</field>
+            <field name="priority">20</field>
+            <field name="arch" type="xml">
+                <tree string="Profile">
+                    <field name="employee_id"/>
+                </tree>
+            </field>
+        </record>
+        <record id="hr_employee_profile_view_form" model="ir.ui.view">
+            <field name="name">hr.employee.profile.form</field>
+            <field name="model">hr.employee.profile</field>
+            <field name="priority">20</field>
+            <field name="arch" type="xml">
+                <form string="Employee Profile">
+                    <field name="id" invisible="1"/>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="employee_id" string="Employee" />
+                                <field name="customer_id" string="Customer" />
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Work History">
+                                <field name="work_history_ids" context="{'default_employee_id':id}">
+                                    <tree editable="bottom">
+                                        <field name="work_position" string="Work Position" />
+                                        <field name="start_date" string="Start Date" />
+                                        <field name="end_date" string="End Date" />
+                                    </tree>
+                                </field>
+                            </page>
+                            <page string="Job Training">
+                                <field name="job_training_ids" context="{'default_employee_id':id}">
+                                    <tree editable="bottom">
+                                        <field name="expertise_area" string="Expertise Area" />
+                                        <field name="start_date" string="Start Date" />
+                                        <field name="end_date" string="End Date" />
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+    </data>
+</openerp>

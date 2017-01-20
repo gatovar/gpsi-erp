@@ -8,7 +8,9 @@
     'description': '',
     'website': '',
     'depends': ['hr'],
-    'data': [],
+    'data': [
+        'views/hr_employee_profile_views.xml'
+    ],
     'test': [],
     'installable': True,
     'auto_install': False,

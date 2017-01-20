@@ -61,6 +61,23 @@
             sequence="1">
         </menuitem>
 
+        <!--Profile-->
+
+        <act_window
+            id="hr_employee_profile_action_profile"
+            name="Profile"
+            res_model="hr.employee.profile"
+            view_mode="tree,form">
+        </act_window>
+
+        <menuitem
+            id="hr_employee_profile_menu_profile"
+            name="Profile"
+            parent="menu_staff_operations"
+            action="hr_employee_profile_action_profile"
+            sequence="2">
+        </menuitem>
+
         <!--Appraisals-->
 
         <act_window
@@ -75,7 +92,7 @@
             name="Appraisals"
             parent="menu_staff_operations"
             action="action_staff_operations_appraisals"
-            sequence="2">
+            sequence="3">
         </menuitem>
 
         <!--Documents-->
@@ -92,7 +109,7 @@
             name="Documents"
             parent="menu_staff_operations"
             action="action_staff_operations_documents"
-            sequence="3">
+            sequence="4">
         </menuitem>
 
         <!--Reports-->
@@ -213,6 +230,7 @@
             action="ir_attachment_category_action_staff_configuration_attachment_tags"
             sequence="1">
         </menuitem>
+
 
     </data>
 </openerp>
