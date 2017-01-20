@@ -12,7 +12,8 @@
         'views/general_views.xml',
         'views/event_instructor.xml',
         'views/event_cert_delivery.xml',
-        'views/attendees_list.xml'
+        'views/attendees_list.xml',
+        'views/certificate.xml'
     ],
     'test': [],
     'installable': True,
