@@ -7,7 +7,7 @@
             <field name="priority">20</field>
             <field name="arch" type="xml">
                 <tree string="Profile">
-                    <field name="employee_id"/>
+                    <field name="employee_id" />
                 </tree>
             </field>
         </record>
@@ -17,7 +17,7 @@
             <field name="priority">20</field>
             <field name="arch" type="xml">
                 <form string="Employee Profile">
-                    <field name="id" invisible="1"/>
+                    <field name="id" invisible="1" />
                     <sheet>
                         <group>
                             <group>
@@ -26,19 +26,38 @@
                             </group>
                         </group>
                         <notebook>
-                            <page string="Work History">
-                                <field name="work_history_ids" context="{'default_employee_id':id}">
+                            <page string="Academic Historial">
+                                <field name="historial_ids" context="{'default_collage_id':id}">
                                     <tree editable="bottom">
-                                        <field name="work_position" string="Work Position" />
+                                        <field name="study_grade" string="Study Grade" />
+                                        <field name="institute" string="Alma Mater" />
+                                        <field name="start_date" string="Start Date" />
+                                        <field name="end_date" string="End Date" />
+                                    </tree>
+                                </field>
+                            </page>
+                            <page string="Employment Experience">
+                                <field name="experience_ids" context="{'default_experience_id':id}">
+                                    <tree editable="bottom">
+                                        <field name="job_position" string="Job Position" />
                                         <field name="start_date" string="Start Date" />
                                         <field name="end_date" string="End Date" />
                                     </tree>
                                 </field>
                             </page>
                             <page string="Job Training">
-                                <field name="job_training_ids" context="{'default_employee_id':id}">
+                                <field name="training_ids" context="{'default_training_id':id}">
                                     <tree editable="bottom">
                                         <field name="expertise_area" string="Expertise Area" />
+                                        <field name="start_date" string="Start Date" />
+                                        <field name="end_date" string="End Date" />
+                                    </tree>
+                                </field>
+                            </page>
+                            <page string="Completed Courses">
+                                <field name="courses_ids" context="{'default_course_id':id}">
+                                    <tree editable="bottom">
+                                        <field name="course" string="Course" />
                                         <field name="start_date" string="Start Date" />
                                         <field name="end_date" string="End Date" />
                                     </tree>
