@@ -2,3 +2,4 @@
 
 import event_instructor
 import event_cert_delivery
+import event_training
