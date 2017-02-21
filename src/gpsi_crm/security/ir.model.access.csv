@@ -1,3 +1,0 @@
-id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-gpsi_crm_cert_card_all,gpsi.crm.cert.card all,model.gpsi_crm_cert_card,,1,1,1,1
-gpsi_crm_cert_card_site_all,gpsi.crm.cert.card.site all,model.gpsi_crm_cert_card_site,,1,1,1,1

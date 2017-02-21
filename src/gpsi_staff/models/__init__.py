@@ -1,4 +1,4 @@
 # -*- coding: utf-8 -*-
 
-import skill
-import ir_attachment
+import checklist
+import audit_task

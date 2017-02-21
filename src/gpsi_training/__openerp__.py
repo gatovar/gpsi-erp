@@ -1,20 +1,14 @@
 # -*- coding: utf-8 -*-
 {
     'name': 'GPSI Training',
-    'version': '1.0.0',
-    'category': 'globalstd',
+    'version': '0.0.1',
+    'category': 'gpsi',
     'sequence': 20,
-    'summary': 'GPSI Training',
+    'summary': 'Courses, Certificates',
     'description': '',
-    'website': 'http://www.globalstd.com/',
-    'depends': ['event'],
-    'data': [
-        'views/general_views.xml',
-        'views/event_instructor.xml',
-        'views/event_cert_delivery.xml',
-        'views/attendees_list.xml',
-        'views/certificate.xml'
-    ],
+    'website': '',
+    'depends': [],
+    'data': [],
     'test': [],
     'installable': True,
     'auto_install': False,

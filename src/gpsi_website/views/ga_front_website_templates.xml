@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+
+    <template id="gpsi_website.ga/front/assets_common">
+        <link rel="shortcut icon" href="http://www.globalstd.com/templates/jm_consilium/favicon.ico"></link>
+        <link rel='stylesheet' type='text/css' href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600&amp;subset=cyrillic,latin'></link>
+        <link rel="stylesheet" href="/gpsi_website/static/src/assets2/plugins/bootstrap/css/bootstrap.min.css"></link>
+        <link rel="stylesheet" href="/gpsi_website/static/src/assets2/css/style.css"></link>
+        <link rel="stylesheet" href="/gpsi_website/static/src/assets2/css/headers/header-v6.css"></link>
+        <link rel="stylesheet" href="/gpsi_website/static/src/assets2/css/footers/footer-v1.css"></link>
+        <link rel="stylesheet" href="/gpsi_website/static/src/assets2/plugins/animate.css"></link>
+        <link rel="stylesheet" href="/gpsi_website/static/src/assets2/plugins/line-icons/line-icons.css"></link>
+        <link rel="stylesheet" href="/gpsi_website/static/src/assets2/plugins/font-awesome/css/font-awesome.min.css"></link>
+        <link rel="stylesheet" href="/gpsi_website/static/src/assets2/plugins/cube-portfolio/cubeportfolio/css/cubeportfolio.min.css"></link>
+        <link rel="stylesheet" href="/gpsi_website/static/src/assets2/plugins/cube-portfolio/cubeportfolio/custom/custom-cubeportfolio.css"></link>
+        <link rel="stylesheet" href="/gpsi_website/static/src/assets2/plugins/animated-headline/css/animated-headline.css"></link>
+        <link rel="stylesheet" href="/gpsi_website/static/src/assets2/css/theme-colors/default.css" id="style_color"></link>
+        <link rel="stylesheet" href="/gpsi_website/static/src/assets2/css/theme-skins/dark.css"></link>
+        <link rel="stylesheet" href="/gpsi_website/static/src/assets2/css/custom.css"></link>
+        <link rel="stylesheet" href="/gpsi_website/static/src/assets2/plugins/line-icons-pro/styles.css"></link>
+        <link rel="stylesheet" href="/gpsi_website/static/src/assets2/css/pages/page_log_reg_v1.css"></link>
+
+        <script type="text/javascript" src="/gpsi_website/static/src/assets2/plugins/jquery/jquery.min.js"></script>
+        <script type="text/javascript" src="/gpsi_website/static/src/assets2/plugins/jquery/jquery-migrate.min.js"></script>
+        <script type="text/javascript" src="/gpsi_website/static/src/assets2/plugins/bootstrap/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="/gpsi_website/static/src/assets2/plugins/back-to-top.js"></script>
+        <script type="text/javascript" src="/gpsi_website/static/src/assets2/plugins/smoothScroll.js"></script>
+        <script type="text/javascript" src="/gpsi_website/static/src/assets2/plugins/jquery.parallax.js"></script>
+        <script type="text/javascript" src="/gpsi_website/static/src/assets2/plugins/counter/waypoints.min.js"></script>
+        <script type="text/javascript" src="/gpsi_website/static/src/assets2/plugins/counter/jquery.counterup.min.js"></script>
+        <script type="text/javascript" src="/gpsi_website/static/src/assets2/plugins/wow-animations/js/wow.min.js"></script>
+        <script type="text/javascript" src="/gpsi_website/static/src/assets2/plugins/animated-headline/js/modernizr.js"></script>
+        <script type="text/javascript" src="/gpsi_website/static/src/assets2/plugins/animated-headline/js/animated-headline.js"></script>
+        <script type="text/javascript" src="/gpsi_website/static/src/assets2/plugins/cube-portfolio/cubeportfolio/js/jquery.cubeportfolio.min.js"></script>
+        <script type="text/javascript" src="/gpsi_website/static/src/assets2/js/custom.js"></script>
+        <script type="text/javascript" src="/gpsi_website/static/src/assets2/js/app.js"></script>
+        <script type="text/javascript" src="/gpsi_website/static/src/assets2/js/plugins/cube-portfolio/cube-portfolio-lightbox.js"></script>
+        <script type="text/javascript">
+            jQuery(document).ready(function() {
+            	App.init();
+            });
+        </script>
+    </template>
+
+    <template id="gpsi_website.ga/front/home">
+    </template>
+
+</openerp>

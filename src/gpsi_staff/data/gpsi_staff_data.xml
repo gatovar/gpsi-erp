@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record id="global_audit_category" model="ir.module.category">
+            <field name="name">Global Audit</field>
+            <field name="description">GlobalAudit category</field>
+        </record>
+
+        <record id="group_ga_user" model="res.groups">
+            <field name="name">User</field>
+            <field name="category_id" ref="gpsi_staff.global_audit_category"/>
+            <field name="is_portal" eval="True"></field>
+        </record>
+
+        <record id="group_ga_admin" model="res.groups">
+            <field name="name">Administrator</field>
+            <field name="category_id" ref="gpsi_staff.global_audit_category"/>
+            <field name="implied_ids" eval="[(4, ref('group_ga_user'))]"/>
+            <field name="is_portal" eval="True"></field>
+        </record>
+
+        <record id="group_ga_owner" model="res.groups">
+            <field name="name">Owner</field>
+            <field name="category_id" ref="gpsi_staff.global_audit_category"/>
+            <field name="implied_ids" eval="[(4, ref('group_ga_admin'))]"/>
+            <field name="is_portal" eval="True"></field>
+        </record>
+
+        <record id="gpsi_staff_category" model="ir.module.category">
+            <field name="name">GPSI Staff</field>
+            <field name="description">GPSI Staff category</field>
+        </record>
+
+        <record id="group_gpsi_staff_user" model="res.groups">
+            <field name="name">User</field>
+            <field name="category_id" ref="gpsi_staff.gpsi_staff_category"/>
+        </record>
+
+        <record id="group_gpsi_staff_auditor" model="res.groups">
+            <field name="name">Auditor</field>
+            <field name="category_id" ref="gpsi_staff.gpsi_staff_category"/>
+            <field name="implied_ids" eval="[(4, ref('group_gpsi_staff_user'))]"/>
+        </record>
+
+        <record id="group_gpsi_staff_admin" model="res.groups">
+            <field name="name">Manager</field>
+            <field name="category_id" ref="gpsi_staff.gpsi_staff_category"/>
+            <field name="implied_ids" eval="[(4, ref('group_gpsi_staff_auditor'))]"/>
+        </record>
+
+        <record id="project_cert_audit" model="project.project">
+            <field name="name">Certification Audits</field>
+            <field name="use_tasks">True</field>
+            <field name="label_tasks">Events</field>
+            <field name="privacy_visibility">followers</field>
+            <field name="gs_is_cert_audit" eval="True"/>
+        </record>
+
+        <record id="cert_audit_new_stage" model="project.task.type">
+            <field name="name">New</field>
+            <field name="sequence">0</field>
+            <field name="project_ids" eval="[(4, ref('project_cert_audit'))]"/>
+        </record>
+
+        <record id="cert_audit_schedule_stage" model="project.task.type">
+            <field name="name">Scheduling</field>
+            <field name="sequence">1</field>
+            <field name="project_ids" eval="[(4, ref('project_cert_audit'))]"/>
+        </record>
+
+        <record id="cert_audit_execute_stage" model="project.task.type">
+            <field name="name">Execute</field>
+            <field name="sequence">2</field>
+            <field name="project_ids" eval="[(4, ref('project_cert_audit'))]"/>
+        </record>
+
+        <record id="cert_audit_review_stage" model="project.task.type">
+            <field name="name">Review</field>
+            <field name="sequence">3</field>
+            <field name="project_ids" eval="[(4, ref('project_cert_audit'))]"/>
+        </record>
+
+        <record id="cert_audit_closed_stage" model="project.task.type">
+            <field name="name">Closed</field>
+            <field name="sequence">4</field>
+            <field name="fold" eval="True"/>
+            <field name="project_ids" eval="[(4, ref('project_cert_audit'))]"/>
+        </record>
+
+        <record id="vendor_audit_new_stage" model="project.task.type">
+            <field name="name">New</field>
+            <field name="sequence">0</field>
+        </record>
+
+        <record id="vendor_audit_scheduling_stage" model="project.task.type">
+            <field name="name">Scheduling</field>
+            <field name="sequence">1</field>
+        </record>
+
+        <record id="vendor_audit_execute_stage" model="project.task.type">
+            <field name="name">Execute</field>
+            <field name="sequence">2</field>
+        </record>
+
+        <record id="vendor_audit_review_stage" model="project.task.type">
+            <field name="name">Review</field>
+            <field name="sequence">3</field>
+        </record>
+
+        <record id="vendor_audit_closed_stage" model="project.task.type">
+            <field name="name">Closed</field>
+            <field name="sequence">4</field>
+        </record>
+        
+    </data>
+</openerp>

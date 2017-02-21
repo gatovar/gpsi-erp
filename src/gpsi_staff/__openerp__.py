@@ -1,19 +1,19 @@
 # -*- coding: utf-8 -*-
 {
     'name': 'GPSI Staff',
-    'version': '1.0.0',
-    'category': 'globalstd',
+    'version': '0.0.1',
+    'category': 'gpsi',
     'sequence': 20,
-    'summary': 'Staff Integration',
+    'summary': 'Audit Management',
     'description': '',
     'website': '',
-    'depends': ['hr'],
+    'depends': ['project', 'project_issue'],
     'data': [
-        'views/skill_views.xml',
-        'views/general_views.xml'
+        'views/audit_task_views.xml',
+        'data/gpsi_staff_data.xml'
     ],
     'test': [],
     'installable': True,
     'auto_install': False,
-    'application': False,
+    'application': False
 }

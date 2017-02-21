@@ -1,0 +1,312 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="gpsi_website.ga/checklist/base" name="Web layout">&lt;!DOCTYPE html&gt;
+        <html>
+            <head>
+                <meta charset="utf-8"/>
+                <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+                <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+                <title t-esc="title or 'GlobalAudit'"/>
+
+                <script type="text/javascript">
+                    var odoo = {
+                        csrf_token: "<t t-esc="request.csrf_token(None)"/>",
+                    };
+                </script>
+
+                <t t-call="gpsi_website.ga/admin/assets_common"/>
+            </head>
+            <body t-attf-class="{{'navbar-top' if not editable else ''}} layout-boxed">
+                <t t-if="not editable">
+                    <div class="navbar navbar-inverse bg-danger-400 navbar-fixed-top">
+                        <div class="navbar-header">
+                            <a class="navbar-brand" href="index.html"><img src="/gpsi_website/static/src/assets/images/logo_light2.png" alt=""/></a>
+                            <ul class="nav navbar-nav visible-xs-block">
+                                <li><a data-toggle="collapse" data-target="#navbar-mobile"><i class="icon-tree5"></i></a></li>
+                                <li><a class="sidebar-mobile-main-toggle"><i class="icon-paragraph-justify3"></i></a></li>
+                            </ul>
+                        </div>
+                            <div class="navbar-collapse collapse" id="navbar-mobile">
+                                <ul class="nav navbar-nav">
+                                    <li class="dropdown mega-menu mega-menu-wide">
+                                        <a href="/ga/admin">
+                                            <i class="fa fa-dashboard position-left"></i> Dashboard
+                                        </a>
+                                    </li>
+                                    <li class="dropdown">
+                                        <a href="#"  class="dropdown-toggle" data-toggle="dropdown">
+                                            <i class="fa fa-pencil-square-o position-left"></i> Certification <span class="caret"></span>
+                                        </a>
+                                        <ul class="dropdown-menu dropdown-menu-right">
+                                            <li><a href="/ga/admin/ca/contracts"> Contracts</a></li>
+                                            <li><a href="/ga/admin/ca/events"> Audits</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="dropdown">
+                                        <a href="#"  class="dropdown-toggle" data-toggle="dropdown">
+                                            <i class="fa fa-pencil-square-o position-left"></i> Supplier Evaluation <span class="caret"></span>
+                                        </a>
+                                        <ul class="dropdown-menu dropdown-menu-right">
+                                            <li><a href="/ga/admin/va/suppliers"> Suppliers</a></li>
+                                            <li><a href="/ga/admin/va/events"> Audits</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="dropdown mega-menu mega-menu-wide">
+                                        <a href="/ga/admin/complaints">
+                                            <i class="fa fa-warning position-left"></i> Issues
+                                        </a>
+                                    </li>
+                                    <t t-if="request.env.user.has_group('gpsi_staff.group_ga_admin')">
+                                        <li class="dropdown">
+                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                                <i class="fa fa-bar-chart position-left"></i> Reports <span class="caret"></span>
+                                            </a>
+                                            <ul class="dropdown-menu dropdown-menu-right">
+                                                <li><a href="/ga/admin/va/reports/efficiency"> Efficiency</a></li>
+                                                <li><a href="/ga/admin/va/reports/complaints"> Issues</a></li>
+                                                <li><a href="/ga/admin/reports/users"> User Performance</a></li>
+                                            </ul>
+                                        </li>
+                                        <li class="dropdown">
+                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                            <i class="fa fa-cogs position-left"></i> Settings <span class="caret"></span>
+                                            </a>
+                                            <ul class="dropdown-menu dropdown-menu-right">
+                                                <li class="dropdown-submenu">
+                                                    <a href="#"><i class="fa fa-tags"></i> Tags</a>
+                                                    <ul class="dropdown-menu">
+                                                        <li><a href="/ga/admin/settings/tags/contacts"> Contacts</a></li>
+                                                        <li><a href="/ga/admin/settings/tags/audits"> Audits</a></li>
+                                                        <li><a href="/ga/admin/settings/tags/issues"> Issues</a></li>
+                                                    </ul>
+                                                </li>
+                                                <li><a href="/ga/admin/settings/users"><i class="fa fa-users"></i> Users</a></li>
+                                                <li><a href="/ga/admin/settings/integrations"><i class="icon-chrome"></i> Integrations</a></li>
+                                            </ul>
+                                        </li>
+                                    </t>
+                                </ul>
+                                <ul class="nav navbar-nav navbar-right">
+                                    <li class="dropdown dropdown-user">
+                                        <a class="dropdown-toggle" data-toggle="dropdown">
+                                            <span style="padding: 0px" t-field="request.env.user.image" t-field-options="{&quot;widget&quot;: &quot;image&quot;, &quot;style&quot;: &quot;display: inline;&quot;}"/>
+                                            <span><t t-esc="request.env.user.name"/></span>
+                                            <i class="caret"></i>
+                                        </a>
+                                        <ul class="dropdown-menu dropdown-menu-right">
+                                            <li><a href="/ga/admin/logout"><i class="icon-switch2"></i> Logout</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                    </div>
+                </t>
+                <div class="page-container">
+                    <div class="page-content">
+                        <div class="content-wrapper">
+                            <t t-raw="0"/>
+                        </div>
+                    </div>
+                </div>
+            </body>
+        </html>
+    </template>
+
+    <template id="gpsi_website.ga/checklist/layout" name="Checklist/Layout">
+        <t t-call="gpsi_website.ga/checklist/base">
+            <div class="panel page-header border-top-primary" style="padding-bottom: 0;">
+                <div class="page-header-content">
+                    <div class="page-title">
+                        <h5>
+                            <span class="text-semibold"><t t-esc="assessment.name"/></span> - Assessment
+                        </h5>
+                    </div>
+                    <div class="heading-elements">
+                        <t t-if="editable">
+                            <button class="btn bg-primary btn-icon heading-btn" onclick="onSubmit()">Save Changes</button>
+                        </t>
+                    </div>
+                </div>
+                <t t-if="not editable">
+                    <div class="breadcrumb-line breadcrumb-line-wide" style="box-shadow: none;">
+                        <ul class="breadcrumb">
+                            <li><a href="/admin"><i class="icon-home2 position-left"></i> Home</a></li>
+                            <li><a href="/admin/audits">Audits</a></li>
+                            <li><a t-attf-href="/ga/admin/va/events/{{audit.id}}"><t t-esc="audit.name"/></a></li>
+                            <li class="active">Assessment</li>
+                        </ul>
+                    </div>
+                </t>
+            </div>
+            <div class="content">
+                <div class="panel panel-3d">
+                    <div class="panel-heading" style="margin-bottom:10px">
+                        <h6 class="panel-title">&amp;nbsp;</h6>
+                        <div class="heading-elements">
+                            <div class="heading-btn">
+                                <a t-attf-href="/ga/admin/cars?search=[('task_id','=',{{audit.id}})]" class="btn border-slate text-slate-800 btn-flat">0 Corrective Action Requests</a>
+                            </div>
+                        </div>
+                        <a class="heading-elements-toggle"><i class="icon-menu"></i></a>
+                    </div>
+                    <div class="panel-body">
+                        <form id="assessment_form" class="form-horizontal" t-attf-action="/ga/admin/va/events/{{audit.id}}/assessment/edit" method="post" enctype="multipart/form-data">
+                            <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <fieldset class="content-group">
+                                        <div class="form-group">
+                                            <label class="control-label col-lg-4 text-semibold">Results</label>
+                                            <div class="col-lg-8">
+                                                <t t-if="editable">
+                                                    <select name="select" class="form-control">
+                                                        <t t-foreach="assessment.score_ids" t-as="score">
+                                                            <t t-if="score.id == assessment.score_id.id">
+                                                                <option t-attf-value="{{score.id}}" selected="selected"><t t-esc="score.name"/></option>
+                                                            </t>
+                                                            <t t-if="score.id != assessment.score_id.id">
+                                                                <option t-attf-value="{{score.id}}"><t t-esc="score.name"/></option>
+                                                            </t>
+                                                        </t>
+                                                    </select>
+                                                </t>
+                                                <t t-if="not editable">
+                                                    <input type="text" class="form-control" disabled="disabled" t-attf-value="{{assessment.score_id.name}}"/>
+                                                </t>
+                                            </div>
+                                        </div>
+                                    </fieldset>
+                                </div>
+                            </div>
+                            <t t-raw="0"/>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <script type="text/javascript">
+                onSubmit = function() {
+                    $('textarea[class="summernote"]').each(function() {
+                        $(this).html($(this).code());
+                    });
+                    document.getElementById('assessment_form').submit();
+                }
+            </script>
+        </t>
+    </template>
+
+    <template id="gpsi_website.ga/checklist/default" name="Checklist/Default">
+        <t t-call="gpsi_website.ga/checklist/layout">
+            <t t-set="user" t-value="request.env.user"/>
+            <t t-set="notes" t-value="False"/>
+            <t t-foreach="assessment.field_ids" t-as="field">
+                <t t-if="field.name == 'notes'">
+                    <t t-set="notes" t-value="field"/>
+                </t>
+            </t>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="tabbable">
+                        <ul class="nav nav-tabs nav-tabs-highlight">
+                            <li class="active"><a class="text-semibold" href="#question-tab" data-toggle="tab">Requirements</a></li>
+                            <t t-if="notes">
+                                <li><a class="text-semibold" href="#notes-tab" data-toggle="tab">Notes</a></li>
+                            </t>
+                        </ul>
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="question-tab">
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="form-group">
+                                            <div class="table-responsive">
+                                                <table class="table">
+                                                    <thead>
+                                                        <tr>
+                                                            <th width="1%"></th>
+                                                            <th width="45%">Requirement</th>
+                                                            <th width="40%">Observation</th>
+                                                            <th width="15%">Rating</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <t t-set="last_section_name" t-value="False"/>
+                                                        <t t-foreach="assessment.line_ids" t-as="line">
+                                                            <t t-set="observation" t-value="False"/>
+                                                            <t t-foreach="line.field_ids" t-as="field">
+                                                                <t t-if="field.name == 'observation'">
+                                                                    <t t-set="observation" t-value="field"/>
+                                                                </t>
+                                                            </t>
+                                                            <t t-if="not last_section_name or line.name != last_section_name">
+                                                                <t t-set="last_section_name" t-value="line.name"/>
+                                                                <tr class="active border-double">
+                                                                    <td colspan="4" class="text-semibold"><t t-esc="line.name"/></td>
+                                                                </tr>
+                                                            </t>
+                                                            <tr t-attf-id="line-{{line.id}}">
+                                                                <td>
+                                                                    <a class="label label-xs label-flat label-rounded label-icon border-teal text-teal-600" data-popup="popover" data-trigger="hover" t-attf-data-content="{{line.help}}">
+                                                                        <i class="icon-question7"></i>
+                                                                    </a>
+                                                                </td>
+                                                                <td>
+                                                                    <t t-esc="line.description"/>
+                                                                </td>
+                                                                <td>
+                                                                    <t t-if="editable">
+                                                                        <textarea t-attf-name="field$${{observation.id}}" rows="1" class="form-control textarea-elastic" style="overflow: hidden; word-wrap: break-word; resize: vertical;"><t t-esc="observation.t_value"/></textarea>
+                                                                    </t>
+                                                                    <t t-if="not editable">
+                                                                        <t t-esc="observation.t_value"/>
+                                                                    </t>
+                                                                </td>
+                                                                <td>
+                                                                    <t t-if="editable">
+                                                                        <select t-attf-name="line_score_id$${{line.id}}" class="form-control">
+                                                                            <t t-foreach="line.score_ids" t-as="score">
+                                                                                <t t-if="score.id == line.score_id.id">
+                                                                                    <option t-attf-value="{{score.id}}" selected="selected"><t t-esc="score.name"/></option>
+                                                                                </t>
+                                                                                <t t-if="score.id != line.score_id.id">
+                                                                                    <option t-attf-value="{{score.id}}"><t t-esc="score.name"/></option>
+                                                                                </t>
+                                                                            </t>
+                                                                        </select>
+                                                                    </t>
+                                                                    <t t-if="not editable">
+                                                                        <span class="label bg-success-400"><t t-esc="line.score_id.name"/></span>
+                                                                    </t>
+                                                                </td>
+                                                            </tr>
+                                                        </t>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <t t-if="notes">
+                                <div class="tab-pane" id="notes-tab">
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <t t-if="editable">
+                                                <div class="form-group">
+                                                    <textarea t-attf-name="field$${{notes.id}}" class="summernote" name="notes"><t t-raw="notes.h_value"/></textarea>
+                                                </div>
+                                            </t>
+                                            <t t-if="not editable">
+                                                <div style="padding: 10px"><t t-raw="notes.h_value"/></div>
+                                            </t>
+                                        </div>
+                                    </div>
+                                </div>
+                            </t>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+    
+</odoo>

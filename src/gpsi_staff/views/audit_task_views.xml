@@ -1,0 +1,476 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+
+        <act_window
+            id="action_staff_opers_cert_audits"
+            name="Certification Audits"
+            res_model="res.partner"
+            view_mode="tree,form">
+        </act_window>
+
+        <menuitem
+            id="menu_staff"
+            name="Staff"
+            sequence="10">
+        </menuitem>
+
+        <menuitem
+            id="menu_staff_opers"
+            name="Operations"
+            parent="menu_staff"
+            sequence="1">
+        </menuitem>
+
+        <record id="action_cert_audits" model="ir.actions.act_window">
+            <field name="name">Certification Audits</field>
+            <field name="res_model">project.task</field>
+            <field name="view_mode">kanban,tree,form,calendar,pivot,graph</field>
+            <field name="domain" eval="[('project_id','=',ref('gpsi_staff.project_cert_audit'))]"></field>
+            <field name="context" eval="{'default_project_id': ref('gpsi_staff.project_cert_audit')}"></field>
+        </record>
+
+        <menuitem
+            id="menu_staff_opers_cert_audits"
+            name="Certification Audits"
+            parent="menu_staff_opers"
+            action="action_cert_audits"
+            sequence="1">
+        </menuitem>
+
+        <record id="action_vendor_audit_project_2_audit_task_all" model="ir.actions.act_window">
+            <field name="name">Audits</field>
+            <field name="res_model">project.task</field>
+            <field name="view_mode">kanban,tree,form,calendar</field>
+            <field name="domain">[('project_id','=',active_id)]</field>
+            <field name="context">{
+                'default_project_id': active_id
+            }</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    Here, you can create new audits
+                </p>
+                <p>
+                    You can now manage your audits in order to get things done efficiently. Track progress, discuss, attach documents, etc.
+                </p>
+            </field>
+        </record>
+
+        <record id="action_vendor_audits" model="ir.actions.act_window">
+            <field name="name">Vendor Audits</field>
+            <field name="res_model">project.project</field>
+            <field name="view_mode">kanban,tree,form</field>
+            <field name="domain" eval="[('gs_is_vendor_audit','=',True)]"></field>
+            <field name="context" eval="{'search_default_Current': 1, 'default_gs_is_vendor_audit': True}"></field>
+        </record>
+
+        <menuitem
+            id="menu_staff_opers_vendor_audits"
+            name="Vendor Audits"
+            parent="menu_staff_opers"
+            action="action_vendor_audits"
+            sequence="2">
+        </menuitem>
+
+        <record id="vendor_audit_project_view_kanban" model="ir.ui.view" >
+            <field name="name">gpsi.staff.audit.project.kanban</field>
+            <field name="model">project.project</field>
+            <field name="priority">50</field>
+            <field name="arch" type="xml">
+                <kanban class="oe_background_grey o_kanban_dashboard o_project_kanban">
+                    <field name="name"/>
+                    <field name="use_tasks"/>
+                    <field name="user_id"/>
+                    <field name="color"/>
+                    <field name="task_count"/>
+                    <field name="task_needaction_count"/>
+                    <field name="label_tasks"/>
+                    <field name="task_ids"/>
+                    <field name="alias_id"/>
+                    <field name="alias_name"/>
+                    <field name="alias_domain"/>
+                    <field name="doc_count"/>
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div t-attf-class="#{kanban_color(record.color.raw_value)} oe_kanban_global_click">
+                                <div class="o_project_kanban_main">
+                                    <div class="o_kanban_card_content o_visible">
+                                        <div class="o_kanban_primary_left">
+                                            <div class="o_primary">
+                                                <span><t t-esc="record.name.value"/></span>
+                                            </div>
+                                            <div t-if="record.alias_name.value and record.alias_domain.value">
+                                                <span><i class="fa fa-envelope"></i> <t t-esc="record.alias_id.value"/></span>
+                                            </div>
+                                        </div>
+                                    </div><div class="o_kanban_card_manage_pane o_invisible">
+                                        <div class="o_kanban_card_manage_section o_kanban_manage_reports">
+                                            <div groups="project.group_project_manager">
+                                                <a type="edit">Settings</a>
+                                            </div>
+                                            <div>
+                                                <a name="%(project.action_project_task_user_tree_filtered)d" type="action">Tasks</a>
+                                            </div>
+                                            <div>
+                                                <a name="%(project.action_view_task_history_cumulative_filter)d" type="action">Cumulative Flow</a>
+                                            </div>
+                                        </div>
+                                        <div t-if="widget.editable" class="o_project_kanban_colorpicker">
+                                            <ul class="oe_kanban_colorpicker" data-field="color"/>
+                                        </div>
+                                    </div>
+                                    <div class="o_project_kanban_manage">
+                                        <a class="o_kanban_manage_toggle_button" href="#">More <i class="fa fa-caret-down"/></a>
+                                    </div>
+                                </div>
+
+                                <div class="o_project_kanban_boxes">
+                                    <div t-if="record.use_tasks.raw_value" class="o_project_kanban_box">
+                                        <a name="%(action_vendor_audit_project_2_audit_task_all)d" type="action">
+                                            <span class="o_value"><t t-esc="record.task_count.value"/></span>
+                                            <span class="o_label"><t t-esc="record.label_tasks.value"/></span>
+                                        </a>
+                                        <a t-if="record.task_needaction_count.raw_value" class="o_needaction" name="%(project.act_project_project_2_project_task_all)d" type="action" context="{'search_default_message_needaction': 1}">
+                                            <t t-esc="record.task_needaction_count.raw_value"/>
+                                        </a>
+                                    </div>
+                                    <!--
+                                    <div t-if="record.use_issues.raw_value" class="o_project_kanban_box">
+                                        <a name="%(project_issue.act_project_project_2_project_issue_all)d" type="action">
+                                            <span class="o_value"><t t-raw="record.issue_ids.raw_value.length"/></span>
+                                            <span class="o_label"><field name="label_issues"/></span>
+                                        </a>
+                                        <a t-if="record.issue_needaction_count.raw_value" class="o_needaction" name="%(project_issue.act_project_project_2_project_issue_all)d" type="action" context="{'search_default_message_needaction': 1}">
+                                            <t t-esc="record.issue_needaction_count.raw_value"/>
+                                        </a>
+                                    </div>
+                                    -->
+                                    <a t-if="record.doc_count.raw_value" class="o_project_kanban_box" name="attachment_tree_view" type="object">
+                                        <span class="o_value"><t t-esc="record.doc_count.value"/></span>
+                                        <span class="o_label">Documents</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
+        <record id="vendor_audit_task_view_form" model="ir.ui.view">
+            <field name="name">gpsi.staff.audit.task.form</field>
+            <field name="model">project.task</field>
+            <field name="priority">50</field>
+            <field name="arch" type="xml">
+                <form string="Audit">
+                    <header>
+                        <field name="stage_id" widget="statusbar" clickable="True" options="{'fold_field': 'fold'}"/>
+                    </header>
+                    <sheet>
+                        <field name="id" invisible="1"/>
+                        <field name="gs_assessment_id" invisible="1"/>
+                        <div class="oe_button_box" name="button_box">
+                            <button class="oe_stat_button" name="action_gs_edit_assessment" type="object" icon="fa-edit" string="Assessment" attrs="{'invisible': [('gs_assessment_id','=',False)]}"/>
+                            <button name="toggle_active" type="object" groups="base.group_user" class="oe_stat_button" icon="fa-archive">
+                                <field name="active" widget="boolean_button" options="{&quot;terminology&quot;: &quot;archive&quot;}"/>
+                            </button>
+                        </div>
+                        <div class="oe_title">
+                            <h1 class="o_row">
+                                <field name="priority" widget="priority"/>
+                                <field name="name" placeholder="Task Title..."/>
+                            </h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="project_id" domain="[('state','not in', ('close', 'cancelled'))]" context="{'default_use_tasks':1}" groups="base.group_no_one"/>
+                                <field name="user_id" options="{&quot;no_open&quot;: True}" on_change="onchange_user_id(user_id, context)" context="{'default_groups_ref': ['base.group_user', 'base.group_partner_manager', 'project.group_project_user']}"/>
+                                <field name="partner_id" string="Auditee" required="1" domain="[('parent_id','=',False)]" options="{'no_create': True, 'no_create_edit': True}"/>
+                                <field name="gs_checklist_id" string="Checklist" required="1" options="{'no_create': True, 'no_create_edit': True}"/>
+                            </group>
+                            <group>
+                                <field name="date_deadline" string="Date" help="Execution date"/>
+                                <field name="tag_ids" widget="many2many_tags"/>
+                                <field name="gs_assessment_id" string="Assessment" readonly="1" context="{'form_view_ref': 'gpsi_staff.assessment_view_form'}" groups="base.group_no_one"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page name="description_page" string="Description">
+                                <field name="description" type="html"/>
+                                <div class="oe_clear"/>
+                            </page>
+                            <page string="Audit Team">
+                                <field name="gs_audit_team_ids">
+                                    <tree editable="bottom" context="{'default_task_id': id}">
+                                        <field name="user_id" required="1"/>
+                                        <field name="role" required="1"/>
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <record id="assessment_view_form" model="ir.ui.view">
+            <field name="name">gpsi_staff.assessment.form</field>
+            <field name="model">gpsi.staff.checklist</field>
+            <field name="priority">30</field>
+            <field name="arch" type="xml">
+                <form string="Assessment">
+                    <sheet>
+                        <field name="id" invisible="1"/>
+                        <group>
+                            <group>
+                                <field name="name" required="1"/>
+                                <field name="score_id" options="{'no_create': True, 'no_create_edit': True}"/>
+                                <field name="eval_action"/>
+                            </group>
+                            <group>
+                                <field name="view_id" required="1"/>
+                                <field name="general_report_id"/>
+                                <field name="executive_report_id"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Scores">
+                                <field name="score_ids">
+                                    <tree>
+                                        <field name="sequence" widget="handle"/>
+                                        <field name="name"/>
+                                        <field name="value"/>
+                                    </tree>
+                                </field>
+                            </page>
+                            <page string="Fields">
+                                <field name="field_ids" context="{'default_checklist_id': id}">
+                                    <tree create="0">
+                                        <field name="name"/>
+                                        <field name="field_type"/>
+                                    </tree>
+                                </field>
+                            </page>
+                            <page string="Lines">
+                                <field name="line_ids" context="{'default_checklist_id_id': id}">
+                                    <tree create="0">
+                                        <field name="name"/>
+                                        <field name="description"/>
+                                        <button name="duplicate" string="Duplicate" type="object" icon="gtk-apply"/>
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <menuitem
+            id="menu_staff_reports"
+            name="Reports"
+            parent="menu_staff"
+            sequence="2">
+        </menuitem>
+
+        <menuitem
+            id="menu_staff_config"
+            name="Configuration"
+            parent="menu_staff"
+            sequence="3">
+        </menuitem>
+
+        <menuitem
+            id="menu_staff_config_settings"
+            name="Settings"
+            parent="menu_staff_config"
+            action="action_staff_opers_cert_audits"
+            sequence="1">
+        </menuitem>
+
+        <record id="action_config_chks" model="ir.actions.act_window">
+            <field name="name">Cheklists</field>
+            <field name="res_model">gpsi.staff.checklist</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[('is_template','=',True)]</field>
+            <field name="context">{'default_is_template': True}</field>
+        </record>
+
+        <menuitem
+            id="menu_staff_config_chks"
+            name="Cheklists"
+            parent="menu_staff_config"
+            action="action_config_chks"
+            sequence="2">
+        </menuitem>
+
+        <record id="checklist_view_tree" model="ir.ui.view">
+            <field name="name">gpsi.staff.checklist.tree</field>
+            <field name="model">gpsi.staff.checklist</field>
+            <field name="priority">20</field>
+            <field name="arch" type="xml">
+                <tree string="Checklists">
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="checklist_view_form" model="ir.ui.view">
+            <field name="name">gpsi.staff.checklist.form</field>
+            <field name="model">gpsi.staff.checklist</field>
+            <field name="priority">20</field>
+            <field name="arch" type="xml">
+                <form string="Checklist">
+                    <sheet>
+                        <field name="id" invisible="1"/>
+                        <div class="oe_button_box" name="button_box">
+                            <button name="toggle_active" type="object" groups="base.group_user" class="oe_stat_button" icon="fa-archive">
+                                <field name="active" widget="boolean_button" options="{&quot;terminology&quot;: &quot;archive&quot;}"/>
+                            </button>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="name" required="1"/>
+                                <field name="rev"/>
+                                <field name="is_template" groups="base.group_no_one"/>
+                            </group>
+                            <group>
+                                <field name="view_id"/>
+                                <field name="general_report_id"/>
+                                <field name="executive_report_id"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Scores">
+                                <field name="score_ids">
+                                    <tree>
+                                        <field name="sequence" widget="handle"/>
+                                        <field name="name"/>
+                                        <field name="value"/>
+                                    </tree>
+                                </field>
+                            </page>
+                            <page string="Fields">
+                                <field name="field_ids" context="{'default_checklist_id': id}">
+                                    <tree>
+                                        <field name="name"/>
+                                        <field name="field_type"/>
+                                    </tree>
+                                </field>
+                            </page>
+                            <page string="Lines">
+                                <field name="line_ids" context="{'default_checklist_id_id': id}">
+                                    <tree>
+                                        <field name="sequence" widget="handle"/>
+                                        <field name="name"/>
+                                        <field name="description"/>
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="checklist_line_view_form" model="ir.ui.view">
+            <field name="name">gpsi.staff.checklist.line.form</field>
+            <field name="model">gpsi.staff.checklist.line</field>
+            <field name="priority">20</field>
+            <field name="arch" type="xml">
+                <form string="Line">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name"/>
+                                <field name="tag_ids" widget="many2many_tags"/>
+                            </group>
+                            <group>
+                                <field name="sequence" string="Sequence"/>
+                                <field name="score_id" options="{'no_create': True, 'no_create_edit': True}"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Description">
+                                <field name="description"/>
+                            </page>
+                            <page string="Help">
+                                <field name="help"/>
+                            </page>
+                            <page string="Scores">
+                                <field name="score_ids">
+                                    <tree>
+                                        <field name="sequence" widget="handle"/>
+                                        <field name="name"/>
+                                        <field name="value"/>
+                                    </tree>
+                                </field>
+                            </page>
+                            <page string="Fields">
+                                <field name="field_ids">
+                                    <tree>
+                                        <field name="name"/>
+                                        <field name="field_type"/>
+                                    </tree>
+                                 </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="checklist_field_view_form" model="ir.ui.view">
+            <field name="name">gpsi.staff.checklist.field.form</field>
+            <field name="model">gpsi.staff.checklist.field</field>
+            <field name="priority">20</field>
+            <field name="arch" type="xml">
+                <form string="Field">
+                    <sheet>
+                        <group>
+                            <field name="name" string="Field Name"/>
+                            <field name="field_description" string="Field Label"/>
+                            <field name="help" string="Field Help"/>
+                            <field name="field_type" string="Field Type"/>
+                            <field name="b_value" string="Value" attrs="{'invisible': [('field_type','!=','boolean')]}"/>
+                            <field name="c_value" string="Value" attrs="{'invisible': [('field_type','!=','char')]}"/>
+                            <field name="i_value" string="Value" attrs="{'invisible': [('field_type','!=','int')]}"/>
+                            <field name="f_value" string="Value" attrs="{'invisible': [('field_type','!=','float')]}"/>
+                            <field name="d_value" string="Value" attrs="{'invisible': [('field_type','!=','date')]}"/>
+                        </group>
+                        <notebook attrs="{'invisible': [('field_type','in',['boolean', 'char', 'int', 'float', 'date', False])]}">
+                            <page string="Value" attrs="{'invisible': [('field_type','!=','text')]}">
+                                <field name="t_value"/>
+                            </page>
+                            <page string="Value" attrs="{'invisible': [('field_type','!=','html')]}">
+                                <field name="h_value"/>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- ######### -->
+        <record id="action_vendor_audits" model="ir.actions.act_window">
+            <field name="view_ids"
+                   eval="[(5, 0, 0),
+                          (0, 0, {'view_mode': 'kanban', 'view_id': ref('gpsi_staff.vendor_audit_project_view_kanban')}),
+                          (0, 0, {'view_mode': 'form', 'view_id': ref('project.edit_project')})]"/>
+        </record>
+
+        <record id="action_vendor_audit_project_2_audit_task_all" model="ir.actions.act_window">
+            <field name="view_ids" 
+                   eval="[(5, 0, 0),
+                          (0, 0, {'view_mode': 'kanban', 'view_id': ref('project.view_task_kanban')}),
+                          (0, 0, {'view_mode': 'tree', 'view_id': ref('project.view_task_tree2')}),
+                          (0, 0, {'view_mode': 'form', 'view_id': ref('gpsi_staff.vendor_audit_task_view_form')})]"/>
+        </record>
+
+    </data>
+
+</openerp>

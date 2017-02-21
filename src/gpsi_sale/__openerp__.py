@@ -1,19 +1,14 @@
 # -*- coding: utf-8 -*-
 {
-    'name': 'GPSI Sales',
-    'version': '1.0.0',
-    'category': 'globalstd',
+    'name': 'GPSI Sale',
+    'version': '0.0.1',
+    'category': 'gpsi',
     'sequence': 20,
-    'summary': 'Sales Extension',
+    'summary': 'Certification Orders, Course Orders',
     'description': '',
-    'website': 'http://www.globalstd.com/',
-    'depends': ['mail','sale'],
-    'data': [
-        'views/sale_views.xml',
-        'views/contract_views.xml',
-        'data/sale_data.xml',
-        'views/quotation_views.xml'
-    ],
+    'website': '',
+    'depends': ['sale'],
+    'data': [],
     'test': [],
     'installable': True,
     'auto_install': False,

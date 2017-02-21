@@ -1,15 +1,16 @@
 # -*- coding: utf-8 -*-
 {
     'name': 'GPSI Website',
-    'version': '1.0.0',
-    'category': 'globalstd',
+    'version': '0.0.1',
+    'category': 'gpsi',
     'sequence': 20,
-    'summary': 'GPSI Website',
+    'summary': 'Global Audit',
     'description': '',
-    'website': 'http://www.globalstd.com/',
-    'depends': ['website'],
+    'website': '',
+    'depends': [],
     'data': [
-        'views/website_templates.xml'
+        'views/ga_website_templates.xml',
+        'views/ga_checklist_website_templates.xml'
     ],
     'test': [],
     'installable': True,

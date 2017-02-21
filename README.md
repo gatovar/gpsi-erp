@@ -1,42 +1,14 @@
-# GPSI ERP
-El documento para gestionar una tarea de evaluación.
+Solicito una auditoría a un partner, se le envia una invitación, cuando la solicitud es aceptada entonces
+el usuario que acepto la invitación es asociado a ese partner.
 
-- Etapas
-    - Borrador
-    - Examen
-    - Evaluación
-    - Finalizado
-- Participantes
-    - Frank Mendoza - Evaluador
-    - German Tovar - Evaluado
-- Participantes por Etapa
-    - Frank Mendoza - Borrador - Crea cuestionario
-    - German Tovar - Examen - Responde examen
-    - Frank Mendoza - Evaluación - Evalua examen
-- Recursos y Formatos
-    - Examen E001 - Examen
-    - Hoja de Evaluación HE001 - Evaluación
+El partner debe tener un usuario relacionado.
 
-## Proceso para ausentarse de la empresa
-- Etapas
-    - Solicitud
-    - Revisión
-    - Ajustar Solicitud
-    - Calendarizar
-    - Aprovada
-    - Cancelada
-- Participantes
-    - German Tovar - Solicitante
-    - Frank Mendoza - Gerente de Área
-    - Noemi Torija - Ejecutivo Recursos Humanos
-- Participantes por Etapa
-    - German Tovar - Solicitud - Solicita ausencia.
-    - Frank Mendoza - Revisión - Revisa solicitud y aprueba, cancela o la regresa.
-    - German Tovar - Ajustar Solicitud - Ajusta solicitud de acuerdo a los comentarios del gerente.
-    - Noemi Torija - Calendarizar - Marca en el calendario el periodo de ausencia del empleado.
-- Recursos y Formatos
-    - Solicitud de Ausencia SA001 - Formato para ausentarse.
+class ResPartner:
+    gs_user_id = fields.Many2one()
+    gs_token = fields.Char()
 
-Los documentos del área son controlados por 
 
-industrial de lonas
+class ResUsers:
+    gs_partner_ids = fields.One2many()
+
+De esa manera relaciono partner con usuarios...
