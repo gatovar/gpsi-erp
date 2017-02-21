@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+    <data>
+
+        <record id="paperformat_certificate" model="report.paperformat">
+            <field name="name">European A4 certificate</field>
+            <field name="default" eval="True"/>
+            <field name="format">custom</field>
+            <field name="page_height">297</field>
+            <field name="page_width">210</field>
+            <field name="orientation">Portrait</field>
+            <field name="margin_top">20</field>
+            <field name="margin_bottom">23</field>
+            <field name="margin_left">0</field>
+            <field name="margin_right">0</field>
+            <field name="header_line" eval="False"/>
+            <field name="header_spacing">35</field>
+            <field name="dpi">90</field>
+        </record>
+
+        <report
+            id="event_certificate_report"
+            model="event.registration"
+            string="Certificado"
+            report_type="qweb-pdf"
+            name="event.certificate_report"
+            file="event.certificate_report"
+            paperformat="paperformat_certificate"
+        />
+
+        <template id="event.certificate_report">
+            <t t-call="report.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <div class="page">
+                        <div class="container" style="">
+
+                        <div class="row">
+                            <div class="col-md-12" style="text-align: center; width: 100%;">
+                                <img src="http://gms.globalstd.com/rutas_online/logo_actual.jpg" width="450px" alt="Imagen responsive" />
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="" style="font-size: 40px; margin-top: 50px; text-align: center; color: #a31d21;">
+                            <label for="titulo">Certificate</label>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="" style="font-size: 18px; text-align: center; color: #595B60;">
+                            <label for="titulo">Includes examination certified by Exemplar Global under TPECS Scheme:</label>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="" style="font-size: 40px; margin-top: 50px; text-align: center; color: #595B60;">
+                            <label for="titulo"><t t-esc="o.name"/></label>
+                            </div>
+                        </div>
+
+                        <div class="rowtext-center" style="text-align: center;  margin-top: 50px; padding: 20px;">
+                            <div class="" style="width: 100%; font-size: 18px; text-align: center; color: #595B60;">
+                            In recognition of “successful completion” of the competency <t t-esc="o.event_id.name"/>, according the following competence units:
+                            </div>
+                        </div>
+
+                        <div class="row " style="margin-top: 50px;">
+                            <div class="" style="font-size: 18px; text-align: center; color: #595B60;">
+                            <label for="titulo" style="text-decoration: underline;">Competency Unit</label>
+                            </div>
+                        </div>
+
+                        <div class="row" style="margin-top: 50px;">
+                            <table class="" style="background-color: #DAD9D9;  color: #595B60;">
+                                <tr>
+                                    <td style="width: 50%; padding: 2px; border: none; font-weight: bold;" class="text-right">Course Date:</td>
+                                    <td style="width: 50%; padding: 2px; border: none; font-weight: bold;">Certification competency units number:</td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 50%; padding: 2px; border: none;" class="text-right">
+                                        <span t-field="o.event_id.date_begin" t-field-options='{"format": "MMMM d"}'/> through 
+                                        <span t-field="o.event_id.date_end" t-field-options='{"format": "MMMM d"}'/>, 
+                                        <span t-field="o.event_id.date_begin" t-field-options='{"format": "yyyy"}'/>
+                                    </td>
+                                    <td style="width: 50%; padding: 2px; border: none;"><t t-esc="o.gs_competency_number"/></td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 50%; padding: 2px; border: none; font-weight: bold;" class="text-right">Competency examination date: </td>
+                                    <td style="width: 50%; padding: 2px; border: none; font-weight: bold;">Certificate number:</td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 50%; padding: 2px; border: none;" class="text-right"><span t-field="o.gs_date_exam" t-field-options='{"format": "MMMM d, y"}'/></td>
+                                    <td style="width: 50%; padding: 2px; border: none;"><t t-esc="o.gs_cert_number"/></td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 50%; padding: 2px; border: none; font-weight: bold;" class="text-right">Certificate date of issue:</td>
+                                    <td style="width: 50%; padding: 2px; border: none;"></td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 50%; padding: 2px; border: none; border-bottom: 5px solid #a31d21;" class="text-right"><span t-field="o.gs_date_cert" t-field-options='{"format": "MMMM d, y"}'/></td>
+                                    <td style="width: 50%; padding: 2px; border: none; border-bottom: 5px solid #a31d21;"></td>
+                                </tr>
+                            </table>
+                        </div>
+
+                        <div class="row" style="text-align: center; margin-top: 10px;">
+                            <div style="font-size: 14px; text-align: center; color: #999999;">
+                                Global Standards, S.C. Pedro Moreno 1677 Piso 4, Of. 3 Col. Americana, C.P. 44160 Guadalajara, Jalisco, México.
+                            </div>
+                        </div>
+
+                        <div class="row" style="text-align: center;">
+                            <div style="font-size: 18px; text-align: center; color: #999999;">
+                                www.<strong>globalstd</strong>.com
+                            </div>
+                        </div>
+
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </template>
+
+    </data>
+</odoo>
