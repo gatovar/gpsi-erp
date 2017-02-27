@@ -112,6 +112,16 @@
             <field name="name">Closed</field>
             <field name="sequence">4</field>
         </record>
+
+        <record id="issue_open_stage" model="project.task.type">
+            <field name="name">Open</field>
+            <field name="sequence">0</field>
+        </record>
+
+        <record id="issue_closed_stage" model="project.task.type">
+            <field name="name">Closed</field>
+            <field name="sequence">1</field>
+        </record>
         
     </data>
 </openerp>

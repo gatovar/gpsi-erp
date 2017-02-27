@@ -19,6 +19,7 @@ class Checklist(models.Model):
     active = fields.Boolean('Active', default=True)
     score_ids = fields.Many2many('gpsi.staff.checklist.score', 'gpsi_staff_checklist_score_rel', 'checklist_id', 'score_id', 'Checklists')
     score_id = fields.Many2one('gpsi.staff.checklist.score', 'Score', domain="[('checklist_ids','=',id)]", copy=False)
+    # TODO remover campo code
     code = fields.Text('Python Code', help='Run code when checklist is saved.')
     eval_action = fields.Many2one('ir.actions.server', 'Eval Action', help='Run action when checklist is saved.')
 

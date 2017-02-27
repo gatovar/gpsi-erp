@@ -19,6 +19,7 @@
         <script type="text/javascript" src="/gpsi_website/static/src/assets/js/plugins/loaders/blockui.min.js"></script>
         <script type="text/javascript" src="/gpsi_website/static/src/assets/js/plugins/forms/tags/tagsinput.min.js"></script>
         <script type="text/javascript" src="/gpsi_website/static/src/assets/js/plugins/editors/summernote/summernote.min.js"></script>
+        <script type="text/javascript" src="/gpsi_website/static/src/assets/js/plugins/notifications/bootbox.min.js"></script>
 
         <script type="text/javascript" src="/gpsi_website/static/src/assets/js/plugins/visualization/d3/d3.min.js"></script>
         <script type="text/javascript" src="/gpsi_website/static/src/assets/js/plugins/visualization/d3/d3_tooltip.js"></script>
@@ -102,6 +103,55 @@
         </div>
     </template>
 
+    <template id="gpsi_website.ga/admin/widget/chatter" name="Chatter">
+        <div class="panel panel-flat" style="border-color: transparent; box-shadow: none;">
+            <div class="panel-heading">
+                <h5 class="panel-title text-semiold"><i class="icon-bubbles4 position-left"></i> Comments</h5>
+                <div class="heading-elements">
+                </div>
+            </div>
+
+            <div class="panel-body">
+                <form id="comments" class="form-horizontal" t-attf-action="/ga/admin/new_message?id={{rec.id}}&amp;model={{model}}&amp;redirect={{redirect}}" method="post" enctype="multipart/form-data">
+                    <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <textarea name="body" rows="4" class="form-control elastic" maxlength="2500" placeholder="Write something..." style="overflow: hidden; word-wrap: break-word; height: 80px;"></textarea>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <p></p>
+                            <button class="btn bg-blue btn-sm" type="submit">Add Comment</button>
+                        </div>
+                    </div>
+                </form>
+                <ul class="media-list content-group-lg stack-media-on-mobile" style="margin-top: 20px">
+                    <t t-foreach="rec.message_ids" t-as="message">
+                        <li class="media" t-if="message.message_type == 'comment'">
+                            <div class="media-left">
+                                <span t-field="message.author_id.image" t-field-options="{&quot;widget&quot;: &quot;image&quot;, &quot;class&quot;: &quot;img-circle img-xs&quot;}"/>
+                            </div>
+
+                            <div class="media-body">
+                                <div class="media-heading">
+                                    <a href="#" class="text-semibold"><t t-esc="message.author_id.name"/></a>
+                                    <span class="media-annotation">of <t t-raw="message.author_id.company_id.name"/></span>
+                                    <span class="media-annotation dotted"><t t-raw="message.date"/></span>
+                                </div>
+                                <p><t t-raw="message.body"/></p>
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </t>
+                </ul>
+            </div>
+        </div>
+    </template>
+
     <template id="gpsi_website.ga/admin/layout" name="Web layout">&lt;!DOCTYPE html&gt;
         <html>
             <head>
@@ -150,14 +200,14 @@
                                 </a>
                                 <ul class="dropdown-menu dropdown-menu-right">
                                     <li><a href="/ga/admin/va/suppliers"> Suppliers</a></li>
-                                    <li><a href="/ga/admin/va/events"> Requested Audits</a></li>
+                                    <li><a href="/ga/admin/va/events"> Audits</a></li>
                                     <li class="divider"></li>
-                                    <li><a href="/ga/admin/clients/events/"><span class="badge bg-teal-400 pull-right">58</span> Customer Audits</a></li>
+                                    <li><a href="/ga/admin/issues"> Issues</a></li>
                                 </ul>
                             </li>
-                            <li class="dropdown mega-menu mega-menu-wide">
-                                <a href="/ga/admin/complaints">
-                                    <i class="fa fa-warning position-left"></i> Issues
+                            <li class="dropdown">
+                                <a href="/ga/admin/clients/events/">
+                                    <i class="fa fa-pencil-square-o position-left"></i> Customer Audits
                                 </a>
                             </li>
                             <t t-if="request.env.user.has_group('gpsi_staff.group_ga_admin')">
@@ -1595,7 +1645,7 @@
         </t>
     </template>
 
-    <template id="gpsi_website.va/suppliers" name="Suppliers">
+    <template id="gpsi_website.ga/admin/va/suppliers" name="Suppliers">
         <t t-call="gpsi_website.ga/admin/layout">
             <div class="panel page-header border-top-primary" style="padding-bottom: 0;">
                 <div class="page-header-content">
@@ -1636,7 +1686,7 @@
                                                 </a>
                                             </div>
                                             <div class="media-body" style="vertical-align: middle">
-                                                <a t-attf-href="/ga/admin/va/suppliers/{{supplier.id}}" class="display-inline-block text-default text-semibold letter-icon-title"><t t-esc="supplier.name"/></a>
+                                                <a t-attf-href="/ga/admin/va/suppliers/{{supplier.id}}" class="display-inline-block text-semibold letter-icon-title"><t t-esc="supplier.name"/></a>
                                             </div>
                                         </td>
                                         <td><t t-esc="supplier.phone"/></td>
@@ -1651,7 +1701,7 @@
         </t>
     </template>
 
-    <template id="gpsi_website.va/supplier_new" name="Supplier Details">
+    <template id="gpsi_website.ga/admin/va/supplier_new" name="Supplier Details">
         <t t-call="gpsi_website.ga/admin/layout">
             <div class="panel page-header border-top-primary" style="padding-bottom: 0;">
                 <div class="page-header-content">
@@ -1794,7 +1844,7 @@
         </t>
     </template>
 
-    <template id="gpsi_website.va/supplier" name="Supplier Details">
+    <template id="gpsi_website.ga/admin/va/supplier" name="Supplier Details">
         <t t-call="gpsi_website.ga/admin/layout">
             <div class="panel page-header border-top-primary" style="padding-bottom: 0;">
                 <div class="page-header-content">
@@ -1805,7 +1855,8 @@
                     </div>
                     <div class="heading-elements">
                         <button class="btn bg-primary btn-icon heading-btn" onclick="document.getElementById('supplier_form').submit();">Save Changes</button>
-                        <a href="/ga/admin/va/suppliers/new" class="btn btn-default btn-icon heading-btn" style="margin-left: 4px">Create Supplier</a>
+                        <a href="#" class="btn btn-default btn-icon heading-btn" style="margin-left: 4px">Delete</a>
+                        <a href="/ga/admin/va/suppliers/new" class="btn btn-default btn-icon heading-btn" style="margin-left: 4px">Create</a>
                     </div>
                 </div>
                 <div class="breadcrumb-line breadcrumb-line-wide" style="box-shadow: none;">
@@ -1997,7 +2048,7 @@
                                                 <div class="col-lg-12">
                                                     <div class="media">
                                                         <div class="media-left">
-                                                            <span t-field="contact.image" t-field-options="{&quot;widget&quot;: &quot;image&quot;, &quot;style&quot;: &quot;width: 70px; height: 70px;&quot;}"/>
+                                                            <img src="/gpsi_website/static/src/assets/images/demo/users/none.png" style="width: 90px; height: 90px; box-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);" alt=""/>
                                                         </div>
                                                         <div class="media-body">
                                                             <div class="form-group">
@@ -2083,7 +2134,7 @@
                                                     <div class="col-lg-6">
                                                         <div class="media">
                                                             <div class="media-left">
-                                                                <span t-field="child.image" t-field-options="{&quot;widget&quot;: &quot;image&quot;, &quot;style&quot;: &quot;width: 70px; height: 70px;&quot;}"/>
+                                                                <span t-field="child.image" t-field-options="{&quot;widget&quot;: &quot;image&quot;, &quot;style&quot;: &quot;width: 90px; height: 90px; box-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);&quot;}"/>
                                                             </div>
                                                             <div class="media-body">
                                                                 <div class="form-group">
@@ -2166,13 +2217,13 @@
         </t>
     </template>
 
-    <template id="gpsi_website.va/events" name="Vendor Audits">
+    <template id="gpsi_website.ga/admin/va/events" name="Vendor Audits">
         <t t-call="gpsi_website.ga/admin/layout">
             <div class="panel page-header border-top-primary" style="padding-bottom: 0;">
                 <div class="page-header-content">
                     <div class="page-title">
                         <h5>
-                            <span class="text-semibold">Events</span>
+                            <span class="text-semibold">Supplier Audits</span>
                         </h5>
                     </div>
                     <div class="heading-elements">
@@ -2182,7 +2233,7 @@
                 <div class="breadcrumb-line breadcrumb-line-wide" style="box-shadow: none;">
                     <ul class="breadcrumb">
                         <li><a href="/ga/admin"><i class="icon-home2 position-left"></i> Home</a></li>
-                        <li class="active">Events</li>
+                        <li class="active">Audits</li>
                     </ul>
                 </div>
             </div>
@@ -2242,7 +2293,7 @@
                                             </div>
                                         </td>
                                         <td><t t-esc="audit.date_deadline"/></td>
-                                        <td><span class="label bg-success-400"><t t-esc="audit.stage_id.name"/></span></td>
+                                        <td><span class="label label-flat border-grey text-grey-600"><t t-esc="audit.stage_id.name"/></span></td>
                                     </tr>
                                 </t>
                             </tbody>
@@ -2253,7 +2304,7 @@
         </t>
     </template>
 
-    <template id="gpsi_website.va/event_new" name="New Event">
+    <template id="gpsi_website.ga/admin/va/event_new" name="New Event">
         <t t-call="gpsi_website.ga/admin/layout">
             <div class="panel page-header border-top-danger-700" style="padding-bottom: 0;">
                 <div class="page-header-content">
@@ -2318,17 +2369,6 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="form-group">
-                                            <label class="control-label col-lg-4 text-semibold">Tags</label>
-                                            <div class="col-lg-8">
-                                                <div class="input-group">
-                                                    <input type="text" class="form-control" data-role="tagsinput" value=""/>
-                                                    <span class="input-group-btn">
-                                                        <button class="btn btn-default" type="button"><i class="fa fa-search"></i></button>
-                                                    </span>
-                                                </div>
-                                            </div>
-                                        </div>
                                     </fieldset>
                                 </div>
                             </div>
@@ -2366,7 +2406,7 @@
         </t>
     </template>
 
-    <template id="gpsi_website.va/event" name="Event Details">
+    <template id="gpsi_website.ga/admin/va/event" name="Event Details">
         <t t-call="gpsi_website.ga/admin/layout">
             <div class="panel page-header border-top-primary" style="padding-bottom: 0;">
                 <div class="page-header-content">
@@ -2376,13 +2416,16 @@
                         </h5>
                     </div>
                     <div class="heading-elements">
+                        <t t-if="not audit.partner_id.gs_gaudit_company_id">
+                            <a href="/ga/admin/va/events/new" class="btn btn-primary btn-icon heading-btn">Send Invitation</a>
+                        </t>
                         <a href="/ga/admin/va/events/new" class="btn btn-default btn-icon heading-btn">Request Audit</a>
                     </div>
                 </div>
                 <div class="breadcrumb-line breadcrumb-line-wide" style="box-shadow: none;">
                     <ul class="breadcrumb">
                         <li><a href="/ga/admin"><i class="icon-home2 position-left"></i> Home</a></li>
-                        <li><a href="/ga/admin/va/events">Events</a></li>
+                        <li><a href="/ga/admin/va/events">Audits</a></li>
                         <li class="active"><t t-esc="audit.name"/></li>
                     </ul>
                     <ul class="breadcrumb-elements nav nav-wizard" style="margin-right: 0px">
@@ -2398,6 +2441,11 @@
                 </div>
             </div>
             <div class="content">
+                <t t-if="not audit.partner_id.gs_gaudit_company_id">
+                    <div class="alert alert-info alert-styled-left alert-bordered">
+                        <span class="text-semibold">A invitation has been sended to auditee. An email containing the following link has been sent:</span>
+                    </div>
+                </t>
                 <t t-if="len(attachments) > 0">
                     <div class="panel panel-flat panel-collapsed">
                         <div class="panel-heading">
@@ -2440,6 +2488,9 @@
                             <h6 class="panel-title">&amp;nbsp;</h6>
                             <div class="heading-elements">
                                 <div class="heading-btn">
+                                    <t t-if="audit.gs_car_count > 0">
+                                        <a t-attf-href="/ga/admin/va/events/{{audit.id}}/cars" type="button" class="btn border-slate text-slate-800 btn-flat"><t t-esc="audit.gs_car_count"/> CAR'S</a>
+                                    </t>
                                     <a t-attf-href="/ga/admin/va/events/{{audit.id}}/assessment" type="button" class="btn border-slate text-slate-800 btn-flat">Assessment</a>
                                     <a href="/gpsi_website/static/files/executive_report_1.pdf" class="btn border-slate text-slate-800 btn-flat"><i class="icon-printer position-left"></i> Executive Report</a>
                                     <a href="/gpsi_website/static/files/general_report_1.pdf" class="btn border-slate text-slate-800 btn-flat"><i class="icon-printer position-left"></i> General Report</a>
@@ -2456,33 +2507,13 @@
                                         <div class="form-group">
                                             <label class="control-label col-lg-4 text-semibold">Supplier</label>
                                             <div class="col-lg-8">
-                                                <select name="supplier" class="form-control" disabled="disabled">
-                                                    <option selected="selected" value="False"></option>
-                                                    <t t-foreach="request.env['res.partner'].sudo().search([('parent_id','=',False), ('supplier','=',True)])" t-as="supplier">
-                                                        <t t-if="audit.partner_id.id == supplier.id">
-                                                            <option t-attf-value="{{supplier.id}}" selected="selected"><t t-esc="supplier.name"/></option>
-                                                        </t>
-                                                        <t t-if="audit.partner_id.id != supplier.id">
-                                                            <option t-attf-value="{{supplier.id}}"><t t-esc="supplier.name"/></option>
-                                                        </t>
-                                                    </t>
-                                                </select>
+                                                <a t-attf-href="/ga/admin/va/suppliers/{{audit.partner_id.id}}" class="label border-left-primary label-striped text-primary-600" style="font-size: 13px; text-transform: none"><t t-esc="audit.partner_id.name"/></a>
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <label class="control-label col-lg-4 text-semibold">Standard</label>
+                                            <label class="control-label col-lg-4 text-semibold">Checklist</label>
                                             <div class="col-lg-8">
-                                                <select name="standard" class="form-control" disabled="disabled">
-                                                    <option selected="selected" value="False"></option>
-                                                    <t t-foreach="request.env['gpsi.staff.checklist'].sudo().search([('is_template','=',True)])" t-as="checklist">
-                                                        <t t-if="audit.gs_checklist_id.id == checklist.id">
-                                                            <option t-attf-value="{{checklist.id}}" selected="selected"><t t-esc="checklist.name"/></option>
-                                                        </t>
-                                                        <t t-if="audit.gs_checklist_id.id != checklist.id">
-                                                            <option t-attf-value="{{checklist.id}}"><t t-esc="checklist.name"/></option>
-                                                        </t>
-                                                    </t>
-                                                </select>
+                                                <span class="label border-left-primary label-striped text-default-600" style="font-size: 13px; text-transform: none"><t t-esc="audit.gs_checklist_id.name"/></span>
                                             </div>
                                         </div>
                                     </fieldset>
@@ -2492,21 +2523,7 @@
                                         <div class="form-group">
                                             <label class="control-label col-lg-4 text-semibold">Start Date</label>
                                             <div class="col-lg-8">
-                                                <div class="input-group">
-                                                    <input type="text" class="form-control daterange-single" disabled="disabled" t-attf-value="{{audit.date_deadline}}"/>
-                                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="control-label col-lg-4 text-semibold">Tags</label>
-                                            <div class="col-lg-8">
-                                                <div class="input-group">
-                                                    <input type="text" class="form-control" data-role="tagsinput" disabled="disabled" value=""/>
-                                                    <span class="input-group-btn">
-                                                        <button class="btn btn-default" type="button"><i class="fa fa-search"></i></button>
-                                                    </span>
-                                                </div>
+                                                <span class="label border-left-primary label-striped text-default-600" style="font-size: 13px; text-transform: none"><t t-esc="audit.date_deadline"/></span>
                                             </div>
                                         </div>
                                     </fieldset>
@@ -2595,51 +2612,11 @@
                         </form>
                     </div>
                 </div>
-                <div class="panel panel-flat" style="border-color: transparent; box-shadow: none;">
-					<div class="panel-heading">
-						<h5 class="panel-title text-semiold"><i class="icon-bubbles4 position-left"></i> Comments</h5>
-                        <div class="heading-elements">
-				        </div>
-					</div>
-
-					<div class="panel-body">
-                        <form id="add_comment" class="form-horizontal" t-attf-action="/ga/admin/va/events/{{audit.id}}/new_message" method="post" enctype="multipart/form-data">
-                            <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
-                            <div class="row">
-                                <div class="col-lg-12">
-                                    <textarea name="body" rows="4" class="form-control elastic" maxlength="2500" placeholder="Write something..." style="overflow: hidden; word-wrap: break-word; height: 80px;"></textarea>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-lg-6">
-                                    <p></p>
-                                    <button class="btn bg-blue btn-sm" type="submit">Add Comment</button>
-                                </div>
-                            </div>
-                        </form>
-						<ul class="media-list content-group-lg stack-media-on-mobile" style="margin-top: 20px">
-							<t t-foreach="audit.message_ids" t-as="message">
-                                <li class="media" t-if="message.message_type == 'comment'">
-                                    <div class="media-left">
-                                        <span t-field="message.author_id.image" t-field-options="{&quot;widget&quot;: &quot;image&quot;, &quot;class&quot;: &quot;img-circle img-xs&quot;}"/>
-                                    </div>
-
-                                    <div class="media-body">
-                                        <div class="media-heading">
-                                            <a href="#" class="text-semibold"><t t-esc="message.author_id.name"/></a>
-                                            <span class="media-annotation dotted"><t t-raw="message.date"/></span>
-                                        </div>
-                                        <p><t t-raw="message.body"/></p>
-                                        <div class="row">
-                                            <div class="col-lg-12">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </li>
-                            </t>
-						</ul>
-					</div>
-				</div>
+                <t t-call="gpsi_website.ga/admin/widget/chatter">
+                    <t t-set="rec" t-value="audit"/>
+                    <t t-set="model" t-value="'project.task'"/>
+                    <t t-set="redirect" t-value="'/ga/admin/va/events/{0}'.format(audit.id)"/>
+                </t>
             </div>
         </t>
     </template>
@@ -2766,7 +2743,7 @@
         </t>
     </template>
 
-    <template id="gpsi_website.va/cars" name="Corrective Action Requests">
+    <template id="gpsi_website.ga/admin/va/cars" name="Corrective Action Requests">
         <t t-call="gpsi_website.ga/admin/layout">
             <div class="panel page-header border-top-primary" style="padding-bottom: 0;">
                 <div class="page-header-content">
@@ -2781,7 +2758,9 @@
                 <div class="breadcrumb-line breadcrumb-line-wide" style="box-shadow: none;">
                     <ul class="breadcrumb">
                         <li><a href="/admin"><i class="icon-home2 position-left"></i> Home</a></li>
-                        <li class="active">Cars</li>
+                        <li><a href="/ga/admin/va/events">Audits</a></li>
+                        <li><a t-attf-href="/ga/admin/va/events/{{audit.id}}"><t t-esc="audit.name"/></a></li>
+                        <li class="active">CAR'S</li>
                     </ul>
                 </div>
             </div>
@@ -2794,34 +2773,46 @@
                                     <th>Ref. #</th>
                                     <th width="30%">Vendor</th>
                                     <th width="30%">Lead Auditor</th>
-                                    <th>Date</th>
+                                    <th>Due Date</th>
                                     <th>Status</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td><a href="/admin/va/cars/1">CAR001</a></td>
-                                    <td>
-                                        <div class="media-left media-middle">
-										    <a href="#"><img src="/gpsi_website/static/src/assets/images/demo/users/face15.jpg" class="img-circle img-xs" alt=""/></a>
-										</div>
-                                        <div class="media-body">
-											<a href="/admin/va/suppliers/1" class="display-inline-block text-default text-semibold letter-icon-title">Salsas Jaliscienses</a>
-											<div class="text-muted text-size-small"><span class="status-mark border-blue position-left"></span> Active</div>
-										</div>
-                                    </td>
-                                    <td>
-                                        <div class="media-left media-middle">
-										    <a href="#"><img src="/gpsi_website/static/src/assets/images/demo/users/gzarate.jpg" class="img-circle img-xs" alt=""/></a>
-										</div>
-                                        <div class="media-body">
-											<a href="/admin/va/suppliers/1" class="display-inline-block text-default text-semibold letter-icon-title">German Zarate</a>
-											<div class="text-muted text-size-small"><span class="status-mark border-blue position-left"></span> Active</div>
-										</div>
-                                    </td>
-                                    <td>04/09/2016</td>
-                                    <td><span class="label bg-success-400">Closed</span></td>
-                                </tr>
+                                <t t-foreach="cars" t-as="car">
+                                    <t t-set="auditor" t-value="False"/>
+                                    <t t-foreach="car.audit_id.gs_audit_team_ids" t-as="member">
+                                        <t t-if="member.role == 'lead'">
+                                            <t t-set="auditor" t-value="member.user_id"/>
+                                        </t>
+                                    </t>
+                                    <tr>
+                                        <td><a t-attf-href="/ga/admin/va/events/{{audit.id}}/cars/{{car.id}}">CAR<t t-esc="car.id"/></a></td>
+                                        <td>
+                                            <div class="media-left media-middle">
+                                                <a href="#">
+                                                    <span t-field="car.audit_id.partner_id.image" t-field-options="{&quot;widget&quot;: &quot;image&quot;, &quot;class&quot;: &quot;img-circle img-xs&quot;}"/>
+                                                </a>
+                                            </div>
+                                            <div class="media-body" style="vertical-align: middle">
+                                                <a href="#" class="display-inline-block text-default text-semibold letter-icon-title"><t t-esc="car.audit_id.partner_id.name"/></a>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <t t-if="auditor">
+                                                <div class="media-left media-middle">
+                                                    <a href="#">
+                                                        <span t-field="auditor.image" t-field-options="{&quot;widget&quot;: &quot;image&quot;, &quot;class&quot;: &quot;img-circle img-xs&quot;}"/>
+                                                    </a>
+                                                </div>
+                                                <div class="media-body" style="vertical-align: middle">
+                                                    <a href="#" class="display-inline-block text-default text-semibold letter-icon-title"><t t-esc="auditor.name"/></a>
+                                                </div>
+                                            </t>
+                                        </td>
+                                        <td><t t-esc="car.due_date"/></td>
+                                        <td><span class="label label-flat border-grey text-grey-600"><t t-esc="car.state"/></span></td>
+                                    </tr>
+                                </t>
                             </tbody>
                         </table>
                     </div>
@@ -2830,100 +2821,100 @@
         </t>
     </template>
 
-    <template id="gpsi_website.va/car" name="Corrective Action Details">
+    <template id="gpsi_website.ga/admin/va/car" name="Corrective Action Details">
         <t t-call="gpsi_website.ga/admin/layout">
             <div class="panel page-header border-top-primary" style="padding-bottom: 0;">
                 <div class="page-header-content">
                     <div class="page-title">
                         <h5>
-                            <span class="text-semibold">CAR001</span>
+                            <span class="text-semibold">CAR<t t-esc="car.id"/></span> - Customer Audit
                         </h5>
                     </div>
                     <div class="heading-elements">
+                        <t t-if="car.state == 'open'">
+                            <button class="btn bg-primary btn-icon heading-btn" onclick="onSubmit()">Save Changes</button>
+                            <button class="btn btn-default btn-icon heading-btn" onclick="onSendToReview()">Send to Review</button>
+                        </t>
+                        <t t-if="car.state == 'review'">
+                            <button class="btn btn-default btn-icon heading-btn" onclick="onOpenCar()">Reopen</button>
+                        </t>
                     </div>
                 </div>
                 <div class="breadcrumb-line breadcrumb-line-wide" style="box-shadow: none;">
                     <ul class="breadcrumb">
-                        <li><a href="/admin"><i class="icon-home2 position-left"></i> Home</a></li>
-                        <li><a href="/admin/va/cars">Cars</a></li>
-                        <li class="active">CAR001</li>
+                        <li><a href="/ga/admin"><i class="icon-home2 position-left"></i> Home</a></li>
+                        <li><a href="/ga/admin/va/events">Audits</a></li>
+                        <li><a t-attf-href="/ga/admin/va/events/{{car.audit_id.id}}"><t t-esc="car.audit_id.name"/></a></li>
+                        <li><a t-attf-href="/ga/admin/va/events/{{car.audit_id.id}}/cars">CAR'S</a></li>
+                        <li class="active">CAR<t t-esc="car.id"/></li>
+                    </ul>
+                    <ul class="breadcrumb-elements nav nav-wizard" style="margin-right: 0px">
+                        <t t-set="stages" t-value="[('open', 'Open'), ('review', 'Review'), ('closed', 'Closed')]"/>
+                        <t t-foreach="stages" t-as="stage">
+                            <t t-if="car.state == stage[0]">
+                                <li class="active"><a><t t-esc="stage[1]"/></a></li>
+                            </t>
+                            <t t-if="car.state != stage[0]">
+                                <li><a><t t-esc="stage[1]"/></a></li>
+                            </t>
+                        </t>
                     </ul>
                 </div>
             </div>
             <div class="content">
-                <div class="panel panel-flat panel-collapsed">
-                    <div class="panel-heading">
-                        <h6 class="panel-title"><i class="icon-link position-left"></i> Attached files</h6>
-                        <div class="heading-elements">
-                            <ul class="icons-list">
-                                <li><a data-action="collapse"></a></li>
+                <t t-if="len(attachments) > 0">
+                    <div class="panel panel-flat panel-collapsed">
+                        <div class="panel-heading">
+                            <h6 class="panel-title"><i class="icon-link position-left"></i> Attached files</h6>
+                            <div class="heading-elements">
+                                <ul class="icons-list">
+                                    <li><a data-action="collapse"></a></li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="panel-body">
+                            <ul class="media-list">
+                                <t t-foreach="attachments" t-as="attachment">
+                                    <li class="media">
+                                        <div class="media-left media-middle">
+                                            <i class="icon-file-pdf icon-2x text-muted"></i>
+                                        </div>
+                                        <div class="media-body">
+                                            <a t-attf-href="/web/content/{{attachment.id}}?download=1" class="media-heading text-semibold"><t t-esc="attachment.name"/></a>
+                                            <ul class="list-inline list-inline-separate list-inline-condensed text-size-mini text-muted">
+                                                <li>Added by <a href="#"><t t-esc="attachment.create_uid.name"/></a></li>
+                                            </ul>
+                                        </div>
+                                        <div class="media-right media-middle">
+                                            <ul class="icons-list">
+                                                <li><a t-attf-href="/web/content/{{attachment.id}}?download=1"><i class="icon-download"></i></a></li>
+                                            </ul>
+                                        </div>
+                                    </li>
+                                </t>
                             </ul>
                         </div>
                     </div>
-
+                </t>
+                <div class="panel panel-3d">
                     <div class="panel-body">
-                        <ul class="media-list">
-                            <li class="media">
-                                <div class="media-left media-middle">
-                                    <i class="icon-file-pdf icon-2x text-muted"></i>
-                                </div>
-
-                                <div class="media-body">
-                                    <a href="/gpsi_website/static/files/opening_closing_meeting_1.pdf" class="media-heading text-semibold">Opening_Closing_Meeting.pdf</a>
-                                    <ul class="list-inline list-inline-separate list-inline-condensed text-size-mini text-muted">
-                                        <li>Size: 359KB</li>
-                                        <li>Added by <a href="#">German Zarate</a></li>
-                                    </ul>
-                                </div>
-
-                                <div class="media-right media-middle">
-                                    <ul class="icons-list">
-                                        <li><a href="/gpsi_website/static/files/opening_closing_meeting_1.pdf"><i class="icon-download"></i></a></li>
-                                    </ul>
-                                </div>
-                            </li>
-                            <li class="media">
-                                <div class="media-left media-middle">
-                                    <i class="icon-file-pdf icon-2x text-muted"></i>
-                                </div>
-
-                                <div class="media-body">
-                                    <a href="/gpsi_website/static/files/executive_report_signed_1.pdf" class="media-heading text-semibold">Executive_Report_Signed.pdf</a>
-                                    <ul class="list-inline list-inline-separate list-inline-condensed text-size-mini text-muted">
-                                        <li>Size: 336KB</li>
-                                        <li>Added by <a href="#">German Zarate</a></li>
-                                    </ul>
-                                </div>
-
-                                <div class="media-right media-middle">
-                                    <ul class="icons-list">
-                                        <li><a href="/gpsi_website/static/files/executive_report_signed_1.pdf"><i class="icon-download"></i></a></li>
-                                    </ul>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="panel panel-flat border-grey-300">
-                    <div class="panel-body">
-                        <form class="form-horizontal" action="#">
+                        <form id="car_form" class="form-horizontal" t-attf-action="/ga/admin/va/cars/{{car.id}}" method="post" enctype="multipart/form-data">
+                            <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                            <input type="hidden" name="state" t-att-value="car.state"/>
                             <div class="row">
                                 <div class="col-lg-6">
                                     <fieldset class="content-group">
                                         <div class="form-group">
                                             <label class="control-label col-lg-4 text-semibold">Supplier</label>
                                             <div class="col-lg-8">
-                                                <select name="select" class="form-control alpha-purple border-purple-400">
-                                                    <option value="opt1">Salsas Jaliscienses</option>
-                                                </select>
+                                                <span class="label border-left-primary label-striped text-default-600" style="font-size: 13px; text-transform: none"><t t-esc="car.audit_id.partner_id.name"/></span>
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <label class="control-label col-lg-4 text-semibold">Standard</label>
+                                            <label class="control-label col-lg-4 text-semibold">Assessment</label>
                                             <div class="col-lg-8">
-                                                <select name="select" class="form-control alpha-purple border-purple-400">
-                                                    <option value="opt1">Global Markets Programme: Intermediate</option>
-                                                </select>
+                                                <a t-attf-href="/ga/admin/va/events/{{car.audit_id.id}}/assessment" class="label border-left-primary label-striped text-primary-600" style="font-size: 13px; text-transform: none"><t t-esc="car.audit_id.gs_checklist_id.name"/></a>
                                             </div>
                                         </div>
                                     </fieldset>
@@ -2931,15 +2922,9 @@
                                 <div class="col-lg-6">
                                     <fieldset class="content-group">
                                         <div class="form-group">
-                                            <label class="control-label col-lg-4 text-semibold">Date</label>
-                                            <div class="col-lg-8">
-                                                <input type="text" class="form-control" value="03 October 2016"/>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
                                             <label class="control-label col-lg-4 text-semibold">Due Date</label>
                                             <div class="col-lg-8">
-                                                <input type="text" class="form-control" value="04 October 2016"/>
+                                                <span class="label border-left-primary label-striped text-default-600" style="font-size: 13px; text-transform: none"><t t-esc="car.due_date"/></span>
                                             </div>
                                         </div>
                                     </fieldset>
@@ -2962,23 +2947,7 @@
                                                     <div class="col-lg-12">
                                                         <fieldset class="content-group">
                                                             <div class="form-group">
-                                                                <label class="control-label col-lg-2 text-semibold">Requirement</label>
-                                                                <div class="col-lg-10">
-                                                                    <textarea rows="8" class="form-control elastic" readonly="readonly" style="overflow: hidden; word-wrap: break-word; resize: horizontal;">Requerimiento: Referencia (NOM-251-SSA1-2009, 5.1.2, 5.9.6, 6.1.3)
-                                                                    </textarea>
-                                                                </div>
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <label class="control-label col-lg-2 text-semibold">Statement</label>
-                                                                <div class="col-lg-10">
-                                                                    <textarea rows="2" class="form-control elastic" readonly="readonly" style="overflow: hidden; word-wrap: break-word; resize: horizontal;">Durante el recorrido se muestran grietas en pisos y roturas junto al área de proceso de mezclado de ingredientes.</textarea>
-                                                                </div>
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <label class="control-label col-lg-2 text-semibold">Objective Evidence</label>
-                                                                <div class="col-lg-10">
-                                                                    <textarea rows="2" class="form-control elastic" readonly="readonly" style="overflow: hidden; word-wrap: break-word; resize: horizontal;">Revisión durante el recorrido.</textarea>
-                                                                </div>
+                                                                <div style="padding-left: 15px; padding-right: 15px"><t t-raw="car.nonconformity"/></div>
                                                             </div>
                                                         </fieldset>
                                                     </div>
@@ -2988,7 +2957,12 @@
                                                 <div class="row">
                                                     <div class="col-lg-12">
                                                         <div class="form-group">
-                                                            <textarea rows="4" class="form-control elastic" style="overflow: hidden; word-wrap: break-word; resize: horizontal; height: 96px;">Acciones Correctivas  -----Ver adjunto 'CRONOGRAMA PISO'Evidencias de acciones correctivas ...... Ver adjunto 'PISO DE PLANTA TERMINADO'</textarea>
+                                                            <t t-if="car.state != 'open'">
+                                                                <div style="padding-left: 15px; padding-right: 15px"><t t-raw="car.correction"/></div>
+                                                            </t>
+                                                            <t t-if="car.state == 'open'">
+                                                                <textarea class="summernote" name="correction"><t t-raw="car.correction"/></textarea>
+                                                            </t>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -2997,7 +2971,12 @@
                                                 <div class="row">
                                                     <div class="col-lg-12">
                                                         <div class="form-group">
-                                                            <textarea rows="10" class="form-control elastic" style="overflow: hidden; word-wrap: break-word; resize: horizontal;">1.- ¿Porqué está dañado el piso? Porque el peso de las tarimas es mas de 2 toneladas y al pasar por los declives no resiste y se empieza a romper; aunque el año pasado se reparó, ya entró la humedad y por eso se está botando de los lugares donde estaba quebrado.</textarea>
+                                                            <t t-if="car.state != 'open'">
+                                                                <div style="padding-left: 15px; padding-right: 15px"><t t-raw="car.root_cause"/></div>
+                                                            </t>
+                                                            <t t-if="car.state == 'open'">
+                                                                <textarea class="summernote" name="root_cause"><t t-raw="car.root_cause"/></textarea>
+                                                            </t>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -3006,7 +2985,12 @@
                                                 <div class="row">
                                                     <div class="col-lg-12">
                                                         <div class="form-group">
-                                                            <textarea rows="4" class="form-control elastic" style="overflow: hidden; word-wrap: break-word; resize: horizontal; height: 96px;"></textarea>
+                                                            <t t-if="car.state != 'open'">
+                                                                <div style="padding-left: 15px; padding-right: 15px"><t t-raw="car.action_plan"/></div>
+                                                            </t>
+                                                            <t t-if="car.state == 'open'">
+                                                                <textarea class="summernote" name="action_plan"><t t-raw="car.action_plan"/></textarea>
+                                                            </t>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -3015,7 +2999,12 @@
                                                 <div class="row">
                                                     <div class="col-lg-12">
                                                         <div class="form-group">
-                                                            <textarea rows="4" class="form-control elastic" style="overflow: hidden; word-wrap: break-word; resize: horizontal; height: 96px;"></textarea>
+                                                            <t t-if="car.state != 'open'">
+                                                                <div style="padding-left: 15px; padding-right: 15px"><t t-raw="car.conclusion"/></div>
+                                                            </t>
+                                                            <t t-if="car.state == 'open'">
+                                                                <textarea class="summernote" name="conclusion"><t t-raw="car.conclusion"/></textarea>
+                                                            </t>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -3027,49 +3016,213 @@
                         </form>
                     </div>
                 </div>
-                <div class="panel panel-flat">
-					<div class="panel-heading">
-						<h5 class="panel-title text-semiold"><i class="icon-bubbles4 position-left"></i> Comments</h5>
-					</div>
+                <t t-call="gpsi_website.ga/admin/widget/chatter">
+                    <t t-set="rec" t-value="car"/>
+                    <t t-set="model" t-value="'gpsi.staff.audit.car'"/>
+                    <t t-set="redirect" t-value="'/ga/admin/va/cars/{0}'.format(car.id)"/>
+                </t>
+            </div>
+            <script type="text/javascript">
+                onSubmit = function() {
+                    $('textarea[class="summernote"]').each(function() {
+                        $(this).html($(this).code());
+                    });
+                    document.getElementById('car_form').submit();
+                };
+                onSendToReview = function() {
+                    $('input[name=state]').attr('value', 'review');
+                    $('textarea[class="summernote"]').each(function() {
+                        $(this).html($(this).code());
+                    });
+                    document.getElementById('car_form').submit();
+                };
+                onOpenCar = function() {
+                    $('input[name=state]').attr('value', 'open');
+                    $('textarea[class="summernote"]').each(function() {
+                        $(this).html($(this).code());
+                    });
+                    document.getElementById('car_form').submit();
+                };
+            </script>
+        </t>
+    </template>
 
-					<div class="panel-body">
-						<ul class="media-list content-group-lg stack-media-on-mobile">
-                            <li class="media">
-								<div class="media-left">
-									<a href="#"><img src="/gpsi_website/static/src/assets/images/demo/users/gzarate.jpg" class="img-circle img-sm" alt=""/></a>
-								</div>
+    <template id="gpsi_website.ga/admin/va/car2" name="Corrective Action Details">
+        <t t-call="gpsi_website.ga/admin/layout">
+            <div class="panel page-header border-top-primary" style="padding-bottom: 0;">
+                <div class="page-header-content">
+                    <div class="page-title">
+                        <h5>
+                            <span class="text-semibold">CAR<t t-esc="car.id"/></span> - Customer Audit
+                        </h5>
+                    </div>
+                    <div class="heading-elements">
+                    </div>
+                </div>
+                <div class="breadcrumb-line breadcrumb-line-wide" style="box-shadow: none;">
+                    <ul class="breadcrumb">
+                        <li><a href="/ga/admin"><i class="icon-home2 position-left"></i> Home</a></li>
+                        <li><a href="/ga/admin/va/events">Audits</a></li>
+                        <li><a t-attf-href="/ga/admin/va/events/{{car.audit_id.id}}"><t t-esc="car.audit_id.name"/></a></li>
+                        <li><a t-attf-href="/ga/admin/va/events/{{car.audit_id.id}}/cars">CAR'S</a></li>
+                        <li class="active">CAR<t t-esc="car.id"/></li>
+                    </ul>
+                    <ul class="breadcrumb-elements nav nav-wizard" style="margin-right: 0px">
+                        <t t-set="stages" t-value="[('open', 'Open'), ('review', 'Review'), ('closed', 'Closed')]"/>
+                        <t t-foreach="stages" t-as="stage">
+                            <t t-if="car.state == stage[0]">
+                                <li class="active"><a href="#"><t t-esc="stage[1]"/></a></li>
+                            </t>
+                            <t t-if="car.state != stage[0]">
+                                <li><a href="#"><t t-esc="stage[1]"/></a></li>
+                            </t>
+                        </t>
+                    </ul>
+                </div>
+            </div>
+            <div class="content">
+                <t t-if="len(attachments) > 0">
+                    <div class="panel panel-flat panel-collapsed">
+                        <div class="panel-heading">
+                            <h6 class="panel-title"><i class="icon-link position-left"></i> Attached files</h6>
+                            <div class="heading-elements">
+                                <ul class="icons-list">
+                                    <li><a data-action="collapse"></a></li>
+                                </ul>
+                            </div>
+                        </div>
 
-								<div class="media-body">
-									<div class="media-heading">
-										<a href="#" class="text-semibold">German Zarate</a>
-										<span class="media-annotation dotted">23 Nov 2016</span>
-									</div>
+                        <div class="panel-body">
+                            <ul class="media-list">
+                                <t t-foreach="attachments" t-as="attachment">
+                                    <li class="media">
+                                        <div class="media-left media-middle">
+                                            <i class="icon-file-pdf icon-2x text-muted"></i>
+                                        </div>
+                                        <div class="media-body">
+                                            <a t-attf-href="/web/content/{{attachment.id}}?download=1" class="media-heading text-semibold"><t t-esc="attachment.name"/></a>
+                                            <ul class="list-inline list-inline-separate list-inline-condensed text-size-mini text-muted">
+                                                <li>Added by <a href="#"><t t-esc="attachment.create_uid.name"/></a></li>
+                                            </ul>
+                                        </div>
+                                        <div class="media-right media-middle">
+                                            <ul class="icons-list">
+                                                <li><a t-attf-href="/web/content/{{attachment.id}}?download=1"><i class="icon-download"></i></a></li>
+                                            </ul>
+                                        </div>
+                                    </li>
+                                </t>
+                            </ul>
+                        </div>
+                    </div>
+                </t>
+                <div class="panel panel-3d">
+                    <div class="panel-body">
+                        <form class="form-horizontal" action="#">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <fieldset class="content-group">
+                                        <div class="form-group">
+                                            <label class="control-label col-lg-4 text-semibold">Supplier</label>
+                                            <div class="col-lg-8">
+                                                <a t-attf-href="/ga/admin/va/suppliers/{{car.audit_id.partner_id.id}}" class="label border-left-primary label-striped text-primary-600" style="font-size: 13px; text-transform: none"><t t-esc="car.audit_id.partner_id.name"/></a>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-lg-4 text-semibold">Assessment</label>
+                                            <div class="col-lg-8">
+                                                <a t-attf-href="/ga/admin/va/events/{{car.audit_id.id}}/assessment" class="label border-left-primary label-striped text-primary-600" style="font-size: 13px; text-transform: none"><t t-esc="car.audit_id.gs_checklist_id.name"/></a>
+                                            </div>
+                                        </div>
+                                    </fieldset>
+                                </div>
+                                <div class="col-lg-6">
+                                    <fieldset class="content-group">
+                                        <div class="form-group">
+                                            <label class="control-label col-lg-4 text-semibold">Due Date</label>
+                                            <div class="col-lg-8">
+                                                <span class="label border-left-primary label-striped text-default-600" style="font-size: 13px; text-transform: none"><t t-esc="car.due_date"/></span>
+                                            </div>
+                                        </div>
+                                    </fieldset>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="tabbable">
+                                        <ul class="nav nav-tabs nav-tabs-highlight">
+                                            <li class="active"><a class="text-semibold" href="#nonconformity-tab" data-toggle="tab">Nonconformity</a></li>
+                                            <li><a class="text-semibold" href="#inmediate-tab" data-toggle="tab">Inmediate Correction</a></li>
+                                            <li><a class="text-semibold" href="#root-cause-tab" data-toggle="tab">Root Cause Analysis</a></li>
+                                            <li><a class="text-semibold" href="#actions-tab" data-toggle="tab">Action Plans</a></li>
+                                            <li><a class="text-semibold" href="#conclusions-tab" data-toggle="tab">Conclusions</a></li>
+                                        </ul>
 
-									<p>Se revisa con fecha de 23 de Nov 2016, en base  al la evidencia, estudio de 5 porques, cauza raíz, evidencia fotográfica, se revisa plan de acción, queda cerrada la NC, se dará seguimiento en los próximos eventos.</p>
-								</div>
-							</li>
-							<li class="media">
-								<div class="media-left">
-									<a href="#"><img src="/gpsi_website/static/src/assets/images/demo/users/gzarate.jpg" class="img-circle img-sm" alt=""/></a>
-								</div>
-
-								<div class="media-body">
-									<div class="media-heading">
-										<a href="#" class="text-semibold">German Zarate</a>
-										<span class="media-annotation dotted">05 Nov 2016</span>
-									</div>
-
-									<p>Buen día, favor de adjuntar de acuerdo a su procedimiento de acciones correctivas, análisis de causas raíz, plan de acción, lo enviado se toma como evidencia del seguimiento, gracias y saludos.</p>
-								</div>
-							</li>
-						</ul>
-					</div>
-				</div>
+                                        <div class="tab-content">
+                                            <div class="tab-pane active" id="nonconformity-tab">
+                                                <div class="row">
+                                                    <div class="col-lg-12">
+                                                        <fieldset class="content-group">
+                                                            <div class="form-group">
+                                                                <div style="padding-left: 15px; padding-right: 15px"><t t-raw="car.nonconformity"/></div>
+                                                            </div>
+                                                        </fieldset>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="tab-pane" id="inmediate-tab">
+                                                <div class="row">
+                                                    <div class="col-lg-12">
+                                                        <div class="form-group">
+                                                            <div style="padding-left: 15px; padding-right: 15px"><t t-raw="car.correction"/></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="tab-pane" id="root-cause-tab">
+                                                <div class="row">
+                                                    <div class="col-lg-12">
+                                                        <div class="form-group">
+                                                            <div style="padding-left: 15px; padding-right: 15px"><t t-raw="car.root_cause"/></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="tab-pane" id="actions-tab">
+                                                <div class="row">
+                                                    <div class="col-lg-12">
+                                                        <div class="form-group">
+                                                            <div style="padding-left: 15px; padding-right: 15px"><t t-raw="car.action_plan"/></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="tab-pane" id="conclusions-tab">
+                                                <div class="row">
+                                                    <div class="col-lg-12">
+                                                        <div class="form-group">
+                                                            <div style="padding-left: 15px; padding-right: 15px"><t t-raw="car.conclusion"/></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <t t-call="gpsi_website.ga/admin/widget/chatter">
+                    <t t-set="rec" t-value="car"/>
+                    <t t-set="model" t-value="'gpsi.staff.audit.car'"/>
+                    <t t-set="redirect" t-value="'/ga/admin/va/cars/{0}'.format(car.id)"/>
+                </t>
             </div>
         </t>
     </template>
 
-    <template id="gpsi_website.va/complaints" name="Complaints">
+    <template id="gpsi_website.ga/admin/issues" name="Issues">
         <t t-call="gpsi_website.ga/admin/layout">
             <div class="panel page-header border-top-primary" style="padding-bottom: 0;">
                 <div class="page-header-content">
@@ -3079,12 +3232,12 @@
                         </h5>
                     </div>
                     <div class="heading-elements">
-                        <button type="button" class="btn bg-teal-400 btn-icon heading-btn"> Create Complaint</button>
+                        <a href="/ga/admin/issues/new" type="button" class="btn btn-default btn-icon heading-btn"> Create Complaint</a>
                     </div>
                 </div>
                 <div class="breadcrumb-line breadcrumb-line-wide" style="box-shadow: none;">
                     <ul class="breadcrumb">
-                        <li><a href="/admin"><i class="icon-home2 position-left"></i> Home</a></li>
+                        <li><a href="/ga/admin"><i class="icon-home2 position-left"></i> Home</a></li>
                         <li class="active">Complaints</li>
                     </ul>
                 </div>
@@ -3103,73 +3256,33 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td><a href="/admin/va/complaints/1">CP001</a></td>
-                                    <td>
-                                        <div class="media-left media-middle">
-										    <a href="#"><img src="/gpsi_website/static/src/assets/images/demo/users/face15.jpg" class="img-circle img-xs" alt=""/></a>
-										</div>
-                                        <div class="media-body">
-											<a href="/admin/va/suppliers/1" class="display-inline-block text-default text-semibold letter-icon-title">Salsas Jaliscienses</a>
-											<div class="text-muted text-size-small"><span class="status-mark border-blue position-left"></span> Active</div>
-										</div>
-                                    </td>
-                                    <td>
-                                        <div>
-                                            <span class="label bg-blue">Deficiente</span>
-                                        </div>
-                                        <div>
-                                        El proveedor a entregado una caja donde un 80% de los productos vienen en tapas deficientes, se detectaron fisuras y ralladuras en varias de ellas.
-                                        </div>
-                                    </td>
-                                    <td>03/09/2016</td>
-                                    <td><span class="label bg-success-400">Closed</span></td>
-                                </tr>
-                                <tr>
-                                    <td><a href="/admin/va/complaints/1">CP002</a></td>
-                                    <td>
-                                        <div class="media-left media-middle">
-										    <a href="#"><img src="/gpsi_website/static/src/assets/images/demo/users/face18.jpg" class="img-circle img-xs" alt=""/></a>
-										</div>
-                                        <div class="media-body">
-											<a href="/admin/va/suppliers/1" class="display-inline-block text-default text-semibold letter-icon-title">Productos Glama S.A. de C.V.</a>
-											<div class="text-muted text-size-small"><span class="status-mark border-blue position-left"></span> Active</div>
-										</div>
-                                    </td>
-                                    <td>
-                                        <div>
-                                            <span class="label bg-blue">Impuntual</span>
-                                            <span class="label bg-blue">Deficiente</span>
-                                        </div>
-                                        <div>
-                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                                        </div>
-                                    </td>
-                                    <td>04/09/2016</td>
-                                    <td><span class="label bg-warning-400">OPEN</span></td>
-                                </tr>
-                                <tr>
-                                    <td><a href="/admin/va/complaints/1">CP003</a></td>
-                                    <td>
-                                        <div class="media-left media-middle">
-										    <a href="#"><img src="/gpsi_website/static/src/assets/images/demo/users/face19.jpg" class="img-circle img-xs" alt=""/></a>
-										</div>
-                                        <div class="media-body">
-											<a href="/admin/va/suppliers/1" class="display-inline-block text-default text-semibold letter-icon-title">Productos Glama S.A. de C.V.</a>
-											<div class="text-muted text-size-small"><span class="status-mark border-blue position-left"></span> Active</div>
-										</div>
-                                    </td>
-                                    <td>
-                                        <div>
-                                            <span class="label bg-blue">Defectuoso</span>
-                                        </div>
-                                        <div>
-                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                                        </div>
-                                    </td>
-                                    <td>10/09/2016</td>
-                                    <td><span class="label bg-warning-400">OPEN</span></td>
-                                </tr>
+                                <t t-foreach="issues" t-as="issue">
+                                    <tr>
+                                        <td><a t-attf-href="/ga/admin/issues/{{issue.id}}">IS<t t-esc="issue.id"/></a></td>
+                                        <td>
+                                            <div class="media-left media-middle">
+                                                <a t-attf-href="/ga/admin/va/suppliers/{{issue.partner_id.id}}">
+                                                    <span t-field="issue.partner_id.image" t-field-options="{&quot;widget&quot;: &quot;image&quot;, &quot;class&quot;: &quot;img-circle img-xs&quot;}"/>
+                                                </a>
+                                            </div>
+                                            <div class="media-body" style="vertical-align: middle">
+                                                <a t-attf-href="/ga/admin/va/suppliers/{{issue.partner_id.id}}" class="display-inline-block text-default text-semibold letter-icon-title"><t t-esc="issue.partner_id.name"/></a>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div>
+                                                <t t-foreach="issue.tag_ids" t-as="tag">
+                                                    <span class="label bg-blue"><t t-esc="tag.name"/></span>
+                                                </t>
+                                            </div>
+                                            <div>
+                                            <t t-raw="issue.description"/>
+                                            </div>
+                                        </td>
+                                        <td><t t-esc="issue.create_date"/></td>
+                                        <td><span class="label label-flat border-grey text-grey-600"><t t-esc="issue.stage_id.name"/></span></td>
+                                    </tr>
+                                </t>
                             </tbody>
                         </table>
                     </div>
@@ -3178,7 +3291,7 @@
         </t>
     </template>
 
-    <template id="gpsi_website.va/complaint" name="Complaint Details">
+    <template id="gpsi_website.ga/admin/issue_new" name="Complaint Details">
         <t t-call="gpsi_website.ga/admin/layout">
             <div class="panel page-header border-top-primary" style="padding-bottom: 0;">
                 <div class="page-header-content">
@@ -3188,19 +3301,145 @@
                         </h5>
                     </div>
                     <div class="heading-elements">
-                        <button type="button" class="btn bg-teal-400 btn-icon heading-btn">Create Complaint</button>
+                        <button type="button" class="btn bg-primary btn-icon heading-btn" onclick="submitAuditForm()">Save Changes</button>
+                        <button class="btn btn-default btn-icon heading-btn" style="margin-left: 4px" onclick="window.history.back();">Cancel</button>
                     </div>
                 </div>
                 <div class="breadcrumb-line breadcrumb-line-wide" style="box-shadow: none;">
                     <ul class="breadcrumb">
-                        <li><a href="/admin"><i class="icon-home2 position-left"></i> Home</a></li>
-                        <li><a href="/admin/va/complaints">Complaints</a></li>
+                        <li><a href="/ga/admin"><i class="icon-home2 position-left"></i> Home</a></li>
+                        <li><a href="/ga/admin/issues">Complaints</a></li>
                         <li class="active">CP001</li>
                     </ul>
                 </div>
             </div>
             <div class="content">
-                <div class="panel panel-flat">
+                <div class="panel panel-3d">
+                    <div class="panel-body">
+                        <form id="issue_form" class="form-horizontal" action="/ga/admin/issues/new" method="post" enctype="multipart/form-data"> 
+                            <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <fieldset class="content-group">
+                                        <div class="form-group">
+                                            <label class="control-label col-lg-4 text-semibold">User</label>
+                                            <div class="col-lg-8">
+                                                <select name="user" class="form-control" required="required">
+                                                    <option selected="selected" value=""></option>
+                                                    <t t-foreach="request.env['res.users'].sudo().search([('company_id','=',request.env.user.company_id.id)])" t-as="user">
+                                                        <t t-if="request.env.user.id == user.id">
+                                                            <option t-attf-value="{{user.id}}" selected="selected"><t t-esc="user.name"/></option>
+                                                        </t>
+                                                        <t t-if="request.env.user.id != user.id">
+                                                            <option t-attf-value="{{user.id}}"><t t-esc="user.name"/></option>
+                                                        </t>
+                                                    </t>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-lg-4 text-semibold">Supplier</label>
+                                            <div class="col-lg-8">
+                                                <select name="supplier" class="form-control" required="required">
+                                                    <option selected="selected" value=""></option>
+                                                    <t t-foreach="request.env['res.partner'].search([('parent_id','=',False), ('supplier','=',True)])" t-as="supplier">
+                                                        <option t-attf-value="{{supplier.id}}"><t t-esc="supplier.name"/></option>
+                                                    </t>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </fieldset>
+                                </div>
+                                <div class="col-lg-6">
+                                    <fieldset class="content-group">
+                                        <div class="form-group">
+                                            <label class="control-label col-lg-4 text-semibold">Severity</label>
+                                            <div class="col-lg-8">
+                                                <select name="severity" class="form-control">
+                                                    <option value="0">Minor</option>
+                                                    <option value="1">Major</option>
+                                                    <option value="2">Critical</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-lg-4 text-semibold">Tags</label>
+                                            <div class="col-lg-8">
+                                                <input type="text" name="tags" class="form-control" data-role="tagsinput"/>
+                                            </div>
+                                        </div>
+                                    </fieldset>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="tabbable">
+                                        <ul class="nav nav-tabs nav-tabs-highlight">
+                                            <li class="active"><a class="text-semibold" href="#description-tab" data-toggle="tab">Description</a></li>
+                                        </ul>
+
+                                        <div class="tab-content">
+                                            <div class="tab-pane active" id="description-tab">
+                                                <div class="row">
+                                                    <div class="col-lg-12">
+                                                        <div class="form-group">
+                                                            <div class="col-lg-12">
+                                                                <textarea name="description" class="form-control" rows="5"></textarea>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <script type="text/javascript">
+                submitAuditForm = function() {
+                    document.getElementById('issue_form').submit();
+                }
+            </script>
+        </t>
+    </template>
+
+    <template id="gpsi_website.ga/admin/issue" name="Complaint Details">
+        <t t-call="gpsi_website.ga/admin/layout">
+            <div class="panel page-header border-top-primary" style="padding-bottom: 0;">
+                <div class="page-header-content">
+                    <div class="page-title">
+                        <h5>
+                            <span class="text-semibold">CP001</span>
+                        </h5>
+                    </div>
+                    <div class="heading-elements">
+                        <a href="/ga/admin/issues/new" type="button" class="btn btn-default btn-icon heading-btn"> Create Complaint</a>
+                    </div>
+                </div>
+                <div class="breadcrumb-line breadcrumb-line-wide" style="box-shadow: none;">
+                    <ul class="breadcrumb">
+                        <li><a href="/ga/admin"><i class="icon-home2 position-left"></i> Home</a></li>
+                        <li><a href="/ga/admin/issues">Complaints</a></li>
+                        <li class="active">CP001</li>
+                    </ul>
+                    <ul class="breadcrumb-elements nav nav-wizard" style="margin-right: 0px">
+                        <t t-set="stages" t-value="['Open', 'Closed']"/>
+                        <t t-foreach="stages" t-as="stage">
+                            <t t-if="issue.stage_id.name == stage">
+                                <li class="active"><a href="#"><t t-esc="stage"/></a></li>
+                            </t>
+                            <t t-if="issue.stage_id.name != stage">
+                                <li><a href="#"><t t-esc="stage"/></a></li>
+                            </t>
+                        </t>
+                    </ul>
+                </div>
+            </div>
+            <div class="content">
+                <div class="panel panel-3d">
                     <div class="panel-body">
                         <form class="form-horizontal" action="#">
                             <div class="row">
@@ -3209,29 +3448,20 @@
                                         <div class="form-group">
                                             <label class="control-label col-lg-4 text-semibold">User</label>
                                             <div class="col-lg-8">
-                                                <select name="select" class="form-control">
-                                                    <option value="opt1">Diego Mendoza</option>
-                                                    <option value="opt2">Carlos Tevez</option>
-                                                    <option value="opt3">Gabriel Vazquez</option>
-                                                </select>
+                                                <a t-attf-href="/ga/admin/settings/users/{{issue.user_id.id}}" class="label border-left-primary label-striped text-primary-600" style="font-size: 13px; text-transform: none"><t t-esc="issue.user_id.name"/></a>
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label class="control-label col-lg-4 text-semibold">Supplier</label>
                                             <div class="col-lg-8">
-                                                <select name="select" class="form-control">
-                                                    <option value="opt1">Salsas Jaliscienses</option>
-                                                </select>
+                                                <a t-attf-href="/ga/admin/va/suppliers/{{issue.partner_id.id}}" class="label border-left-primary label-striped text-primary-600" style="font-size: 13px; text-transform: none"><t t-esc="issue.partner_id.name"/></a>
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label class="control-label col-lg-4 text-semibold">Severity</label>
                                             <div class="col-lg-8">
-                                                <select name="select" class="form-control">
-                                                    <option value="opt1">Minor</option>
-                                                    <option value="opt2">Major</option>
-                                                    <option value="opt3">Critical</option>
-                                                </select>
+                                                <t t-set="severities" t-value="{'0': 'Minor', '1': 'Major', '2': 'Critical'}"/>
+                                                <span class="label border-left-primary label-striped text-default-600" style="font-size: 13px; text-transform: none"><t t-esc="severities[issue.priority]"/></span>
                                             </div>
                                         </div>
                                     </fieldset>
@@ -3241,42 +3471,51 @@
                                         <div class="form-group">
                                             <label class="control-label col-lg-4 text-semibold">Date</label>
                                             <div class="col-lg-8">
-                                                <input type="text" class="form-control" placeholder="Street..." value="03 Dic 2016"/>
+                                                <span class="label border-left-primary label-striped text-default-600" style="font-size: 13px; text-transform: none"><t t-esc="issue.create_date"/></span>
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label class="control-label col-lg-4 text-semibold">Tags</label>
                                             <div class="col-lg-8">
-                                                <input type="text" class="form-control" data-role="tagsinput" value="Deficiente"/>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="control-label col-lg-4 text-semibold">Status</label>
-                                            <div class="col-lg-8">
-                                                <select name="select" class="form-control">
-                                                    <option value="opt1">Open</option>
-                                                    <option value="opt2">Closed</option>
-                                                </select>
+                                                <span class="label border-left-primary label-striped text-default-600" style="font-size: 13px; text-transform: none">
+                                                    <t t-foreach="issue.tag_ids" t-as="tag">
+                                                        <span class="label label-primary"><t t-esc="tag.name"/></span>
+                                                    </t>
+                                                </span>
                                             </div>
                                         </div>
                                     </fieldset>
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-lg-12">
-                                    <fieldset class="content-group">
-                                        <div class="form-group">
-                                            <label class="control-label col-lg-2 text-semibold">Description</label>
-                                            <div class="col-lg-10">
-                                                <textarea rows="4" class="form-control elastic" style="word-wrap: break-word; resize: vertical;">El proveedor a entregado una caja donde un 80% de los productos vienen en tapas deficientes, se detectaron fisuras y ralladuras en varias de ellas.</textarea>
+                                <div class="col-md-12">
+                                    <div class="tabbable">
+                                        <ul class="nav nav-tabs nav-tabs-highlight">
+                                            <li class="active"><a class="text-semibold" href="#description-tab" data-toggle="tab">Description</a></li>
+                                        </ul>
+
+                                        <div class="tab-content">
+                                            <div class="tab-pane active" id="description-tab">
+                                                <div class="row">
+                                                    <div class="col-lg-12">
+                                                        <div class="form-group">
+                                                            <div style="padding-left: 15px; padding-right: 15px"><t t-raw="issue.description"/></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
-                                    </fieldset>
+                                    </div>
                                 </div>
                             </div>
                         </form>
                     </div>
                 </div>
+                <t t-call="gpsi_website.ga/admin/widget/chatter">
+                    <t t-set="rec" t-value="issue"/>
+                    <t t-set="model" t-value="'project.issue'"/>
+                    <t t-set="redirect" t-value="'/ga/admin/issues/{0}'.format(issue.id)"/>
+                </t>
             </div>
         </t>
     </template>
@@ -3515,13 +3754,13 @@
         </t>
     </template>
 
-    <template id="gpsi_website.ga/admin/clients/events" name="Vendor Audits">
+    <template id="gpsi_website.ga/admin/clients/events" name="Customer Audits">
         <t t-call="gpsi_website.ga/admin/layout">
             <div class="panel page-header border-top-primary" style="padding-bottom: 0;">
                 <div class="page-header-content">
                     <div class="page-title">
                         <h5>
-                            <span class="text-semibold">Events</span>
+                            <span class="text-semibold">Customer Audits</span>
                         </h5>
                     </div>
                     <div class="heading-elements">
@@ -3530,7 +3769,7 @@
                 <div class="breadcrumb-line breadcrumb-line-wide" style="box-shadow: none;">
                     <ul class="breadcrumb">
                         <li><a href="/ga/admin"><i class="icon-home2 position-left"></i> Home</a></li>
-                        <li class="active">Events</li>
+                        <li class="active">Audits</li>
                     </ul>
                 </div>
             </div>
@@ -3551,19 +3790,19 @@
                             <tbody>
                                 <t t-foreach="audits" t-as="audit">
                                     <tr>
-                                        <td><a t-attf-href="/ga/admin/va/events/{{audit.id}}">ID<t t-esc="audit.id"/></a></td>
+                                        <td><a t-attf-href="/ga/admin/clients/events/{{audit.id}}">ID<t t-esc="audit.id"/></a></td>
                                         <td>
                                             <div class="media-left media-middle">
                                                 <t t-if="audit.partner_id">
-                                                    <a t-attf-href="/admin/contacts/{{audit.partner_id.id}}">
-                                                        <span t-field="audit.partner_id.image" t-field-options="{&quot;widget&quot;: &quot;image&quot;, &quot;class&quot;: &quot;img-circle img-xs&quot;}"/>
+                                                    <a t-attf-href="/admin/contacts/{{audit.project_id.partner_id.id}}">
+                                                        <span t-field="audit.project_id.partner_id.image" t-field-options="{&quot;widget&quot;: &quot;image&quot;, &quot;class&quot;: &quot;img-circle img-xs&quot;}"/>
                                                     </a>
                                                 </t>
                                             </div>
                                             <div class="media-body" style="vertical-align: middle">
-                                                <t t-if="audit.partner_id">
+                                                <t t-if="audit.project_id.partner_id">
                                                     <a t-attf-href="/ga/admin/va/suppliers/{{audit.partner_id.id}}" class="display-inline-block text-default text-semibold letter-icon-title">
-                                                        <t t-esc="audit.partner_id.name"/>
+                                                        <t t-esc="audit.project_id.partner_id.name"/>
                                                     </a>
                                                 </t>
                                             </div>
@@ -3597,6 +3836,253 @@
                         </table>
                     </div>
                 </div>
+            </div>
+        </t>
+    </template>
+
+    <template id="gpsi_website.ga/admin/clients/event" name="Audit Details">
+        <t t-call="gpsi_website.ga/admin/layout">
+            <div class="panel page-header border-top-primary" style="padding-bottom: 0;">
+                <div class="page-header-content">
+                    <div class="page-title">
+                        <h5>
+                            <span class="text-semibold"><t t-esc="audit.name"/></span> - Customer Audit
+                        </h5>
+                    </div>
+                    <div class="heading-elements">
+                    </div>
+                </div>
+                <div class="breadcrumb-line breadcrumb-line-wide" style="box-shadow: none;">
+                    <ul class="breadcrumb">
+                        <li><a href="/ga/admin"><i class="icon-home2 position-left"></i> Home</a></li>
+                        <li><a href="/ga/admin/clients/events">Audits</a></li>
+                        <li class="active"><t t-esc="audit.name"/></li>
+                    </ul>
+                    <ul class="breadcrumb-elements nav nav-wizard" style="margin-right: 0px">
+                        <t t-foreach="stages" t-as="stage">
+                            <t t-if="audit.stage_id.id == stage.id">
+                                <li class="active"><a href="#"><t t-esc="stage.name"/></a></li>
+                            </t>
+                            <t t-if="audit.stage_id.id != stage.id">
+                                <li><a href="#"><t t-esc="stage.name"/></a></li>
+                            </t>
+                        </t>
+                    </ul>
+                </div>
+            </div>
+            <div class="content">
+                <t t-if="len(attachments) > 0">
+                    <div class="panel panel-flat panel-collapsed">
+                        <div class="panel-heading">
+                            <h6 class="panel-title"><i class="icon-link position-left"></i> Attached files</h6>
+                            <div class="heading-elements">
+                                <ul class="icons-list">
+                                    <li><a data-action="collapse"></a></li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="panel-body">
+                            <ul class="media-list">
+                                <t t-foreach="attachments" t-as="attachment">
+                                    <li class="media">
+                                        <div class="media-left media-middle">
+                                            <i class="icon-file-pdf icon-2x text-muted"></i>
+                                        </div>
+                                        <div class="media-body">
+                                            <a t-attf-href="/web/content/{{attachment.id}}?download=1" class="media-heading text-semibold"><t t-esc="attachment.name"/></a>
+                                            <ul class="list-inline list-inline-separate list-inline-condensed text-size-mini text-muted">
+                                                <li>Added by <a href="#"><t t-esc="attachment.create_uid.name"/></a></li>
+                                            </ul>
+                                        </div>
+                                        <div class="media-right media-middle">
+                                            <ul class="icons-list">
+                                                <li><a t-attf-href="/web/content/{{attachment.id}}?download=1"><i class="icon-download"></i></a></li>
+                                            </ul>
+                                        </div>
+                                    </li>
+                                </t>
+                            </ul>
+                        </div>
+                    </div>
+                </t>
+                <div class="panel panel-3d">
+                    <t t-set="execute_stage" t-value="audit.env.ref('gpsi_staff.vendor_audit_execute_stage')"/>
+                    <t t-if="audit.stage_id.sequence > execute_stage.sequence">
+                        <div class="panel-heading" style="margin-bottom:10px">
+                            <h6 class="panel-title">&amp;nbsp;</h6>
+                            <div class="heading-elements">
+                                <div class="heading-btn">
+                                    <t t-if="audit.gs_car_count > 0">
+                                        <a t-attf-href="/ga/admin/va/events/{{audit.id}}/cars" type="button" class="btn border-slate text-slate-800 btn-flat"><t t-esc="audit.gs_car_count"/> CAR'S</a>
+                                    </t>
+                                    <a t-attf-href="/ga/admin/va/events/{{audit.id}}/assessment" type="button" class="btn border-slate text-slate-800 btn-flat">Assessment</a>
+                                    <a href="/gpsi_website/static/files/executive_report_1.pdf" class="btn border-slate text-slate-800 btn-flat"><i class="icon-printer position-left"></i> Executive Report</a>
+                                    <a href="/gpsi_website/static/files/general_report_1.pdf" class="btn border-slate text-slate-800 btn-flat"><i class="icon-printer position-left"></i> General Report</a>
+                                </div>
+                            </div>
+                            <a class="heading-elements-toggle"><i class="icon-menu"></i></a>
+                        </div>
+                    </t>
+                    <div class="panel-body">
+                        <form class="form-horizontal" action="#">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <fieldset class="content-group">
+                                        <div class="form-group">
+                                            <label class="control-label col-lg-4 text-semibold">Supplier</label>
+                                            <div class="col-lg-8">
+                                                <a t-attf-href="/ga/admin/va/suppliers/{{audit.partner_id.id}}" class="label border-left-primary label-striped text-primary-600" style="font-size: 13px; text-transform: none"><t t-esc="audit.partner_id.name"/></a>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-lg-4 text-semibold">Standard</label>
+                                            <div class="col-lg-8">
+                                                <span class="label border-left-primary label-striped text-default-600" style="font-size: 13px; text-transform: none"><t t-esc="audit.gs_checklist_id.name"/></span>
+                                            </div>
+                                        </div>
+                                    </fieldset>
+                                </div>
+                                <div class="col-lg-6">
+                                    <fieldset class="content-group">
+                                        <div class="form-group">
+                                            <label class="control-label col-lg-4 text-semibold">Start Date</label>
+                                            <div class="col-lg-8">
+                                                <span class="label border-left-primary label-striped text-default-600" style="font-size: 13px; text-transform: none"><t t-esc="audit.date_deadline"/></span>
+                                            </div>
+                                        </div>
+                                    </fieldset>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="tabbable">
+                                        <ul class="nav nav-tabs nav-tabs-highlight">
+                                            <li class="active"><a class="text-semibold" href="#notes-tab" data-toggle="tab">Notes</a></li>
+                                            <li><a class="text-semibold" href="#team-tab" data-toggle="tab">Audit Team</a></li>
+                                            <li><a class="text-semibold" href="#plan-tab" data-toggle="tab">Audit Plan</a></li>
+                                        </ul>
+
+                                        <div class="tab-content">
+                                            <div class="tab-pane active" id="notes-tab">
+                                                <div class="row">
+                                                    <div class="col-lg-12">
+                                                        <div class="form-group">
+                                                            <div style="padding-left: 15px; padding-right: 15px"><t t-raw="audit.description"/></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="tab-pane" id="team-tab">
+                                                <div class="row">
+                                                    <t t-foreach="audit.gs_audit_team_ids" t-as="member">
+                                                        <div class="col-lg-4 col-md-4">
+                                                            <div class="panel panel-body">
+                                                                <div class="media">
+                                                                    <div class="media-left">
+                                                                        <span t-field="member.user_id.image" t-field-options="{&quot;widget&quot;: &quot;image&quot;, &quot;style&quot;: &quot;width: 70px; height: 70px; box-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);&quot;}"/>
+                                                                    </div>
+                                                                    <div class="media-body">
+                                                                        <h6 class="media-heading"><t t-esc="member.user_id.name"/></h6>
+                                                                        <p class="text-muted"><t t-esc="dict(member.fields_get(allfields=['role'])['role']['selection'])[member.role]"/></p>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </t>
+                                                </div>
+                                            </div>
+                                            <div class="tab-pane" id="plan-tab">
+                                                <div class="row">
+                                                    <div class="col-lg-12">
+                                                        <div class="form-group">
+                                                            <div class="table-responsive">
+                                                                <table class="table">
+                                                                    <thead>
+                                                                        <tr>
+                                                                            <th width="25%">Date</th>
+                                                                            <th width="25%">Auditor</th>
+                                                                            <th>Process</th>
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody>
+                                                                        <tr>
+                                                                            <td>
+                                                                                <div>
+                                                                                    <span class="text-default text-semibold">11:00 - 12:15</span>
+                                                                                </div>
+                                                                                <div class="text-muted text-size-small">
+                                                                                    03 Oct 2016
+                                                                                </div>
+                                                                            </td>
+                                                                            <td>German Zarate</td>
+                                                                            <td>
+                                                                                <div>Sistemas de gestión de seguridad alimentaria</div>
+                                                                                <div class="text-muted text-size-small"><span class="status-mark border-success position-left"></span> B.A.1 Especificaciones del producto incluyendo su liberación</div>
+                                                                                <div class="text-muted text-size-small"><span class="status-mark border-success position-left"></span> I.A.12 Análisis al producto</div>
+                                                                                <div class="text-muted text-size-small"><span class="status-mark border-success position-left"></span> B.A.2 Trazabilidad Análisis al producto</div>
+                                                                            </td>
+                                                                        </tr>
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="panel panel-flat" style="border-color: transparent; box-shadow: none;">
+					<div class="panel-heading">
+						<h5 class="panel-title text-semiold"><i class="icon-bubbles4 position-left"></i> Comments</h5>
+                        <div class="heading-elements">
+				        </div>
+					</div>
+
+					<div class="panel-body">
+                        <form id="add_comment" class="form-horizontal" t-attf-action="/ga/admin/va/events/{{audit.id}}/new_message" method="post" enctype="multipart/form-data">
+                            <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <textarea name="body" rows="4" class="form-control elastic" maxlength="2500" placeholder="Write something..." style="overflow: hidden; word-wrap: break-word; height: 80px;"></textarea>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <p></p>
+                                    <button class="btn bg-blue btn-sm" type="submit">Add Comment</button>
+                                </div>
+                            </div>
+                        </form>
+						<ul class="media-list content-group-lg stack-media-on-mobile" style="margin-top: 20px">
+							<t t-foreach="audit.message_ids" t-as="message">
+                                <li class="media" t-if="message.message_type == 'comment'">
+                                    <div class="media-left">
+                                        <span t-field="message.author_id.image" t-field-options="{&quot;widget&quot;: &quot;image&quot;, &quot;class&quot;: &quot;img-circle img-xs&quot;}"/>
+                                    </div>
+
+                                    <div class="media-body">
+                                        <div class="media-heading">
+                                            <a href="#" class="text-semibold"><t t-esc="message.author_id.name"/></a>
+                                            <span class="media-annotation">of <t t-raw="message.author_id.company_id.name"/></span>
+                                            <span class="media-annotation dotted"><t t-raw="message.date"/></span>
+                                        </div>
+                                        <p><t t-raw="message.body"/></p>
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                            </t>
+						</ul>
+					</div>
+				</div>
             </div>
         </t>
     </template>

@@ -10,6 +10,8 @@
     'depends': ['project', 'project_issue'],
     'data': [
         'views/audit_task_views.xml',
+        'views/res_partner_views.xml',
+        'views/res_company_views.xml',
         'data/gpsi_staff_data.xml'
     ],
     'test': [],

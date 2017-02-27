@@ -6,6 +6,7 @@ import openerp
 
 from openerp import http
 from openerp.http import request
+from openerp.tools import safe_eval
 from openerp.addons.web.controllers.main import Home
 
 _logger = logging.getLogger(__name__)
@@ -105,15 +106,15 @@ class GlobalAuditAdminWebsite(http.Controller):
 
     @http.route('/ga/admin/va/suppliers', type='http', auth="user")
     def va_suppliers(self, **kw):
-        suppliers = request.env['res.partner'].search([('parent_id','=',False), ('supplier','=',True)])
+        suppliers = request.env['res.partner'].search([('company_id','=',request.env.user.company_id.id), ('parent_id','=',False), ('supplier','=',True)])
         qcontext = {
             'suppliers': suppliers
         }
-        return request.render('gpsi_website.va/suppliers', qcontext)
+        return request.render('gpsi_website.ga/admin/va/suppliers', qcontext)
 
     @http.route('/ga/admin/va/suppliers/new', type='http', auth="user")
     def va_supplier_new(self, **kw):
-        return request.render('gpsi_website.va/supplier_new')
+        return request.render('gpsi_website.ga/admin/va/supplier_new')
 
     @http.route('/ga/admin/va/suppliers/new', type='http', methods=['POST'], auth="user")
     def post_va_supplier_new(self, **kw):
@@ -143,7 +144,7 @@ class GlobalAuditAdminWebsite(http.Controller):
         qcontext = {
             'contact': contact
         }
-        return request.render('gpsi_website.va/supplier', qcontext)
+        return request.render('gpsi_website.ga/admin/va/supplier', qcontext)
 
     @http.route('/ga/admin/va/suppliers/<int:supplier_id>', type='http', methods=['POST'], auth="user")
     def post_va_supplier(self, supplier_id, **kw):
@@ -206,11 +207,11 @@ class GlobalAuditAdminWebsite(http.Controller):
         qcontext = {
             'audits': audits
         }
-        return request.render('gpsi_website.va/events', qcontext)
+        return request.render('gpsi_website.ga/admin/va/events', qcontext)
 
     @http.route('/ga/admin/va/events/new', type='http', methods=['GET'], auth="user")
     def va_event_new(self, **kw):
-        return request.render('gpsi_website.va/event_new')
+        return request.render('gpsi_website.ga/admin/va/event_new')
 
     @http.route('/ga/admin/va/events/new', type='http', methods=['POST'], auth="user")
     def post_va_event_new(self, **kw):
@@ -238,15 +239,13 @@ class GlobalAuditAdminWebsite(http.Controller):
             'attachments': attachments,
             'stages': stages
         }
-        return request.render('gpsi_website.va/event', qcontext)
+        return request.render('gpsi_website.ga/admin/va/event', qcontext)
 
-    @http.route('/ga/admin/va/events/<int:event_id>/new_message', type='http', methods=['POST'], auth="user")
-    def post_va_event_message(self, event_id, **kw):
-        Task = request.env['project.task'].sudo()
-        conversation = Task.search([('id','=',event_id)])
-        conversation.message_post(body=kw['body'], message_type='comment', author_id=request.env.user.partner_id.id)
-        
-        return werkzeug.utils.redirect('/ga/admin/va/events/' + str(event_id) + '#add_comment')
+    @http.route('/ga/admin/new_message', type='http', methods=['POST'], auth="user")
+    def post_new_message(self, **kw):
+        rec = request.env[kw['model']].sudo().search([('id','=',int(kw['id']))])
+        rec.message_post(body=kw['body'], message_type='comment', author_id=request.env.user.partner_id.id)
+        return werkzeug.utils.redirect('{0}#comments'.format(kw['redirect']))
 
     @http.route('/ga/admin/va/events/<int:event_id>/assessment', type='http', auth="user")
     def va_event_assessment(self, event_id, **kw):
@@ -295,21 +294,74 @@ class GlobalAuditAdminWebsite(http.Controller):
 
         return werkzeug.utils.redirect('/ga/admin/va/events/' + str(event_id) + '/assessment/edit')
 
-    @http.route('/ga/admin/va/cars', type='http', auth="user")
-    def va_cars(self, **kw):
-        return request.render('gpsi_website.va/cars')
+    @http.route('/ga/admin/va/events/<int:event_id>/cars', type='http', auth="user")
+    def va_cars(self, event_id, **kw):
+        audit = request.env['project.task'].sudo().search([('id','=',event_id)])
+        cars = request.env['gpsi.staff.audit.car'].sudo().search([('audit_id','=', event_id)])
+        qcontext = {
+            'audit': audit,
+            'cars': cars
+        }
+        return request.render('gpsi_website.ga/admin/va/cars', qcontext)
 
-    @http.route('/ga/admin/va/cars/<int:car_id>', type='http', auth="user")
-    def va_car(self, car_id, **kw):
-        return request.render('gpsi_website.va/car')
+    @http.route('/ga/admin/va/events/<int:event_id>/cars/<int:car_id>', type='http', auth="user")
+    def va_car(self, event_id, car_id, **kw):
+        car = request.env['gpsi.staff.audit.car'].sudo().search([('id','=',car_id)])
+        attachments = request.env['ir.attachment'].sudo().search([('res_model','=','gpsi.staff.audit.car'), ('res_id','=',car_id)])
+        qcontext = {
+            'car': car,
+            'attachments': attachments,
+            'editable': False
+        }
+        template = 'gpsi_website.ga/admin/va/car'
+        if car.audit_id.project_id.partner_id.id == request.env.user.company_id.partner_id.id:
+            template = 'gpsi_website.ga/admin/va/car2'
+        return request.render(template, qcontext)
 
-    @http.route('/ga/admin/va/complaints', type='http', auth="user")
+    @http.route('/ga/admin/va/cars/<int:car_id>', type='http', methods=['POST'], auth="user")
+    def post_va_car(self, car_id, **kw):
+        car = request.env['gpsi.staff.audit.car'].sudo().search([('id','=',car_id)])
+        car.write(kw)
+        return werkzeug.utils.redirect('/ga/admin/va/cars/{0}'.format(int(car_id)))
+
+    @http.route('/ga/admin/issues', type='http', auth="user")
     def va_complaints(self, **kw):
-        return request.render('gpsi_website.va/complaints')
+        project = request.env['project.project'].sudo().search([('use_issues','=',True), ('partner_id','=',request.env.user.company_id.partner_id.id)])
+        issues = request.env['project.issue'].sudo().search([('project_id','=',project.id)], order='create_date desc')
+        qcontext = {
+            'issues': issues
+        }
+        return request.render('gpsi_website.ga/admin/issues', qcontext)
 
-    @http.route('/ga/admin/va/complaints/<int:complaint_id>', type='http', auth="user")
-    def va_complaint(self, complaint_id, **kw):
-        return request.render('gpsi_website.va/complaint')
+    @http.route('/ga/admin/issues/new', type='http', auth="user")
+    def va_camplaint_new(self, **kw):
+        return request.render('gpsi_website.ga/admin/issue_new')
+
+    @http.route('/ga/admin/issues/new', type='http', methods=['POST'], auth="user")
+    def post_va_camplaint_new(self, **kw):
+        project = request.env['project.project'].sudo().search([('use_issues','=',True), ('partner_id','=',request.env.user.company_id.partner_id.id)])
+        Issue = request.env['project.issue'].sudo()
+        issue = Issue.create({
+            'name': 'TMP',
+            'user_id': int(kw['user']),
+            'partner_id': int(kw['supplier']),
+            'priority': kw['severity'],
+            'description': kw['description'],
+            'company_id': request.env.user.company_id.id,
+            'project_id': project.id
+        })
+        issue.write({
+            'name': 'ISSUE[{0}]'.format(issue.id)
+        })
+        return werkzeug.utils.redirect('/ga/admin/issues/{0}'.format(issue.id))
+
+    @http.route('/ga/admin/issues/<int:issue_id>', type='http', auth="user")
+    def va_complaint(self, issue_id, **kw):
+        issue = request.env['project.issue'].sudo().search([('id','=',issue_id)])
+        qcontext = {
+            'issue': issue
+        }
+        return request.render('gpsi_website.ga/admin/issue', qcontext)
 
     @http.route('/ga/admin/va/reports/efficiency', type='http', auth="user")
     def va_reports_efficiency(self, **kw):
@@ -317,15 +369,27 @@ class GlobalAuditAdminWebsite(http.Controller):
 
     @http.route('/ga/admin/va/reports/complaints', type='http', auth="user")
     def va_reports_complaints(self, **kw):
-        return request.render('gpsi_website.va/reports/complaints')
+        return request.render('gpsi_website.ga/admin/va/reports/complaints')
 
     @http.route('/ga/admin/clients/events', type='http', auth="user")
     def clients_events(self, **kw):
-        audits = request.env['project.task'].sudo().search([('partner_id','=',request.env.user.partner_id.id)])
+        audits = request.env.user.company_id.gs_customer_audit_ids
         qcontext = {
             'audits': audits
         }
-        return request.render('gpsi_website.va/events', qcontext)
+        return request.render('gpsi_website.ga/admin/clients/events', qcontext)
+
+    @http.route('/ga/admin/clients/events/<int:event_id>', type='http', auth="user")
+    def clients_event(self, event_id, **kw):
+        audit = request.env['project.task'].sudo().search([('id','=',event_id)])
+        attachments = request.env['ir.attachment'].sudo().search([('res_model','=','project.task'), ('res_id','=',event_id)])
+        stages = request.env['project.task.type'].sudo().search([('project_ids','in',[audit.project_id.id])])
+        qcontext = {
+            'audit': audit,
+            'attachments': attachments,
+            'stages': stages
+        }
+        return request.render('gpsi_website.ga/admin/clients/event', qcontext)
 
     @http.route('/ga/admin/settings/company', type='http', auth="user")
     def settings_company(self, **kw):
