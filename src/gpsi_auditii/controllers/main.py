@@ -11,6 +11,11 @@ _logger = logging.getLogger(__name__)
 
 
 class AuditiiController(http.Controller):
+    def has_perms(self):
+        """Valida que el usuario tenga los permisos adecuados
+        """
+        return request.env.user.has_group('gpsi_auditii.group_ga_user')
+
     @http.route('/ga/admin/signin', type='http', auth="none")
     def sign_in(self, redirect=None, **kw):
         request.params['login_success'] = False
@@ -80,20 +85,35 @@ class AuditiiController(http.Controller):
 
     @http.route('/ga/admin', type='http', auth="user")
     def dashboard(self, **kw):
+        if not self.has_perms():
+            return request.render('gpsi_auditii.admin/forbidden')
+
         return request.render('gpsi_auditii.admin/dashboard')
 
     @http.route('/ga/admin/ca/contracts', type='http', auth="user")
     def ca_contracts(self, **kw):
+        if not self.has_perms():
+            return request.render('gpsi_auditii.admin/forbidden')
+
         return request.render('gpsi_auditii.admin/ca/contracts')
 
     @http.route('/ga/admin/ca/contracts/<int:contract_id>', type='http', auth="user")
     def ca_contract(self, contract_id, **kw):
+        if not self.has_perms():
+            return request.render('gpsi_auditii.admin/forbidden')
+
         return request.render('gpsi_auditii.admin/ca/contract')
 
     @http.route('/ga/admin/ca/events', type='http', auth="user")
     def ca_events(self, **kw):
+        if not self.has_perms():
+            return request.render('gpsi_auditii.admin/forbidden')
+
         return request.render('gpsi_auditii.admin/ca/events')
 
     @http.route('/ga/admin/ca/events/<int:event_id>', type='http', auth="user")
     def ca_event(self, event_id, **kw):
+        if not self.has_perms():
+            return request.render('gpsi_auditii.admin/forbidden')
+            
         return request.render('gpsi_auditii.admin/ca/event')

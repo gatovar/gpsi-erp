@@ -10,7 +10,8 @@
     'depends': ['gpsi_staff', 'gpsi_themes'],
     'data': [
         'views/auditii_views.xml',
-        'views/auditii_website.xml'
+        'views/auditii_website.xml',
+        'data/auditii_data.xml'
     ],
     'test': [],
     'installable': True,

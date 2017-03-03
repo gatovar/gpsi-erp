@@ -94,7 +94,7 @@
                                     <i class="fa fa-pencil-square-o position-left"></i> Customer Audits
                                 </a>
                             </li>
-                            <t t-if="request.env.user.has_group('gpsi_staff.group_ga_admin')">
+                            <t t-if="request.env.user.has_group('gpsi_auditii.group_ga_admin')">
                                 <li class="dropdown">
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                         <i class="fa fa-bar-chart position-left"></i> Reports <span class="caret"></span>
@@ -378,14 +378,14 @@
                 </div>
                 <div class="breadcrumb-line breadcrumb-line-wide" style="box-shadow: none;">
                     <ul class="breadcrumb">
-                        <li><a href="/admin"><i class="icon-home2 position-left"></i> Home</a></li>
-                        <li><a href="/admin/ca/contracts">Contracts</a></li>
+                        <li><a href="/ga/admin"><i class="icon-home2 position-left"></i> Home</a></li>
+                        <li><a href="/ga/admin/ca/contracts">Contracts</a></li>
                         <li class="active">SO001</li>
                     </ul>
                 </div>
             </div>
             <div class="content">
-                <div class="panel panel-flat border-grey-300">
+                <div class="panel panel-3d">
                     <div class="panel-heading" style="margin-bottom: 5px">
                         <!--<h6 class="panel-title form-wizard-title text-semibold">
                             <span class="form-wizard-count">1</span>
@@ -753,8 +753,8 @@
                 </div>
                 <div class="breadcrumb-line breadcrumb-line-wide" style="box-shadow: none;">
                     <ul class="breadcrumb">
-                        <li><a href="/admin"><i class="icon-home2 position-left"></i> Home</a></li>
-                        <li><a href="/admin/ca/events">Events</a></li>
+                        <li><a href="/ga/admin"><i class="icon-home2 position-left"></i> Home</a></li>
+                        <li><a href="/ga/admin/ca/events">Events</a></li>
                         <li class="active">EV-001</li>
                     </ul>
                 </div>
@@ -833,7 +833,7 @@
                         </ul>
                     </div>
                 </div>
-                <div class="panel panel-flat border-grey-300">
+                <div class="panel panel-3d">
                     <div class="panel-heading" style="margin-bottom:10px">
                         <h6 class="panel-title">&amp;nbsp;</h6>
                         <div class="heading-elements">
@@ -1034,5 +1034,39 @@
 				</div>
             </div>
         </t>
+    </template>
+
+    <template id="gpsi_auditii.admin/forbidden" name="Event Details">
+        <html>
+            <head>
+                <meta charset="utf-8"/>
+                <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+                <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+                <title t-esc="title or 'GlobalAudit'"/>
+
+                <script type="text/javascript">
+                    var odoo = {
+                        csrf_token: "<t t-esc="request.csrf_token(None)"/>",
+                    };
+                </script>
+
+                <t t-call="gpsi_auditii.admin/assets_common"/>
+            </head>
+            <body>
+                <div class="page-container login-container">
+                    <div class="page-content">
+                        <div class="content-wrapper">
+                            <div class="content">
+                                <div class="container-fluid text-center">
+                                    <h1 class="error-title">403</h1>
+                                    <h6 class="text-semibold content-group">Oops, an error has occurred. Forbidden!</h6>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </body>
+        </html>
     </template>
 </openerp>
