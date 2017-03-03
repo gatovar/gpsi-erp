@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <report 
+            id="report_audit_chk_def_executive"
+            string="Executive Report"
+            model="gpsi.staff.audit" 
+            report_type="qweb-pdf"
+            file="gpsi_staff.audit_report_checklist_default_executive" 
+            name="gpsi_staff.audit_report_checklist_default_executive">
+        </report>
+
+        <report 
+            id="report_audit_chk_def_general"
+            string="General Report"
+            model="gpsi.staff.audit" 
+            report_type="qweb-pdf"
+            file="gpsi_staff.audit_report_checklist_default_general" 
+            name="gpsi_staff.audit_report_checklist_default_general">
+        </report>
+
+        <template id="audit_report_checklist_default_executive">
+            <t t-call="report.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <t t-call="report.external_layout">
+                        <div class="page">
+                            <h2>Report title</h2>
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+
+        <template id="audit_report_checklist_default_general">
+            <t t-call="report.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <t t-call="report.external_layout">
+                        <div class="page">
+                            <h2>Report title</h2>
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+
+    </data>
+</openerp>

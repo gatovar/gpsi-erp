@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record id="audit_member_role_lead" model="gpsi.staff.audit.member.role">
+            <field name="name">Lead</field>
+        </record>
+
+        <record id="audit_member_role_observer" model="gpsi.staff.audit.member.role">
+            <field name="name">Observer</field>
+        </record>
+
+        <record id="audit_member_role_witness" model="gpsi.staff.audit.member.role">
+            <field name="name">Witness</field>
+        </record>
+
+        <record id="project_cert_audit" model="project.project">
+            <field name="name">Certification Audits</field>
+            <field name="use_tasks">True</field>
+            <field name="label_tasks">Events</field>
+            <field name="privacy_visibility">followers</field>
+            <field name="is_cert_audit" eval="True"/>
+        </record>
+
+        <record id="cert_audit_new_stage" model="project.task.type">
+            <field name="name">New</field>
+            <field name="sequence">0</field>
+            <field name="project_ids" eval="[(4, ref('project_cert_audit'))]"/>
+        </record>
+
+        <record id="cert_audit_schedule_stage" model="project.task.type">
+            <field name="name">Scheduling</field>
+            <field name="sequence">1</field>
+            <field name="project_ids" eval="[(4, ref('project_cert_audit'))]"/>
+        </record>
+
+        <record id="cert_audit_execute_stage" model="project.task.type">
+            <field name="name">Execute</field>
+            <field name="sequence">2</field>
+            <field name="project_ids" eval="[(4, ref('project_cert_audit'))]"/>
+        </record>
+
+        <record id="cert_audit_review_stage" model="project.task.type">
+            <field name="name">Review</field>
+            <field name="sequence">3</field>
+            <field name="project_ids" eval="[(4, ref('project_cert_audit'))]"/>
+        </record>
+
+        <record id="cert_audit_closed_stage" model="project.task.type">
+            <field name="name">Closed</field>
+            <field name="sequence">4</field>
+            <field name="fold" eval="True"/>
+            <field name="project_ids" eval="[(4, ref('project_cert_audit'))]"/>
+        </record>
+
+        <record id="vendor_audit_new_stage" model="project.task.type">
+            <field name="name">New</field>
+            <field name="sequence">0</field>
+        </record>
+
+        <record id="vendor_audit_scheduling_stage" model="project.task.type">
+            <field name="name">Scheduling</field>
+            <field name="sequence">1</field>
+        </record>
+
+        <record id="vendor_audit_execute_stage" model="project.task.type">
+            <field name="name">Execute</field>
+            <field name="sequence">2</field>
+        </record>
+
+        <record id="vendor_audit_review_stage" model="project.task.type">
+            <field name="name">Review</field>
+            <field name="sequence">3</field>
+        </record>
+
+        <record id="vendor_audit_closed_stage" model="project.task.type">
+            <field name="name">Closed</field>
+            <field name="sequence">4</field>
+            <field name="fold" eval="True"/>
+        </record>
+        
+    </data>
+</openerp>

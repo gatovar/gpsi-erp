@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+        <menuitem
+            id="menu_staff"
+            name="Staff"
+            sequence="10">
+        </menuitem>
+
+        <menuitem
+            id="menu_staff_opers"
+            name="Operations"
+            parent="menu_staff"
+            sequence="1">
+        </menuitem>
+
+        <menuitem
+            id="menu_staff_reports"
+            name="Reports"
+            parent="menu_staff"
+            sequence="2">
+        </menuitem>
+
+        <menuitem
+            id="menu_staff_config"
+            name="Configuration"
+            parent="menu_staff"
+            sequence="3">
+        </menuitem>
+    </data>
+</openerp>

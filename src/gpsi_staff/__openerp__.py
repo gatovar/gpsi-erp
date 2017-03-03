@@ -7,15 +7,16 @@
     'summary': 'Audit Management',
     'description': '',
     'website': '',
-    'depends': ['project', 'project_issue'],
+    'depends': ['mail', 'project', 'project_issue'],
     'data': [
-        'views/audit_task_views.xml',
-        'views/res_partner_views.xml',
-        'views/res_company_views.xml',
-        'data/gpsi_staff_data.xml'
+        'data/staff_audit_data.xml',
+        'views/staff_views.xml',
+        'views/staff_audit_views.xml',
+        'views/staff_audit_website.xml',
+        'reports/audit_reports.xml'
     ],
     'test': [],
     'installable': True,
     'auto_install': False,
-    'application': False
+    'application': True
 }
