@@ -7,8 +7,11 @@
     'summary': 'Auditii',
     'description': '',
     'website': '',
-    'depends': ['gpsi_staff', 'gpsi_auditii_web'],
-    'data': [],
+    'depends': ['gpsi_staff', 'gpsi_themes'],
+    'data': [
+        'views/auditii_views.xml',
+        'views/auditii_website.xml'
+    ],
     'test': [],
     'installable': True,
     'auto_install': False,

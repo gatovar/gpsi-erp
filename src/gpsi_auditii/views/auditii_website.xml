@@ -1,0 +1,1038 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <template id="gpsi_auditii.admin/assets_common">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,300,100,500,700,900" type="text/css"/>
+        <link rel="stylesheet" href="/gpsi_themes/static/src/assets/css/icons/icomoon/styles.css" type="text/css"/>
+        <link rel="stylesheet" href="/gpsi_themes/static/src/assets/css/icons/fontawesome/styles.min.css" type="text/css"/>
+        <link rel="stylesheet" href="/gpsi_themes/static/src/assets/css/bootstrap.css" type="text/css"/>
+        <link rel="stylesheet" href="/gpsi_themes/static/src/assets/css/core.css" type="text/css"/>
+        <link rel="stylesheet" href="/gpsi_themes/static/src/assets/css/components.css" type="text/css"/>
+        <link rel="stylesheet" href="/gpsi_themes/static/src/assets/css/colors.css" type="text/css"/>
+        <link rel="stylesheet" href="/gpsi_themes/static/src/assets/css/custom.css" type="text/css"/>
+        
+        <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+
+        <script type="text/javascript" src="/gpsi_themes/static/src/assets/js/plugins/loaders/pace.min.js"></script>
+        <script type="text/javascript" src="/gpsi_themes/static/src/assets/js/core/libraries/jquery.min.js"></script>
+        <script type="text/javascript" src="/gpsi_themes/static/src/assets/js/core/libraries/bootstrap.min.js"></script>
+        <script type="text/javascript" src="/gpsi_themes/static/src/assets/js/plugins/forms/inputs/autosize.min.js"></script>
+        <script type="text/javascript" src="/gpsi_themes/static/src/assets/js/plugins/loaders/blockui.min.js"></script>
+        <script type="text/javascript" src="/gpsi_themes/static/src/assets/js/plugins/forms/tags/tagsinput.min.js"></script>
+        <script type="text/javascript" src="/gpsi_themes/static/src/assets/js/plugins/editors/summernote/summernote.min.js"></script>
+        <script type="text/javascript" src="/gpsi_themes/static/src/assets/js/plugins/notifications/bootbox.min.js"></script>
+
+        <script type="text/javascript" src="/gpsi_themes/static/src/assets/js/plugins/visualization/d3/d3.min.js"></script>
+        <script type="text/javascript" src="/gpsi_themes/static/src/assets/js/plugins/visualization/d3/d3_tooltip.js"></script>
+        <script type="text/javascript" src="/gpsi_themes/static/src/assets/js/plugins/forms/styling/switchery.min.js"></script>
+        <script type="text/javascript" src="/gpsi_themes/static/src/assets/js/plugins/forms/styling/uniform.min.js"></script>
+        <script type="text/javascript" src="/gpsi_themes/static/src/assets/js/plugins/forms/selects/bootstrap_select.min.js"></script>
+        <script type="text/javascript" src="/gpsi_themes/static/src/assets/js/plugins/forms/selects/bootstrap_multiselect.js"></script>
+        <script type="text/javascript" src="/gpsi_themes/static/src/assets/js/plugins/ui/moment/moment.min.js"></script>
+        <script type="text/javascript" src="/gpsi_themes/static/src/assets/js/plugins/pickers/daterangepicker.js"></script>
+        <script type="text/javascript" src="/gpsi_themes/static/src/assets/js/charts/google/lines/lines.js"></script>
+        <script type="text/javascript" src="/gpsi_themes/static/src/assets/js/pages/form_bootstrap_select.js"></script>
+        <script type="text/javascript" src="/gpsi_themes/static/src/assets/js/charts/google/lines/drilldown.js"></script>
+
+        <script type="text/javascript" src="/gpsi_themes/static/src/assets/js/core/app.js"></script>
+    </template>
+
+    <template id="gpsi_auditii.admin/layout" name="Web layout">&lt;!DOCTYPE html&gt;
+        <html>
+            <head>
+                <meta charset="utf-8"/>
+                <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+                <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+                <title t-esc="title or 'GlobalAudit'"/>
+
+                <script type="text/javascript">
+                    var odoo = {
+                        csrf_token: "<t t-esc="request.csrf_token(None)"/>",
+                    };
+                </script>
+
+                <t t-call="gpsi_auditii.admin/assets_common"/>
+            </head>
+            <body class="navbar-top layout-boxed">
+                <div class="navbar navbar-inverse bg-danger-400 navbar-fixed-top">
+                    <div class="navbar-header">
+                        <a class="navbar-brand" href="index.html"><img src="/gpsi_themes/static/src/assets/images/logo_light2.png" alt=""/></a>
+                        <ul class="nav navbar-nav visible-xs-block">
+                            <li><a data-toggle="collapse" data-target="#navbar-mobile"><i class="icon-tree5"></i></a></li>
+                            <li><a class="sidebar-mobile-main-toggle"><i class="icon-paragraph-justify3"></i></a></li>
+                        </ul>
+                    </div>
+                    <div class="navbar-collapse collapse" id="navbar-mobile">
+                        <ul class="nav navbar-nav">
+                            <li class="dropdown mega-menu mega-menu-wide">
+                                <a href="/ga/admin">
+                                    <i class="fa fa-dashboard position-left"></i> Dashboard
+                                </a>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#"  class="dropdown-toggle" data-toggle="dropdown">
+                                    <i class="fa fa-pencil-square-o position-left"></i> Certification <span class="caret"></span>
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu-right">
+                                    <li><a href="/ga/admin/ca/contracts"> Contracts</a></li>
+                                    <li><a href="/ga/admin/ca/events"> Audits</a></li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#"  class="dropdown-toggle" data-toggle="dropdown">
+                                    <i class="fa fa-pencil-square-o position-left"></i> Supplier Evaluation <span class="caret"></span>
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu-right">
+                                    <li><a href="/ga/admin/va/suppliers"> Suppliers</a></li>
+                                    <li><a href="/ga/admin/va/events"> Audits</a></li>
+                                    <li class="divider"></li>
+                                    <li><a href="/ga/admin/issues"> Issues</a></li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="/ga/admin/clients/events/">
+                                    <i class="fa fa-pencil-square-o position-left"></i> Customer Audits
+                                </a>
+                            </li>
+                            <t t-if="request.env.user.has_group('gpsi_staff.group_ga_admin')">
+                                <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                        <i class="fa fa-bar-chart position-left"></i> Reports <span class="caret"></span>
+                                    </a>
+                                    <ul class="dropdown-menu dropdown-menu-right">
+                                        <li><a href="/ga/admin/va/reports/efficiency"> Efficiency</a></li>
+                                        <li><a href="/ga/admin/va/reports/complaints"> Issues</a></li>
+                                        <li><a href="/ga/admin/reports/users"> User Performance</a></li>
+                                    </ul>
+                                </li>
+                                <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                    <i class="fa fa-cogs position-left"></i> Settings <span class="caret"></span>
+                                    </a>
+                                    <ul class="dropdown-menu dropdown-menu-right">
+                                        <li class="dropdown-submenu">
+                                            <a href="#"><i class="fa fa-tags"></i> Tags</a>
+                                            <ul class="dropdown-menu">
+                                                <li><a href="/ga/admin/settings/tags/contacts"> Contacts</a></li>
+                                                <li><a href="/ga/admin/settings/tags/audits"> Audits</a></li>
+                                                <li><a href="/ga/admin/settings/tags/issues"> Issues</a></li>
+                                            </ul>
+                                        </li>
+                                        <li><a href="/ga/admin/settings/users"><i class="fa fa-users"></i> Users</a></li>
+                                        <li><a href="/ga/admin/settings/integrations"><i class="icon-chrome"></i> Integrations</a></li>
+                                    </ul>
+                                </li>
+                            </t>
+                        </ul>
+                        <ul class="nav navbar-nav navbar-right">
+                            <li class="dropdown dropdown-user">
+                                <a class="dropdown-toggle" data-toggle="dropdown">
+                                    <span style="padding: 0px" t-field="request.env.user.image" t-field-options="{&quot;widget&quot;: &quot;image&quot;, &quot;style&quot;: &quot;display: inline;&quot;}"/>
+                                    <span><t t-esc="request.env.user.name"/></span>
+                                    <i class="caret"></i>
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu-right">
+                                    <li><a href="/ga/admin/logout"><i class="icon-switch2"></i> Logout</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="page-container">
+                    <div class="page-content">
+                        <div class="content-wrapper">
+                            <t t-raw="0"/>
+                        </div>
+                    </div>
+                </div>
+            </body>
+        </html>
+    </template>
+
+    <template id="gpsi_auditii.admin/login" name="Login">&lt;!DOCTYPE html&gt;
+        <html lang="en">
+            <head>
+                <meta charset="utf-8"></meta>
+                <meta http-equiv="X-UA-Compatible" content="IE=edge"></meta>
+                <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
+                <title>GlobalAudit</title>
+                <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,300,100,500,700,900" type="text/css"></link>
+                <link rel="stylesheet" href="/gpsi_themes/static/src/assets/css/icons/icomoon/styles.css" type="text/css"></link>
+                <link rel="stylesheet" href="/gpsi_themes/static/src/assets/css/bootstrap.css" type="text/css"></link>
+                <link rel="stylesheet" href="/gpsi_themes/static/src/assets/css/core.css" type="text/css"></link>
+                <link rel="stylesheet" href="/gpsi_themes/static/src/assets/css/components.css" type="text/css"></link>
+                <link rel="stylesheet" href="/gpsi_themes/static/src/assets/css/colors.css" type="text/css"></link>
+                <style>
+                    .form-group {
+                        margin-bottom: 20px
+                    }
+                </style>
+                
+                <script type="text/javascript" src="/gpsi_themes/static/src/assets/js/plugins/loaders/pace.min.js"></script>
+                <script type="text/javascript" src="/gpsi_themes/static/src/assets/js/core/libraries/jquery.min.js"></script>
+                <script type="text/javascript" src="/gpsi_themes/static/src/assets/js/core/libraries/bootstrap.min.js"></script>
+                <script type="text/javascript" src="/gpsi_themes/static/src/assets/js/plugins/loaders/blockui.min.js"></script>
+                <script type="text/javascript" src="/gpsi_themes/static/src/assets/js/plugins/forms/styling/uniform.min.js"></script>
+                <script type="text/javascript" src="/gpsi_themes/static/src/assets/js/pages/login.js"></script>
+
+                <script type="text/javascript">
+                    var odoo = {
+                        csrf_token: "<t t-esc="request.csrf_token(None)"/>",
+                    };
+                </script>
+            </head>
+            <body class="login-cover">
+                <div class="page-container login-container">
+                    <div class="page-content">
+                        <div class="content-wrapper">
+                            <div class="content">
+                                <div class="tabbable panel login-form width-400">
+                                    <ul class="nav nav-tabs nav-tabs-highlight nav-justified">
+                                        <li class="active">
+                                            <a href="#signin-tab" data-toggle="tab">
+                                                <h6><i class="icon-checkmark3 position-left"></i> Already a user?</h6>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#signup-tab" data-toggle="tab">
+                                                <h6><i class="icon-plus3 position-left"></i> Create an account</h6>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                    <div class="tab-content panel-body">
+                                        <div class="tab-pane fade in active" id="signin-tab">
+                                            <form action="/ga/admin/signin" method="post" enctype="multipart/form-data">
+                                                <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                                                <div class="text-center">
+                                                    <div class="icon-object border-slate-300 text-slate-300"><i class="icon-reading"></i></div>
+                                                    <h5 class="content-group">Login to your account <small class="display-block">Your credentials</small></h5>
+                                                </div>
+                                                <div class="alert alert-danger" role="alert" t-if="error"><t t-esc="error"/></div>
+                                                <div class="form-group has-feedback has-feedback-left">
+                                                    <input type="email" class="form-control" placeholder="Email" name="login" required="required"/>
+                                                    <div class="form-control-feedback">
+                                                        <i class="icon-user text-muted"></i>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group has-feedback has-feedback-left">
+                                                    <input type="password" class="form-control" placeholder="Password" name="password" required="required"/>
+                                                    <div class="form-control-feedback">
+                                                        <i class="icon-lock2 text-muted"></i>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group login-options">
+                                                    <div class="row">
+                                                        <div class="col-sm-6">
+                                                            <label class="checkbox-inline">
+                                                            <input type="checkbox" class="styled" checked="checked"/>
+                                                            Remember
+                                                            </label>
+                                                        </div>
+                                                        <div class="col-sm-6 text-right">
+                                                            <a href="login_password_recover.html">Forgot password?</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <button type="submit" class="btn bg-blue btn-block">Login <i class="icon-arrow-right14 position-right"></i></button>
+                                                </div>
+                                            </form>
+                                            <span class="help-block text-center no-margin">By continuing, you're confirming that you've read our <a href="#">Terms &amp; Conditions</a> and <a href="#">Cookie Policy</a></span>
+                                        </div>
+                                        <div class="tab-pane fade" id="signup-tab">
+                                            <form  action="/ga/admin/signup" method="post" enctype="multipart/form-data">
+                                                <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                                                <div class="text-center">
+                                                    <div class="icon-object border-success text-success"><i class="icon-plus3"></i></div>
+                                                    <h5 class="content-group">Create new account <small class="display-block">All fields are required</small></h5>
+                                                </div>
+                                                <div class="form-group has-feedback has-feedback-left">
+                                                    <input type="text" name="company" class="form-control" placeholder="Company"/>
+                                                    <div class="form-control-feedback">
+                                                        <i class="icon-office text-muted"></i>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group has-feedback has-feedback-left">
+                                                    <input type="text" name="username" class="form-control" placeholder="Your username"/>
+                                                    <div class="form-control-feedback">
+                                                        <i class="icon-user-check text-muted"></i>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group has-feedback has-feedback-left">
+                                                    <input type="email" name="email" class="form-control" placeholder="Your email"/>
+                                                    <div class="form-control-feedback">
+                                                        <i class="icon-mention text-muted"></i>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group has-feedback has-feedback-left">
+                                                    <input type="password" name="password" class="form-control" placeholder="Create password"/>
+                                                    <div class="form-control-feedback">
+                                                        <i class="icon-user-lock text-muted"></i>
+                                                    </div>
+                                                </div>
+                                                <div class="content-divider text-muted form-group"><span>Additions</span></div>
+                                                <div class="form-group">
+                                                    <div class="checkbox">
+                                                        <label>
+                                                        <input type="checkbox" class="styled" checked="checked"/>
+                                                        Subscribe to monthly newsletter
+                                                        </label>
+                                                    </div>
+                                                    <div class="checkbox">
+                                                        <label>
+                                                        <input type="checkbox" class="styled"/>
+                                                        Accept <a href="#">terms of service</a>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <button type="submit" class="btn bg-indigo-400 btn-block">Register <i class="icon-circle-right2 position-right"></i></button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </body>
+        </html>
+    </template>
+
+    <template id="gpsi_auditii.admin/dashboard" name="Dashboard">
+        <t t-call="gpsi_auditii.admin/layout">
+            <div class="content">
+            </div>
+        </t>
+    </template>
+
+    <template id="gpsi_auditii.admin/ca/contracts" name="Cert. Contracts">
+        <t t-call="gpsi_auditii.admin/layout">
+            <div class="panel page-header border-top-primary" style="padding-bottom: 0;">
+                <div class="page-header-content">
+                    <div class="page-title">
+                        <h5>
+                            <span class="text-semibold">Contracts</span>
+                        </h5>
+                    </div>
+                    <div class="heading-elements">
+                        <button type="button" class="btn bg-teal-400 btn-icon heading-btn"> Buy a Certificate</button>
+                    </div>
+                </div>
+                <div class="breadcrumb-line breadcrumb-line-wide" style="box-shadow: none;">
+                    <ul class="breadcrumb">
+                        <li><a href="/admin"><i class="icon-home2 position-left"></i> Home</a></li>
+                        <li class="active">Contracts</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="content">
+                <div class="panel panel-flat">
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Ref. #</th>
+                                    <th>Date</th>
+                                    <th>Salesperson</th>
+                                    <th>Standard</th>
+                                    <th>Total</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><a href="/ga/admin/ca/contracts/1">SO001</a></td>
+                                    <td>12/05/2013</td>
+                                    <td>Martha Sanchez</td>
+                                    <td>ISO 9001:2008</td>
+                                    <td><span class="text-semibold">$2,100.00 MXN</span></td>
+                                    <td><span class="label bg-warning-400">Quotation</span></td>
+                                </tr>
+                                <tr>
+                                    <td><a href="/ga/admin/ca/contracts/1">SO002</a></td>
+                                    <td>12/05/2013</td>
+                                    <td>Leo Ayala</td>
+                                    <td>ISO 14000:2013</td>
+                                    <td><span class="text-semibold">$31,300.00 USD</span></td>
+                                    <td><span class="label bg-warning-400">Draft</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+
+    <template id="gpsi_auditii.admin/ca/contract" name="Event Details">
+        <t t-call="gpsi_auditii.admin/layout">
+            <div class="panel page-header border-top-primary" style="padding-bottom: 0;">
+                <div class="page-header-content">
+                    <div class="page-title">
+                        <h5>
+                            <span class="text-semibold">SO001</span>
+                        </h5>
+                    </div>
+                    <div class="heading-elements">
+                    </div>
+                </div>
+                <div class="breadcrumb-line breadcrumb-line-wide" style="box-shadow: none;">
+                    <ul class="breadcrumb">
+                        <li><a href="/admin"><i class="icon-home2 position-left"></i> Home</a></li>
+                        <li><a href="/admin/ca/contracts">Contracts</a></li>
+                        <li class="active">SO001</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="content">
+                <div class="panel panel-flat border-grey-300">
+                    <div class="panel-heading" style="margin-bottom: 5px">
+                        <!--<h6 class="panel-title form-wizard-title text-semibold">
+                            <span class="form-wizard-count">1</span>
+                            Quotation
+                            <small class="display-block">GlobalAudit team is creating sale order</small>
+                        </h6>-->
+                        <h6 class="panel-title">&amp;nbsp;</h6>
+                        <div class="heading-elements">
+                            <div class="heading-btn">
+                                <a href="/ga/admin/account/invoices/1" class="btn border-slate text-slate-800 btn-flat"><i class="icon-file-check position-left"></i> Invoices</a>
+                                <button type="button" class="btn border-slate text-slate-800 btn-flat"><i class="icon-printer position-left"></i> Quotation</button>
+                                <button type="button" class="btn border-slate text-slate-800 btn-flat"><i class="icon-printer position-left"></i> Contract</button>
+                            </div>
+                        </div>
+                        <a class="heading-elements-toggle"><i class="icon-menu"></i></a>
+                    </div>
+                    <div class="panel-body">
+                        <form class="form-horizontal" action="#">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <fieldset class="content-group">
+                                        <div class="form-group">
+                                            <label class="control-label col-lg-4 text-semibold">Certification Type</label>
+                                            <div class="col-lg-8">
+                                                <select name="select" class="form-control">
+                                                    <option value="opt1">Initial</option>
+                                                    <option value="opt2">Recertification</option>
+                                                    <option value="opt3">Takeover</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-lg-4 text-semibold">Standard</label>
+                                            <div class="col-lg-8">
+                                                <select name="select" class="form-control">
+                                                    <option value="opt1">ISO 9001:2008</option>
+                                                    <option value="opt2">ISO 9001:2015</option>
+                                                    <option value="opt3">ISO 14000:2013</option>
+                                                    <option value="opt4">ISO 17000</option>
+                                                    <option value="opt5">ISO 21000</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-lg-4 text-semibold">Employees</label>
+                                            <div class="col-lg-8">
+                                                <input type="text" class="form-control"/>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-lg-4 text-semibold">Risk Level</label>
+                                            <div class="col-lg-8">
+                                                <select name="select" class="form-control">
+                                                    <option value="opt1">Low</option>
+                                                    <option value="opt2">Normal</option>
+                                                    <option value="opt3">High</option>
+                                                    <option value="opt4">Very High</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </fieldset>
+                                </div>
+                                <div class="col-lg-6">
+                                    <fieldset class="content-group">
+                                        <div class="form-group">
+                                            <label class="control-label col-lg-4 text-semibold">Apply Design</label>
+                                            <div class="col-lg-8">
+                                                <div class="checkbox">
+                                                    <label>
+                                                        <div class="checker"><span class="checked"><input type="checkbox" class="styled"/></span></div>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-lg-4 text-semibold">Multisite</label>
+                                            <div class="col-lg-8">
+                                                <div class="checkbox">
+                                                    <label>
+                                                        <div class="checker"><span class="checked"><input type="checkbox" class="styled"/></span></div>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-lg-4 text-semibold">Multilocate</label>
+                                            <div class="col-lg-8">
+                                                <div class="checkbox">
+                                                    <label>
+                                                        <div class="checker"><span class="checked"><input type="checkbox" class="styled"/></span></div>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-lg-4 text-semibold">Bilingual Auditor</label>
+                                            <div class="col-lg-8">
+                                                <div class="checkbox">
+                                                    <label>
+                                                        <div class="checker"><span class="checked"><input type="checkbox" class="styled"/></span></div>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </fieldset>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <legend class="text-bold">Events</legend>
+                                <div class="col-lg-6">
+                                    <fieldset class="content-group">
+                                        <div class="form-group">
+                                            <label class="control-label col-lg-4 text-semibold">Scheme</label>
+                                            <div class="col-lg-8">
+                                                <select name="select" class="form-control">
+                                                    <option value="opt1">Annual</option>
+                                                    <option value="opt2">Biannual</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-lg-4 text-semibold">Duration</label>
+                                            <div class="col-lg-8">
+                                                <select name="select" class="form-control">
+                                                    <option value="opt1">1 year</option>
+                                                    <option value="opt2">2 years</option>
+                                                    <option value="opt3">3 years</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </fieldset>
+                                </div>
+                                <div class="col-lg-6">
+                                    <fieldset class="content-group">
+                                        <div class="form-group">
+                                            <label class="control-label col-lg-4 text-semibold">Currency</label>
+                                            <div class="col-lg-8">
+                                                <select name="select" class="form-control">
+                                                    <option value="opt1">Peso Mexicano</option>
+                                                    <option value="opt2">Dollar</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </fieldset>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="tabbable">
+                                        <ul class="nav nav-tabs nav-tabs-highlight">
+                                            <li class="active"><a class="text-semibold" href="#sites-tab" data-toggle="tab">Sites</a></li>
+                                            <li><a href="#notes-tab" class="text-semibold" data-toggle="tab">Notes</a></li>
+                                            <li><a href="#quotation-tab" class="text-semibold" data-toggle="tab">Quotation</a></li>
+                                        </ul>
+
+                                        <div class="tab-content">
+                                            <div class="tab-pane active" id="sites-tab">
+                                                <div class="row">
+                                                    <div class="col-lg-12">
+                                                        <div class="form-group">
+                                                            <div class="table-responsive">
+                                                                <table class="table">
+                                                                    <thead>
+                                                                        <tr>
+                                                                            <th>Address</th>
+                                                                            <th>Contact</th>
+                                                                            <th>Employees</th>
+                                                                            <th>Action</th>
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody>
+                                                                        <tr>
+                                                                            <td>
+                                                                                <div>C. Pedro Moreno #45</div>
+                                                                                <div class="text-muted text-size-small">C.P. 45000</div>
+                                                                                <div class="text-muted text-size-small">Guadalajara, Jalisco México</div>
+                                                                            </td>
+                                                                            <td>
+                                                                                <div>Carmen Valenzuela</div>
+                                                                                <div class="text-muted text-size-small">cvalenzuela@globalstd.com</div>
+                                                                            </td>
+                                                                            <td>40-50</td>
+                                                                            <td></td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>
+                                                                                <div>C. Pedro Moreno #45</div>
+                                                                                <div class="text-muted text-size-small">C.P. 45000</div>
+                                                                                <div class="text-muted text-size-small">Guadalajara, Jalisco México</div>
+                                                                            </td>
+                                                                            <td>
+                                                                                <div>Frank Mendoza</div>
+                                                                                <div class="text-muted text-size-small">fmendoza@globalstd.com</div>
+                                                                            </td>
+                                                                            <td>10-20</td>
+                                                                            <td></td>
+                                                                        </tr>
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="tab-pane" id="notes-tab">
+                                                <div class="row">
+                                                    <div class="col-lg-12">
+                                                        <div class="form-group">
+                                                            <textarea rows="4" class="form-control elastic" style="overflow: hidden; word-wrap: break-word; resize: horizontal; height: 96px;"></textarea>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="tab-pane" id="quotation-tab">
+                                                <div class="row">
+                                                    <div class="col-lg-12">
+                                                        <div class="form-group">
+                                                            <div class="table-responsive">
+                                                                <table class="table">
+                                                                    <thead>
+                                                                        <tr>
+                                                                            <th>Site</th>
+                                                                            <th>Stage I</th>
+                                                                            <th>Stage II</th>
+                                                                            <th>Surv. I</th>
+                                                                            <th>Surv. 2</th>
+                                                                            <th>Total</th>
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody>
+                                                                        <tr>
+                                                                            <td>
+                                                                                <div>C. Pedro Moreno #45</div>
+                                                                                <div class="text-muted text-size-small">C.P. 45000</div>
+                                                                                <div class="text-muted text-size-small">Guadalajara, Jalisco México</div>
+                                                                            </td>
+                                                                            <td>
+                                                                                <div class="text-semibold">$13,500.00</div>
+                                                                                <div class="text-muted text-size-small">1 Days</div>
+                                                                            </td>
+                                                                            <td>
+                                                                                <div class="text-semibold">$74,250.00</div>
+                                                                                <div class="text-muted text-size-small">5.5 Days</div>
+                                                                            </td>
+                                                                            <td>
+                                                                                <div class="text-semibold">$37,500.00</div>
+                                                                                <div class="text-muted text-size-small">2.5 Days</div>
+                                                                            </td>
+                                                                            <td>
+                                                                                <div class="text-semibold">$37,500.00</div>
+                                                                                <div class="text-muted text-size-small">2.5 Days</div>
+                                                                            </td>
+                                                                            <td>
+                                                                                <div class="text-semibold">$162,750.00</div>
+                                                                                <div class="text-muted text-size-small">12.5 Days</div>
+                                                                            </td>
+                                                                        </tr>
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="panel panel-flat">
+					<div class="panel-heading">
+						<h5 class="panel-title text-semiold"><i class="icon-bubbles4 position-left"></i> Comments</h5>
+						<div class="heading-elements">
+							<a href="#" class="btn bg-blue btn-xs btn-icon"><i class="icon-plus2"></i></a>
+						</div>
+					</div>
+
+					<div class="panel-body">
+						<ul class="media-list content-group-lg stack-media-on-mobile">
+							<li class="media">
+								<div class="media-left">
+									<a href="#"><img src="/gpsi_website/static/src/assets/images/demo/users/face2.jpg" class="img-circle img-sm" alt=""/></a>
+								</div>
+
+								<div class="media-body">
+									<div class="media-heading">
+										<a href="#" class="text-semibold">Samuel Espinoza</a>
+										<span class="media-annotation dotted">2 days</span>
+									</div>
+
+									<p>Se ajusto la cotización para añadir las observaciones del cliente, reducimos en un 10% los costos de la auditoría sin afectar los días auditor.</p>
+								</div>
+							</li>
+						</ul>
+					</div>
+				</div>
+            </div>
+        </t>
+    </template>
+
+    <template id="gpsi_auditii.admin/ca/events" name="Cert. Audit Events">
+        <t t-call="gpsi_auditii.admin/layout">
+            <div class="panel page-header border-top-primary" style="padding-bottom: 0;">
+                <div class="page-header-content">
+                    <div class="page-title">
+                        <h5>
+                            <span class="text-semibold">Events</span>
+                        </h5>
+                    </div>
+                    <div class="heading-elements">
+                        <button type="button" class="btn bg-teal-400 btn-icon heading-btn"><i class="icon-download7"></i></button>
+                    </div>
+                </div>
+                <div class="breadcrumb-line breadcrumb-line-wide" style="box-shadow: none;">
+                    <ul class="breadcrumb">
+                        <li><a href="/admin"><i class="icon-home2 position-left"></i> Home</a></li>
+                        <li class="active">Events</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="content">
+                <div class="panel panel-flat">
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Ref. #</th>
+                                    <th>Lead Auditor</th>
+                                    <th>Stage</th>
+                                    <th>Start Date</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><a href="/ga/admin/ca/events/1">EV-001</a></td>
+                                    <td>Frank Mendoza</td>
+                                    <td>Surveillance I</td>
+                                    <td>12/05/1978</td>
+                                    <td><span class="label bg-success-400">Client Approval</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+
+    <template id="gpsi_auditii.admin/ca/event" name="Event Details">
+        <t t-call="gpsi_auditii.admin/layout">
+            <div class="panel page-header border-top-primary" style="padding-bottom: 0;">
+                <div class="page-header-content">
+                    <div class="page-title">
+                        <h5>
+                            <span class="text-semibold">EV-001</span>
+                        </h5>
+                    </div>
+                    <div class="heading-elements">
+                        <button type="button" class="btn bg-teal-200 btn-icon heading-btn"><i class="icon-download7"></i> Reject</button>
+                        <button type="button" class="btn bg-teal-400 btn-icon heading-btn"><i class="icon-download7"></i> Approval</button>
+                    </div>
+                </div>
+                <div class="breadcrumb-line breadcrumb-line-wide" style="box-shadow: none;">
+                    <ul class="breadcrumb">
+                        <li><a href="/admin"><i class="icon-home2 position-left"></i> Home</a></li>
+                        <li><a href="/admin/ca/events">Events</a></li>
+                        <li class="active">EV-001</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="content">
+                <div class="panel panel-flat panel-collapsed">
+                    <div class="panel-heading">
+                        <h6 class="panel-title"><i class="icon-link position-left"></i> Attached files</h6>
+                        <div class="heading-elements">
+                            <ul class="icons-list">
+                                <li><a data-action="collapse"></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <ul class="media-list">
+                            <li class="media">
+                                <div class="media-left media-middle">
+                                    <i class="icon-file-word icon-2x text-muted"></i>
+                                </div>
+
+                                <div class="media-body">
+                                    <a href="#" class="media-heading text-semibold">ISO_9001:2015_Assessment.doc</a>
+                                    <ul class="list-inline list-inline-separate list-inline-condensed text-size-mini text-muted">
+                                        <li>Size: 1.2Mb</li>
+                                        <li>Added by <a href="#">Diego Ayala</a></li>
+                                    </ul>
+                                </div>
+
+                                <div class="media-right media-middle">
+                                    <ul class="icons-list">
+                                        <li><a href="#"><i class="icon-download"></i></a></li>
+                                    </ul>
+                                </div>
+                            </li>
+
+                            <li class="media">
+                                <div class="media-left media-middle">
+                                    <i class="icon-file-stats icon-2x text-muted"></i>
+                                </div>
+
+                                <div class="media-body">
+                                    <a href="#" class="media-heading text-semibold">Evaluation_Results.pdf</a>
+                                    <ul class="list-inline list-inline-separate list-inline-condensed text-size-mini text-muted">
+                                        <li>Size: 0.9Mb</li>
+                                        <li>Added by <a href="#">Diego Ayala</a></li>
+                                    </ul>
+                                </div>
+
+                                <div class="media-right media-middle">
+                                    <ul class="icons-list">
+                                        <li><a href="#"><i class="icon-download"></i></a></li>
+                                    </ul>
+                                </div>
+                            </li>
+
+                            <li class="media">
+                                <div class="media-left media-middle">
+                                    <i class="icon-file-pdf icon-2x text-muted"></i>
+                                </div>
+                                
+                                <div class="media-body">
+                                    <a href="#" class="media-heading text-semibold">General_Condition.pdf</a>
+                                    <ul class="list-inline list-inline-separate list-inline-condensed text-size-mini text-muted">
+                                        <li>Size: 4.3Mb</li>
+                                        <li>Added by <a href="#">Enrique Natalio</a></li>
+                                    </ul>
+                                </div>
+                                
+                                <div class="media-right media-middle">
+                                    <ul class="icons-list">
+                                        <li><a href="#"><i class="icon-download"></i></a></li>
+                                    </ul>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="panel panel-flat border-grey-300">
+                    <div class="panel-heading" style="margin-bottom:10px">
+                        <h6 class="panel-title">&amp;nbsp;</h6>
+                        <div class="heading-elements">
+                            <div class="heading-btn">
+                                <button type="button" class="btn border-slate text-slate-800 btn-flat">Assessment</button>
+                                <button type="button" class="btn border-slate text-slate-800 btn-flat"><i class="icon-printer position-left"></i> Executive Report</button>
+                                <button type="button" class="btn border-slate text-slate-800 btn-flat"><i class="icon-printer position-left"></i> General Report</button>
+                            </div>
+                        </div>
+                        <a class="heading-elements-toggle"><i class="icon-menu"></i></a>
+                    </div>
+                    <div class="panel-body">
+                        <form class="form-horizontal" action="#">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <fieldset class="content-group">
+                                        <div class="form-group">
+                                            <label class="control-label col-lg-4 text-semibold">Contract</label>
+                                            <div class="col-lg-8">
+                                                <label class="control-label col-lg-8 text-semibold"><a href="/ga/admin/ca/contracts/1">SO001</a></label>
+                                            </div>
+                                        </div>
+                                    </fieldset>
+                                </div>
+                                <div class="col-lg-6">
+                                    <fieldset class="content-group">
+                                        <div class="form-group">
+                                            <label class="control-label col-lg-4 text-semibold">Start Date</label>
+                                            <div class="col-lg-8">
+                                                <input type="text" class="form-control"/>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-lg-4 text-semibold">End Date</label>
+                                            <div class="col-lg-8">
+                                                <input type="text" class="form-control"/>
+                                            </div>
+                                        </div>
+                                    </fieldset>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="tabbable">
+                                        <ul class="nav nav-tabs nav-tabs-highlight">
+                                            <li class="active"><a class="text-semibold" href="#team-tab" data-toggle="tab">Audit Team</a></li>
+                                            <li><a class="text-semibold" href="#plan-tab" data-toggle="tab">Audit Plan</a></li>
+                                        </ul>
+
+                                        <div class="tab-content">
+                                            <div class="tab-pane active" id="team-tab">
+                                                <div class="row">
+                                                    <div class="col-lg-4 col-md-4">
+                                                        <div class="panel panel-body">
+                                                            <div class="media">
+                                                                <div class="media-left">
+                                                                    <a href="/gpsi_website/static/src/assets/images/demo/images/3.png" data-popup="lightbox">
+                                                                    <img src="/gpsi_website/static/src/assets/images/demo/users/face1.jpg" style="width: 70px; height: 70px;" class="img-circle" alt=""/>
+                                                                    </a>
+                                                                </div>
+                                                                <div class="media-body">
+                                                                    <h6 class="media-heading">Eduardo Rondero</h6>
+                                                                    <p class="text-muted">Lead Auditor</p>
+                                                                    <ul class="icons-list">
+                                                                        <li><a href="#" data-popup="tooltip" title="Google Drive" data-container="body"><i class="icon-google-drive"></i></a></li>
+                                                                        <li><a href="#" data-popup="tooltip" title="Twitter" data-container="body"><i class="icon-twitter"></i></a></li>
+                                                                        <li><a href="#" data-popup="tooltip" title="Github" data-container="body"><i class="icon-github"></i></a></li>
+                                                                    </ul>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-4 col-md-4">
+                                                        <div class="panel panel-body">
+                                                            <div class="media">
+                                                                <div class="media-left">
+                                                                    <a href="/gpsi_website/static/src/assets/images/demo/images/4.png" data-popup="lightbox">
+                                                                    <img src="/gpsi_website/static/src/assets/images/demo/users/face4.jpg" style="width: 70px; height: 70px;" class="img-circle" alt=""/>
+                                                                    </a>
+                                                                </div>
+                                                                <div class="media-body">
+                                                                    <h6 class="media-heading">Emma Fonseca</h6>
+                                                                    <p class="text-muted">Auditor</p>
+                                                                    <ul class="icons-list">
+                                                                        <li><a href="#" data-popup="tooltip" title="Google Drive" data-container="body"><i class="icon-google-drive"></i></a></li>
+                                                                        <li><a href="#" data-popup="tooltip" title="Twitter" data-container="body"><i class="icon-twitter"></i></a></li>
+                                                                        <li><a href="#" data-popup="tooltip" title="Github" data-container="body"><i class="icon-github"></i></a></li>
+                                                                    </ul>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-4 col-md-4">
+                                                        <div class="panel panel-body">
+                                                            <div class="media">
+                                                                <div class="media-left">
+                                                                    <a href="/gpsi_website/static/src/assets/images/demo/images/3.png" data-popup="lightbox">
+                                                                    <img src="/gpsi_website/static/src/assets/images/demo/users/face2.jpg" style="width: 70px; height: 70px;" class="img-circle" alt=""/>
+                                                                    </a>
+                                                                </div>
+                                                                <div class="media-body">
+                                                                    <h6 class="media-heading">German Tovar</h6>
+                                                                    <p class="text-muted">Observer</p>
+                                                                    <ul class="icons-list">
+                                                                        <li><a href="#" data-popup="tooltip" title="Google Drive" data-container="body"><i class="icon-google-drive"></i></a></li>
+                                                                        <li><a href="#" data-popup="tooltip" title="Twitter" data-container="body"><i class="icon-twitter"></i></a></li>
+                                                                        <li><a href="#" data-popup="tooltip" title="Github" data-container="body"><i class="icon-github"></i></a></li>
+                                                                    </ul>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="tab-pane" id="plan-tab">
+                                                <div class="row">
+                                                    <div class="col-lg-12">
+                                                        <div class="form-group">
+                                                            <div class="table-responsive">
+                                                                <table class="table">
+                                                                    <thead>
+                                                                        <tr>
+                                                                            <th>Date</th>
+                                                                            <th>Process</th>
+                                                                            <th>Description</th>
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody>
+                                                                        <tr>
+                                                                            <td>
+                                                                                <div>
+                                                                                    <span class="text-default text-semibold">10:00 - 11:00</span>
+                                                                                </div>
+                                                                                <div class="text-muted text-size-small">
+                                                                                    12 Dic 2016
+                                                                                </div>
+                                                                            </td>
+                                                                            <td>Empaquetado</td>
+                                                                            <td>
+                                                                                <div>Introducción</div>
+                                                                                <div class="text-muted text-size-small"><span class="status-mark border-success position-left"></span> Mecánica</div>
+                                                                                <div class="text-muted text-size-small"><span class="status-mark border-success position-left"></span> Presentaciones</div>
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>
+                                                                                <div>
+                                                                                    <span class="text-default text-semibold">11:00 - 13:00</span>
+                                                                                </div>
+                                                                                <div class="text-muted text-size-small">
+                                                                                    12 Dic 2016
+                                                                                </div>
+                                                                            </td>
+                                                                            <td>Empaquetado</td>
+                                                                            <td>
+                                                                                <div>Validación de Documentación</div>
+                                                                                <div class="text-muted text-size-small"><span class="status-mark border-success position-left"></span> Manual de Calidad</div>
+                                                                                <div class="text-muted text-size-small"><span class="status-mark border-success position-left"></span> Guias del Empleado</div>
+                                                                            </td>
+                                                                        </tr>
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="panel panel-flat">
+					<div class="panel-heading">
+						<h5 class="panel-title text-semiold"><i class="icon-bubbles4 position-left"></i> Comments</h5>
+					</div>
+
+					<div class="panel-body">
+						<ul class="media-list content-group-lg stack-media-on-mobile">
+							<li class="media">
+								<div class="media-left">
+									<a href="#"><img src="/gpsi_website/static/src/assets/images/demo/users/face2.jpg" class="img-circle img-sm" alt=""/></a>
+								</div>
+
+								<div class="media-body">
+									<div class="media-heading">
+										<a href="#" class="text-semibold">William Jennings</a>
+										<span class="media-annotation dotted">Just now</span>
+									</div>
+
+									<p>He moonlight difficult engrossed an it sportsmen. Interested has all devonshire difficulty gay assistance joy. Unaffected at ye of compliment alteration to.</p>
+								</div>
+							</li>
+						</ul>
+					</div>
+				</div>
+            </div>
+        </t>
+    </template>
+</openerp>
