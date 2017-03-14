@@ -53,7 +53,8 @@ class AuditTask(models.Model):
 
 
 class Audit(models.Model):
-    """Auditoría
+    """
+    Auditoría
     """
     _name = 'gpsi.staff.audit'
     _description = 'Audit'
@@ -64,6 +65,7 @@ class Audit(models.Model):
     active = fields.Boolean('Active', default=True)
     execution_date = fields.Date('Date')
     auditee_id = fields.Many2one('res.partner', 'Auditee')
+    auditor_id = fields.Many2one('res.partner', compute='_compute_auditor_id', help='Auditor lead')
     member_ids = fields.One2many('gpsi.staff.audit.member', 'audit_id', 'Audit Team')
     car_ids = fields.One2many('gpsi.staff.audit.car', 'audit_id', 'Action Requests')
     car_count = fields.Integer('Car Count', compute='_compute_car_count')
@@ -84,11 +86,22 @@ class Audit(models.Model):
         return res
 
     @api.multi
+    def name_get(self):
+        return [(r.id, 'AU-{0:03d}'.format(r.id)) for r in self]
+
+    @api.multi
     def _compute_car_count(self):
-        """Calcula la cantidad de acciones correctivas
+        """
+        Calcula la cantidad de acciones correctivas
         """
         for audit in self:
             audit.car_count = len(audit.car_ids)
+
+    @api.multi
+    def _compute_auditor_id(self):
+        for audit in self:
+            lead =  audit.member_ids.find_lead()
+            audit.auditor_id = lead and lead.id or False
 
     @api.multi
     def action_open_cars(self):
@@ -129,7 +142,8 @@ class Audit(models.Model):
 
 
 class Checklist(models.Model):
-    """Checklist
+    """
+    Checklist
     """
     _name = 'gpsi.staff.audit.chk'
     _description = 'Checklist'
@@ -161,6 +175,21 @@ class Checklist(models.Model):
                 field.copy({'chk_ln_id': nline.id})
 
         return res
+
+    @api.model
+    def find_templates(self):
+        return self.search([('is_template','=',True)])
+
+    @api.multi
+    def action_open_preview(self):
+        """Abre una nueva ventana para editar la evaluación usando un sitio web personalizado
+        """
+        self.ensure_one()
+        return {
+            'type': 'ir.actions.act_url',
+            'url': '/gpsi/staff/chks/{0}/preview'.format(self.id),
+            'target': 'new'
+        }
 
 
 class ChecklistLine(models.Model):
@@ -210,13 +239,13 @@ class ChecklistField(models.Model):
     chk_ln_id = fields.Many2one('gpsi.staff.audit.chk.line', 'Line')
     typ = fields.Selection(FIELD_TYPES, 'Type')
     label = fields.Char('Field Label')
-    b_value = fields.Boolean('Value')
-    c_value = fields.Char('Value')
-    i_value = fields.Integer('Value')
-    f_value = fields.Float('Value')
-    d_value = fields.Date('Value')
-    t_value = fields.Text('Value')
-    h_value = fields.Html('Value')
+    b_value = fields.Boolean('Bool Value')
+    c_value = fields.Char('Char Value')
+    i_value = fields.Integer('Int Value')
+    f_value = fields.Float('Float Value')
+    d_value = fields.Date('Date Value')
+    t_value = fields.Text('Text Value')
+    h_value = fields.Html('Html Value')
 
 
 class ChecklistScore(models.Model):
@@ -232,7 +261,8 @@ class ChecklistScore(models.Model):
 
 
 class Member(models.Model):
-    """Miembro del equipo de auditoría
+    """
+    Miembro del equipo de auditoría
     """
     _name = 'gpsi.staff.audit.member'
     _description = 'Audit Member'
@@ -240,6 +270,19 @@ class Member(models.Model):
     audit_id = fields.Many2one('gpsi.staff.audit', 'Audit')
     partner_id = fields.Many2one('res.partner', 'Auditor', domain=[('company_id','=',1)])
     role = fields.Many2one('gpsi.staff.audit.member.role', 'Role')
+
+    @api.multi
+    def find_lead(self):
+        """
+        Regresa el auditor lider del conjunto
+
+        :return False si lider no es encontrado
+        """
+        role_lead = self.env.ref('gpsi_staff.audit_member_role_lead')
+        for member in self:
+            if member.role.id == role_lead.id:
+                return member.partner_id
+        return False
 
 
 class MemberRole(models.Model):
@@ -250,13 +293,15 @@ class MemberRole(models.Model):
 
 
 class Plan(models.Model):
-    """Plan de auditoría
+    """
+    Plan de auditoría
     """
     _name = 'gpsi.staff.audit.plan'
 
 
 class PlanLine(models.Model):
-    """Line de plan de auditoría
+    """
+    Linea de plan de auditoría
     """
     _name = 'gpsi.staff.audit.plan.line'
 
@@ -268,7 +313,8 @@ class PlanLine(models.Model):
 
 
 class CorrectiveActionReq(models.Model):
-    """Corrective Action Request
+    """
+    Corrective Action Request
     """
     _name = 'gpsi.staff.audit.car'
     _description = 'Corrective Action Request'
@@ -283,3 +329,7 @@ class CorrectiveActionReq(models.Model):
     action_plan = fields.Html('Action Plans')
     conclusion = fields.Html('Conclusion')
     state = fields.Selection(CAR_STAGES, 'State', default=CAR_STAGES[0][0])
+
+    @api.multi
+    def name_get(self):
+        return [(r.id, 'CAR-{0:03d}'.format(r.id)) for r in self]

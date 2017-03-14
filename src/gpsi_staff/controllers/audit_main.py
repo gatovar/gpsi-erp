@@ -43,3 +43,12 @@ class AuditController(http.Controller):
             'assessment': audit.asst_id
         }
         return request.render(audit.asst_id.view_id.xml_id, qcontext)
+
+    @http.route('/gpsi/staff/chks/<int:chk_id>/preview', type='http', auth="user")
+    def chk_preview(self, chk_id, **kw):
+        chk = request.env['gpsi.staff.audit.chk'].sudo().search([('id','=',chk_id)])
+        qcontext = {
+            'assessment': chk,
+            'preview': True
+        }
+        return request.render(chk.view_id.xml_id, qcontext)

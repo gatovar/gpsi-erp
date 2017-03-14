@@ -17,7 +17,7 @@
         <record id="project_cert_audit" model="project.project">
             <field name="name">Certification Audits</field>
             <field name="use_tasks">True</field>
-            <field name="label_tasks">Events</field>
+            <field name="label_tasks">Audits</field>
             <field name="privacy_visibility">followers</field>
             <field name="is_cert_audit" eval="True"/>
         </record>

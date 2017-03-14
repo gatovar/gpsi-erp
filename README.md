@@ -1,4 +1,15 @@
-gpsi_staff
-    staff_audit.py
-    staff_checklist.py
+Company.add_user()
+Company.remove_user()
+Company.users()
 
+Audit.cars()
+Audit.add_car()
+Audit.assessment()
+Audit.general_report()
+Audit.executive_report()
+Audit.add_member()
+Audit.remove_member()
+Audit.members()
+
+User.write()
+User.delete()
