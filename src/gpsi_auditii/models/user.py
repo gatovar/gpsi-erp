@@ -3,6 +3,8 @@
 from openerp import api, fields, models, _
 from openerp.exceptions import UserError, ValidationError
 
+from exception import AuditiiException
+
 
 class User(models.Model):
     _inherit = 'res.users'
@@ -19,6 +21,9 @@ class User(models.Model):
         :param pw: password
         :param company_id: identificador de la compañia a la que estará asociado el usuario
         """
+        if self.search([('login','=',email)]):
+            raise AuditiiException(AuditiiException.DUPLICATE_USER_EMAIL)
+
         user = self.sudo().create({
             'name': username,
             'login': email,

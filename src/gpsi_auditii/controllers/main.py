@@ -2,8 +2,11 @@ import logging
 import werkzeug
 import openerp
 
+from ..models.exception import AuditiiException
+
 from openerp import http
 from openerp.http import request
+from openerp.exceptions import ValidationError
 from openerp.tools import safe_eval
 from openerp.addons.web.controllers.main import Home
 
@@ -66,8 +69,12 @@ class AuditiiController(http.Controller):
         except openerp.exceptions.AccessDenied:
             values['databases'] = None
         
-        company = request.env['res.company'].create_gaudit(kw['company'], kw['email'])
-        user = request.env['res.users'].create_gaudit_owner(kw['username'], kw['email'], kw['password'], company.id)
+        try:
+            company = request.env['res.company'].create_gaudit(kw['company'], kw['email'])
+            user = request.env['res.users'].create_gaudit_owner(kw['username'], kw['email'], kw['password'], company.id)
+        except AuditiiException as e:
+            values['create_error'] = "Email already exist!"
+            values['creating_account'] = True
 
         uid = request.session.authenticate(DB_NAME, request.params['email'], request.params['password'])
         if uid is not False:
