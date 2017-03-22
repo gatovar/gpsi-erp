@@ -1,15 +1,1 @@
-Company.add_user()
-Company.remove_user()
-Company.users()
-
-Audit.cars()
-Audit.add_car()
-Audit.assessment()
-Audit.general_report()
-Audit.executive_report()
-Audit.add_member()
-Audit.remove_member()
-Audit.members()
-
-User.write()
-User.delete()
+da1a38bd65ae2b1017e6f0256ff1e86282ba1a22

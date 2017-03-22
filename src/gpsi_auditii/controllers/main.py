@@ -480,3 +480,4 @@ class AuditiiController(http.Controller):
     @http.route('/ga/admin/settings/integrations', type='http', auth="user")
     def settings_integrations(self, **kw):
         return request.render('gpsi_auditii.admin/settings/integrations')
+
